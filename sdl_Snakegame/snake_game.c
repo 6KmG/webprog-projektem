@@ -12,7 +12,7 @@
 
 #include <stdio.h>  // For sprintf
 #include <time.h>
-#include <windows.h>
+#include <string.h>
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -24,19 +24,8 @@
 #define FPS 77
 #define MAXSNAKELEN 10000   // Don't go above 1 million
 #define locked 2   // I set up a third option alongside true and false
-
-const short UpdateFrameSpeed = 1000 / FPS;
-const float DELAY = 0.125;
-
-double cooldown = 0;
-unsigned short i = 0;
-unsigned short count = (int)(FPS/14)*6+3;
-unsigned short start;
-char title[64];
-unsigned short score = 0;
-char ending[40];
-long long FrameRateOutputSpeed = time(0) + 1;
-unsigned short FrameCounter = 0;
+#define false 0
+#define true 1
 
 void DrawRect(SDL_Renderer* renderer, short x, short y, short w, short h, char r, char g, char b, char a) {
   SDL_Rect rect;
@@ -55,7 +44,8 @@ double uTime(){
     return (double)time(0) + ((double)tp.tv_nsec / 1000000000);
 }
 
-// I haven't found a function in the sdl library which draws a filled circle so I copy pasted one from Stackoverflow
+// I haven't found a function in the sdl library which draws 
+// a filled circle so I copy pasted one from Stackoverflow
 void DrawCircle(SDL_Renderer *renderer, short x, short y, short radius, char r, char g, char b, char a)
 {
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
@@ -75,6 +65,20 @@ void DrawCircle(SDL_Renderer *renderer, short x, short y, short radius, char r, 
 
 int main(int argc, char *argv[])  
 {
+    const short UpdateFrameSpeed = 1000 / FPS;
+    const float DELAY = 0.125;
+
+    double cooldown = 0;
+    unsigned short i = 0;
+    unsigned short count = (FPS/14)*6+3;
+    unsigned short start;
+    char title[64];
+    unsigned short score = 0;
+    char ending[40];
+    unsigned short FrameCounter = 0;
+
+    long long FrameRateOutputSpeed = time(0) + 1;
+
     srand(time(0));
     SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -220,7 +224,7 @@ int main(int argc, char *argv[])
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     sprintf(ending,"Score: %d",score);
-    SDL_ShowSimpleMessageBox(NULL, ending, "Your Score", MB_OK);
+    SDL_ShowSimpleMessageBox(NULL, ending, "Your Score", 0);
     SDL_Quit();
 
     return 0;
