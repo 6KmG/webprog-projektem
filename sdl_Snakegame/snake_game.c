@@ -136,6 +136,7 @@ int main(int argc, char *argv[])
         // Loads up the positions until the third tile
         SnakeLen[0] = head.x;
         SnakeLen[1] = head.y;
+        
         if(i < FPS/2){
             SnakeLen[i] = head.x;
             SnakeLen[i+1] = head.y;
@@ -148,13 +149,13 @@ int main(int argc, char *argv[])
             DrawRect(renderer, SnakeLen[(int)(FPS/14)*6], SnakeLen[(int)(FPS/14)*6+1], 30, 30, BODYCOLOR);
             SnakeLen[0] = head.x;
             SnakeLen[1] = head.y;
-            for (short j=count; j>2; j-=2){
+            for (short j = count; j>2; j-=2){
                 SnakeLen[j] = SnakeLen[j-2];
                 SnakeLen[j-1] = SnakeLen[j-3];
             }
         }
-
-        for(start = ((int)(FPS/14)*2)*4+2; start < count; start+=((int)(FPS/14)*2)){
+        int incrementation = (FPS/14) * 2;
+        for(start = ((int)(FPS/14)*2)*4+2; start < count; start += incrementation){
             DrawRect(renderer, SnakeLen[start], SnakeLen[start+1], 30, 30, BODYCOLOR);
             if (head.x > SnakeLen[start] && head.y > SnakeLen[start+1] && head.x < SnakeLen[start]+30 && head.y < SnakeLen[start+1]+30){
                 running = false;
