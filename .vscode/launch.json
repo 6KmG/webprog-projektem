@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "pcs_7906c466"
+        },
+        {
+            "type": "java",
+            "name": "Launch benchmark",
+            "request": "launch",
+            "mainClass": "benchmark"
+        },
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/c#/benchmark/bin/Debug/net7.0/benchmark.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/c#/benchmark",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}

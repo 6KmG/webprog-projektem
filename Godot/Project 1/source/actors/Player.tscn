@@ -1,0 +1,205 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://source/actors/Player.gd" type="Script" id=2]
+[ext_resource path="res://background.png" type="Texture" id=3]
+[ext_resource path="res://source/actors/head.gd" type="Script" id=4]
+[ext_resource path="res://2head2-removebg-preview.png" type="Texture" id=5]
+[ext_resource path="res://bodyanimation.png" type="Texture" id=6]
+[ext_resource path="res://rickastley-removebg-preview.png" type="Texture" id=7]
+[ext_resource path="res://source/actors/hp.gd" type="Script" id=8]
+[ext_resource path="res://source/actors/Villain.gd" type="Script" id=9]
+[ext_resource path="res://source/actors/Time.gd" type="Script" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 28, 29 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 439, 284 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 439, 0, 439, 284 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "run",
+"speed": 24.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 16.625, 14.5 )
+
+[sub_resource type="GDScript" id=12]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 31, 32 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 31.5, 58 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 22.5, 81.0971 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 31.5, 31.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 421.5, 11.3527 )
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 25.5, 87 )
+
+[sub_resource type="LineShape2D" id=19]
+normal = Vector2( -1, -1.52588e-06 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="." groups=["background"]]
+margin_left = -190.0
+margin_top = -54.0
+margin_right = 1473.0
+margin_bottom = 1008.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="HP" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 420.0
+margin_top = 167.0
+margin_right = 428.0
+margin_bottom = 181.0
+rect_scale = Vector2( 5, 5 )
+text = "5"
+script = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="HP"]
+modulate = Color( 0, 0, 0, 1 )
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -80.2
+margin_right = 19.8
+margin_bottom = 14.0
+text = "Villain's HP:"
+
+[node name="Time" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 260.0
+margin_top = 86.0
+margin_right = 300.0
+margin_bottom = 100.0
+rect_scale = Vector2( 5, 5 )
+text = "0"
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Time"]
+visible = false
+margin_left = -48.2
+margin_right = -8.2
+margin_bottom = 14.0
+text = "Time:"
+
+[node name="Player" type="KinematicBody2D" parent="." groups=["player"]]
+position = Vector2( 151, 388 )
+script = ExtResource( 2 )
+
+[node name="Body" type="CollisionShape2D" parent="Player"]
+position = Vector2( 8, 0 )
+shape = SubResource( 1 )
+one_way_collision_margin = 0.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player/Body"]
+scale = Vector2( 0.2, 0.3 )
+frames = SubResource( 15 )
+animation = "run"
+
+[node name="Area2D2" type="Area2D" parent="Player"]
+position = Vector2( 8, -37 )
+
+[node name="Head" type="CollisionShape2D" parent="Player/Area2D2"]
+shape = SubResource( 8 )
+script = ExtResource( 4 )
+
+[node name="Head2-removebg-preview" type="Sprite" parent="Player/Area2D2/Head"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+script = SubResource( 12 )
+
+[node name="Platform" type="StaticBody2D" parent="." groups=["platform"]]
+position = Vector2( 581, 611 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 49, 37 )
+shape = SubResource( 3 )
+
+[node name="Icon" type="Sprite" parent="Platform/CollisionShape2D"]
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 112, 5 )
+shape = SubResource( 6 )
+
+[node name="Icon" type="Sprite" parent="Platform/CollisionShape2D2"]
+position = Vector2( 0, 7.62939e-06 )
+scale = Vector2( 1, 2 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 513, 0 )
+rotation = -1.83259
+scale = Vector2( 1, 1.76 )
+shape = SubResource( 16 )
+
+[node name="Icon" type="Sprite" parent="Platform/CollisionShape2D3"]
+scale = Vector2( 0.75, 2.5 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 252, -53 )
+shape = SubResource( 17 )
+
+[node name="Icon" type="Sprite" parent="Platform/CollisionShape2D4"]
+texture = ExtResource( 1 )
+
+[node name="PlatformHitbox" type="CollisionShape2D" parent="Platform"]
+position = Vector2( -114.5, 96.7054 )
+scale = Vector2( 1, 2 )
+shape = SubResource( 2 )
+
+[node name="Icon" type="Sprite" parent="Platform/PlatformHitbox"]
+position = Vector2( -2, -0.814881 )
+scale = Vector2( 13.1406, 0.421471 )
+texture = ExtResource( 1 )
+
+[node name="Villain" type="Area2D" parent="."]
+position = Vector2( 662, 186 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Villain"]
+shape = SubResource( 18 )
+
+[node name="Rickastley-removebg-preview" type="Sprite" parent="Villain"]
+position = Vector2( -1.5, 0 )
+texture = ExtResource( 7 )
+
+[node name="fallout" type="Area2D" parent="."]
+position = Vector2( 581, 917 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fallout"]
+rotation = 1.57079
+scale = Vector2( 5, 10 )
+shape = SubResource( 19 )
+
+[connection signal="body_entered" from="Villain" to="Villain" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="fallout" to="Player" method="_on_fallout_body_entered"]
