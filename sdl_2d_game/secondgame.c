@@ -11,15 +11,15 @@
 
 #define WIDTH 1280
 #define HEIGHT 720
-#define FPS 500
+#define FPS 240
 #define SPEED 600
 #define BACKGROUNDCOLOR 101,154,210,255
 #define BODYCOLOR 150,150,150,150
 #define HEADCOLOR 255,255,255,255
 #define JUMPHEIGHT 22
 #define NUMBEROFPLATFORMS 5
-#define GRAVITYFORCE 3
-#define JUMPLIMIT 2
+#define GRAVITYFORCE 5
+#define JUMPLIMIT 1
 
 unsigned short FrameCounter = 0;
 char title[64];
@@ -77,8 +77,8 @@ SDL_Window *window = SDL_CreateWindow
 );
 
 struct platform plat[NUMBEROFPLATFORMS];            // I made an array for the tiles for ease
-memset(plat, 0, NUMBEROFPLATFORMS*2*4);             // Again I set the elements of this array to 0 however 
-                                                    // not as important as at "keys"
+memset(plat, 0, NUMBEROFPLATFORMS*2*4);             // Again I set the elements of this array to 0
+                                                    // however not as important as at "keys"
 SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
 SDL_Rect player;
@@ -139,24 +139,19 @@ while(running)
             break;
         }
     }
-    if(keys[SDLK_d]){
-        velocity = SPEED / FPS;
-    }
-    if(keys[SDLK_a]){
-        velocity = -SPEED / FPS;
-    }
-    if(keys[SDLK_SPACE]){
-        jump = 1;
-        keys[SDLK_SPACE] = 0;
-    }
+    if(keys[SDLK_d]) velocity = SPEED / FPS;
+
+    if(keys[SDLK_a]) velocity = -SPEED / FPS;
+
+    if(keys[SDLK_SPACE]) jump = 1, keys[SDLK_SPACE] = 0;
+
     if(jump && OnFloor){
+        keys[SDLK_SPACE] = 0;
         if(JumpForce > 0){
             JumpDelay++;
-            if(JumpDelay > JUMPLIMIT){
-                player.y -= JumpForce;
-                JumpForce--;
-                JumpDelay = 0;
-            }
+            player.y -= JumpForce;
+            JumpForce--;
+            JumpDelay = 0;
         }
         else{
             JumpForce = JUMPHEIGHT;
@@ -166,21 +161,21 @@ while(running)
     }
     player.x += velocity;
 
-    // if (velocity > 0){
-    //     lerping += 1;
-    //     if(lerping >= (FPS / 60)){
-    //         velocity--;
-    //         lerping = 0;
-    //     }
-    // }
-    // else if (velocity < 0){
-    //     lerping += 1;
-    //     if(lerping >= (FPS / 60)){
-    //         velocity++;
-    //         lerping = 0;
-    //     }
-    // }
-    velocity = 0;
+    if (velocity > 0){
+        lerping += 1;
+        if(lerping >= 40){
+            velocity--;
+            lerping = 0;
+        }
+    }
+    else if (velocity < 0){
+        lerping += 1;
+        if(lerping >= 40){
+            velocity++;
+            lerping = 0;
+        }
+    }
+    //velocity = 0;
 
     for(unsigned char i = 0; i < NUMBEROFPLATFORMS; i++)    // It renders the tiles and
     {                                                       // checks for collisions with this loop
