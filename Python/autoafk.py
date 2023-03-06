@@ -1,48 +1,22 @@
 import time
 import pyautogui
-import sys
 
-# WINDOW_WIDTH, WINDOW_HEIGHT = 800, 480
+counter = 0
+mytext = "https://snakegm.rf.gd/ (check it out!)"
 
-running = True
-
-def exitbutton():
-    # global running
-    # for run in pygame.event.get():
-    #     if run.type == pygame.KEYDOWN:
-    #         if run.key == pygame.K_ESCAPE:  #Key "esc"
-    #             sys.exit()
-    #             running = False
-    time.sleep(0.75)
-
-
-# pygame.init()
-# window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT),pygame.SHOWN)
-
-while running:
-    time.sleep(1)
-
+while True:
+    time.sleep(5)
+    
     pyautogui.keyDown('w')
     time.sleep(0.86)
     pyautogui.keyUp('w')
+    
     time.sleep(0.79)
 
-    pyautogui.keyDown('f5')
+    pyautogui.press('f5')
     time.sleep(0.25)
-    pyautogui.keyUp('f5')
     
-    time.sleep(0.25)
-
-    pyautogui.keyDown('f5')
-    time.sleep(0.25)
-    pyautogui.keyUp('f5')
-
-    time.sleep(0.25)
-
-    pyautogui.keyDown('f5')
-    time.sleep(0.25)
-    pyautogui.keyUp('f5')
-    
+    pyautogui.press('f5')
     time.sleep(0.25)
 
     pyautogui.moveTo(160, 220, 1)
@@ -56,6 +30,13 @@ while running:
 
     pyautogui.moveTo(720, 620, 1)
     pyautogui.click()
-    
+
     pyautogui.moveTo(640, 540, 1)
     pyautogui.click()
+    
+    counter+=1
+    if counter >= 30:
+        pyautogui.press('Enter')
+        pyautogui.typewrite(mytext)
+        pyautogui.press('Enter')
+        counter = 0
