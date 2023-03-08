@@ -4,11 +4,7 @@
 // Debug mode compilation: g++ snake_game.cpp -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game
 // Release mode compilation: g++ snake_game.cpp -s -mwindows -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o sdl_main
 
-#ifdef _WIN32
-#include "SDL2\SDL.h"
-#else
 #include "SDL2/SDL.h"
-#endif
 
 #include <stdio.h>  // For sprintf
 #include <time.h>
