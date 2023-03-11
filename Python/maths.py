@@ -167,9 +167,8 @@ def euclideanAlgorithm(x: int, y: int):
 
 
 def leastCommonMultiple(x: int, y: int):
-    return int(x * y / euclideanAlgorithm(x, y))
-
-euclideanAlgorithm(377, 85)
+    gcd = int(euclideanAlgorithm(x, y))
+    print(f"[{x}, {y}] = {x} * {y} / {gcd} = {int(x * y / gcd)}")
 
 def isDivisible():
     mod = 6
@@ -183,3 +182,14 @@ def isDivisible():
     k = None
     n = k
     equation = k**3 + 11*k
+    
+def polynomialDivision():
+    return
+    
+    
+    
+    
+    
+    
+    
+polynomialDivision()
