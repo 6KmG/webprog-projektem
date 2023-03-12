@@ -16,7 +16,7 @@
 
 #define WIDTH 800
 #define HEIGHT 480
-#define SPEED 240
+#define SPEED 300
 #define FPS 240
 #define BACKGROUNDCOLOR 101,154,210,255
 #define PLAYERCOLOR 255,255,255,255
@@ -24,12 +24,12 @@
 
 int main(int argc, char *argv[])
 {
-    float velocity = 0;
-    bool pressD = false;
-    bool pressA = false;
-    bool pressSpace = false;
+    bool keyD = false;
+    bool keyA = false;
+    bool keySpace = false;
 
     double previousTime;
+    int velocity;
 
     SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -64,14 +64,14 @@ int main(int argc, char *argv[])
                     running = false;
                     break;
                 case SDL_KEYDOWN:
-                    if(event.key.keysym.sym == SDLK_d) pressD = true;
-                    if(event.key.keysym.sym == SDLK_a) pressA = true;
-                    if(event.key.keysym.sym == SDLK_SPACE) pressSpace = true;
+                    if(event.key.keysym.sym == SDLK_d) keyD = true;
+                    if(event.key.keysym.sym == SDLK_a) keyA = true;
+                    if(event.key.keysym.sym == SDLK_SPACE) keySpace = true;
                     break;
                 case SDL_KEYUP:
-                    if(event.key.keysym.sym == SDLK_d) pressD = false;
-                    if(event.key.keysym.sym == SDLK_a) pressA = false;
-                    if(event.key.keysym.sym == SDLK_SPACE) pressSpace = false;
+                    if(event.key.keysym.sym == SDLK_d) keyD = false;
+                    if(event.key.keysym.sym == SDLK_a) keyA = false;
+                    if(event.key.keysym.sym == SDLK_SPACE) keySpace = false;
                     break;
             }
         }
@@ -82,10 +82,12 @@ int main(int argc, char *argv[])
         SDL_RenderPresent(renderer); 
         SDL_Delay(1000 / FPS);
 
-        if(pressD) player.x += (nanoTime() - previousTime) * SPEED;
-        if(pressA) player.x -= (nanoTime() - previousTime) * SPEED;
-
         player.y += GRAVITY;
+
+        velocity = round((nanoTime() - previousTime) * SPEED);
+        if(keyD) player.x += velocity;
+        if(keyA) player.x -= velocity;
+        printf("%d\n",velocity);
     }
 
     SDL_DestroyRenderer(renderer);

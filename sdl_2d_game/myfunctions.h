@@ -8,7 +8,12 @@ double nanoTime(){
     return (double)time(0) + ((double)tp.tv_nsec / 1000000000);
 }
 
-void drawCircle(SDL_Renderer *renderer, short x, short y, short radius, char r, char g, char b, char a)
+void drawCircle(
+    SDL_Renderer *renderer, 
+    short x, short y, 
+    short radius, 
+    char r, char g, char b, char a
+    )
 {
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     for (short w = 0; w < radius * 2; w++)
@@ -31,7 +36,7 @@ void drawRect(
     short w, short h, 
     char r, char g, char b, char a
     )
-    {
+{
     SDL_Rect rect;
     rect.x = x;
     rect.y = y;
