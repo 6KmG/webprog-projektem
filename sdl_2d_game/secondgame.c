@@ -1,13 +1,14 @@
-#include "SDL2/SDL.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include "SDL2/SDL.h"
+#include "myfunctions.h"
 
 // next to do:
 // gravity
 // collision detection
-// jumpingf
+// jumping
 
 #define true 1
 #define false 0
@@ -15,10 +16,11 @@
 
 #define WIDTH 800
 #define HEIGHT 480
-#define SPEED 5
+#define SPEED 240
 #define FPS 240
 #define BACKGROUNDCOLOR 101,154,210,255
 #define PLAYERCOLOR 255,255,255,255
+#define GRAVITY 0
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +28,8 @@ int main(int argc, char *argv[])
     bool pressD = false;
     bool pressA = false;
     bool pressSpace = false;
+
+    double previousTime;
 
     SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -50,6 +54,7 @@ int main(int argc, char *argv[])
     bool running = true;
     while(running)
     {
+        previousTime = nanoTime();
         SDL_SetRenderDrawColor(renderer, BACKGROUNDCOLOR);
         SDL_RenderClear(renderer); 
 
@@ -71,23 +76,16 @@ int main(int argc, char *argv[])
             }
         }
 
-        if(pressD) velocity += (float) 60 / FPS;
-        if(pressA) velocity -= (float) 60 / FPS;
-
-        if(velocity >= 1) {
-            player.x += round(velocity) + SPEED;
-            velocity = 0;
-        }
-        if(velocity <= -1){
-            player.x += round(velocity) - SPEED;
-            velocity = 0;
-        }
-
         SDL_SetRenderDrawColor(renderer, PLAYERCOLOR);
         SDL_RenderFillRect(renderer, &player);
 
         SDL_RenderPresent(renderer); 
-        SDL_Delay(1000/FPS);
+        SDL_Delay(1000 / FPS);
+
+        if(pressD) player.x += (nanoTime() - previousTime) * SPEED;
+        if(pressA) player.x -= (nanoTime() - previousTime) * SPEED;
+
+        player.y += GRAVITY;
     }
 
     SDL_DestroyRenderer(renderer);

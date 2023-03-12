@@ -50,7 +50,9 @@
         "stdlib.h": "c",
         "time.h": "c",
         "test.h": "c",
-        "sdl.h": "c"
+        "sdl.h": "c",
+        "math.h": "c",
+        "myfunctions.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "java.compile.nullAnalysis.mode": "automatic",
