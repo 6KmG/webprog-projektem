@@ -4,18 +4,14 @@
 // Debug mode compilation: g++ snake_game.cpp -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game
 // Release mode compilation: g++ snake_game.cpp -s -mwindows -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o sdl_main
 
-#ifdef _WIN32
-#include "SDL2\SDL.h"
-#else
 #include "SDL2/SDL.h"
-#endif
 
 #include <stdio.h>  // For sprintf
 #include <time.h>
 #include <string.h>
 
 #define WIDTH 800
-#define HEIGHT 600
+#define HEIGHT 480
 #define BACKGROUNDCOLOR 101,154,210,255
 #define BODYCOLOR 255,255,255,255
 #define HEADCOLOR 255,255,255,255
@@ -28,13 +24,13 @@
 #define true 1
 
 void DrawRect(SDL_Renderer* renderer, short x, short y, short w, short h, char r, char g, char b, char a) {
-  SDL_Rect rect;
-  rect.x = x;
-  rect.y = y;
-  rect.w = w;
-  rect.h = h;
-  SDL_SetRenderDrawColor(renderer, r, g, b, a);
-  SDL_RenderFillRect(renderer, &rect);
+    SDL_Rect rect;
+    rect.x = x;
+    rect.y = y;
+    rect.w = w;
+    rect.h = h;
+    SDL_SetRenderDrawColor(renderer, r, g, b, a);
+    SDL_RenderFillRect(renderer, &rect);
 }
 
 // There's no ready to use time function with sub-second detail, so I made one based on chatGPT's idea
@@ -209,7 +205,7 @@ int main(int argc, char *argv[])
         if (head.x > circleX-50 && head.y > circleY-50 && head.x < circleX+20 && head.y < circleY+20){
             circleX = rand()%(WIDTH - 30) + 15;
             circleY = rand()%(HEIGHT - 30) + 15;
-            count+=(int)(FPS/14)*2;
+            count+=(FPS/14)*2;
             score++;
         }
         // Exit on snake leaving the window
@@ -225,7 +221,7 @@ int main(int argc, char *argv[])
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     sprintf(ending,"Score: %d",score);
-    SDL_ShowSimpleMessageBox(NULL, ending, "Your Score", 0);
+    SDL_ShowSimpleMessageBox(0, ending, "Your Score", 0);
     SDL_Quit();
 
     return 0;

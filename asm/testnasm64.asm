@@ -1,12 +1,7 @@
 section .data
-number db 9
+number dq 9
 
 section .text
-global main:
-    mov rdi, number
-    fild qword [rdi]
-    fsqrt
-    fistp qword [rdi]
-    mov rax, [rdi]
-
-    ret
+extern ExitProcess
+global _start:
+ret
