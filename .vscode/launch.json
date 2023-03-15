@@ -5,6 +5,13 @@
             "type": "java",
             "name": "App",
             "request": "launch",
+            "mainClass": "test.mypackage.App",
+            "projectName": "pcs_7906c466"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
             "mainClass": "src.App",
             "projectName": "pcs_7906c466"
         },

@@ -59,7 +59,7 @@
     "cmake.sourceDirectory": "${workspaceFolder}/glfw-3.3.8/examples",
     "cmake.configureOnOpen": true,
     "java.project.sourcePaths": [
-        "Java\\test"
+        "Java"
     ],
     "java.dependency.syncWithFolderExplorer": true
 }
