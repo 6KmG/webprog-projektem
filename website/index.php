@@ -1,15 +1,16 @@
 <?php
-$Fname = $_POST["Fname"];
-$Lname = $_POST["Lname"];
+    function getUserIpAddr(){
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            //ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            //ip pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+    
+    echo 'User Real IP - '.getUserIpAddr();
 ?>
-<html>
-<head>
-<title>Personal INFO</title>
-</head>
-<body>
-<form method="post" action="<?php echo $PHP_SELF;?>">
-First Name:<input type="text" size="12" maxlength="12" name="Fname"><br />
-Last Name:<input type="text" size="12" maxlength="36" name="Lname"><br /></form>
-<?
-echo "Hello, ".$Fname." ".$Lname.".<br />";
-?> 

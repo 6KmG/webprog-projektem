@@ -1,17 +1,21 @@
-.global	main
+.intel_syntax noprefix
+
+.section .data
+
+caption: .asciz "GAS Greeting"
+message: .asciz "Hello World!"
+.align 4,0
+
+.section .text
+.balign 16
+.globl main
 main:
-	push	%rbp
-	movq	%rsp, %rbp
-	sub	$32, %rsp
-
-	lea	.testing(%rip), %rcx
-	call puts
-
-	mov	$0, %eax
-	add	$32, %rsp
-	pop	%rbp
-	ret
 
 
-.testing:
-	.ascii "hello\0"
+push 3                 # style
+push offset caption    # caption
+push offset message    # message
+push 0                 # window handle
+call _MessageBoxA@16   # MessageBox
+
+ret 16

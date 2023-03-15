@@ -57,5 +57,9 @@
     "C_Cpp.errorSquiggles": "disabled",
     "java.compile.nullAnalysis.mode": "automatic",
     "cmake.sourceDirectory": "${workspaceFolder}/glfw-3.3.8/examples",
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "java.project.sourcePaths": [
+        "Java\\test"
+    ],
+    "java.dependency.syncWithFolderExplorer": true
 }
