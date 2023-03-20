@@ -1,16 +1,17 @@
 package javawindow.src;
 
 import static java.lang.System.*;
+import java.util.Random;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -19,17 +20,19 @@ public class App implements ActionListener{
 
     JFrame frame = new JFrame();
     JPanel panel = new JPanel();
-    JLabel label1 = new JLabel("Number of clicks: " + count);
+    JLabel label1 = new JLabel("Password Generator");
     JButton button1 = new JButton("Click");
+    JTextField textbox1 = new JTextField("asd");
 
     public App(){
         button1.addActionListener(this);
 
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-        panel.setLayout(new GridLayout(0,1));
+        panel.setLayout(new GridLayout(5,1));
 
         panel.add(label1);
         panel.add(button1);
+        panel.add(textbox1);
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,7 +46,7 @@ public class App implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         count++;
-        label1.setText(generateText(8));
+        textbox1.setText(generateText(8));
         out.println("asd");
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
