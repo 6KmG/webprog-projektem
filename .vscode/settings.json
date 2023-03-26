@@ -61,5 +61,6 @@
     "java.project.sourcePaths": [
         "Java"
     ],
-    "java.dependency.syncWithFolderExplorer": true
+    "java.dependency.syncWithFolderExplorer": true,
+    "java.dependency.packagePresentation": "hierarchical"
 }
