@@ -1,9 +1,6 @@
 import time
 import pyautogui
 
-counter = 0
-mytext = "https://snakegm.rf.gd/ (check it out!)"
-
 while True:
     time.sleep(5)
     
@@ -28,15 +25,8 @@ while True:
     pyautogui.moveTo(640, 650, 1)
     pyautogui.click()
 
-    pyautogui.moveTo(720, 620, 1)
+    pyautogui.moveTo(800, 620, 1)
     pyautogui.click()
 
     pyautogui.moveTo(640, 540, 1)
     pyautogui.click()
-    
-    counter+=1
-    if counter >= 30:
-        pyautogui.press('Enter')
-        pyautogui.typewrite(mytext)
-        pyautogui.press('Enter')
-        counter = 0

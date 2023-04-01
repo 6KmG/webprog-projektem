@@ -5,6 +5,13 @@
             "type": "java",
             "name": "App",
             "request": "launch",
+            "mainClass": "Feladat1.src.App",
+            "projectName": "pcs_7906c466"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
             "mainClass": "javawindow.src.App",
             "projectName": "pcs_7906c466"
         },

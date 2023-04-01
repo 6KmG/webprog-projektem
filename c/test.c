@@ -5,5 +5,7 @@
 #include <Windows.h>
 
 int main(int argc, char *argv[]){
-    MessageBox(0, "Hello", "title", 0);
+    float a = 0.1 + 0.2;
+
+    printf("%.17f", a);
 }
