@@ -100,11 +100,11 @@ int main(int argc, char *argv[])
     // I use dynamic allocation since I think I this doesn't fit in the stack
     // I store the cords in 2 elements of list, first is x, second is y and so on
     short SnakeLen[MAXSNAKELEN];
-    memset(SnakeLen,-100,MAXSNAKELEN * sizeof(short));
+    memset(SnakeLen, -100, MAXSNAKELEN * sizeof(short));
 
     // Random circle position
-    short circleX = rand()%(WIDTH - 30) + 15;
-    short circleY = rand()%(HEIGHT - 30) + 15;
+    short circleX = rand()% (WIDTH - 30) + 15;
+    short circleY = rand()% (HEIGHT - 30) + 15;
 
     SDL_Event windowEvent;
     char running = true;
@@ -221,7 +221,7 @@ int main(int argc, char *argv[])
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     sprintf(ending,"Score: %d",score);
-    SDL_ShowSimpleMessageBox(0, ending, "Your Score", 0);
+    SDL_ShowSimpleMessageBox(0, "Your Score", ending, 0);
     SDL_Quit();
 
     return 0;
