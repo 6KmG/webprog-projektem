@@ -7,7 +7,7 @@ while True:
     pyautogui.keyDown('w')
     time.sleep(0.86)
     pyautogui.keyUp('w')
-    
+
     time.sleep(0.79)
 
     pyautogui.press('f5')
