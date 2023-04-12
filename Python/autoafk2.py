@@ -2,7 +2,7 @@ import time
 import pyautogui
 
 while True:
-    time.sleep(5)
+    time.sleep(3)
     
     pyautogui.keyDown('w')
     time.sleep(0.86)
