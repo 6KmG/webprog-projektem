@@ -1,4 +1,4 @@
-package javawindow.src;
+// package javawindow.src;
 
 import static java.lang.System.*;
 
@@ -22,7 +22,7 @@ public class Panel extends JPanel implements ActionListener{
     final static int HEIGHT = 600;
     final static int FPS = 77;
     final static int FRAMESPEED = 1000 / FPS;
-    final static int SPEED = 600;
+    final static int SPEED = 700;
     final static double DELAY = 0.125;
     final static int SNAKE_SIZE = 30;
     final static int CIRCLE_SIZE = 50;
@@ -106,7 +106,7 @@ public class Panel extends JPanel implements ActionListener{
             }
         }
 
-        if (x > circleX - CIRCLE_SIZE - 20 && y > circleY-CIRCLE_SIZE - 20 && x < circleX + 20 && y < circleY + 20){
+        if (x + SNAKE_SIZE > circleX && y + SNAKE_SIZE > circleY && x < circleX + CIRCLE_SIZE && y < circleY + CIRCLE_SIZE){
             circleX = rand.nextInt(WIDTH - CIRCLE_SIZE);
             circleY = rand.nextInt(HEIGHT - CIRCLE_SIZE);
             count+=(FPS/14)*2;
@@ -134,28 +134,28 @@ public class Panel extends JPanel implements ActionListener{
     }
 
     public void keyControl(){
-        if((key == 'd' || key == 'D') && direction[3] != 2 && myNanoTime() > cooldown + DELAY){
+        if((key == 'd' || key == 'D') && direction[3] != 2 && myNanoTime() > cooldown){
             direction[0] = 0;
             direction[1] = 0;
             direction[2] = 2;
             direction[3] = 1;
             cooldown = myNanoTime() + DELAY;
         }
-        if((key == 'a' || key == 'A') && direction[2] != 2 && myNanoTime() > cooldown + DELAY){
+        if((key == 'a' || key == 'A') && direction[2] != 2 && myNanoTime() > cooldown){
             direction[0] = 0;
             direction[1] = 0;
             direction[2] = 1;
             direction[3] = 2;
             cooldown = myNanoTime() + DELAY;
         }
-        if((key == 'w' || key == 'W') && direction[0] != 2 && myNanoTime() > cooldown + DELAY){
+        if((key == 'w' || key == 'W') && direction[0] != 2 && myNanoTime() > cooldown){
             direction[0] = 1;
             direction[1] = 2;
             direction[2] = 0;
             direction[3] = 0;
             cooldown = myNanoTime() + DELAY;
         }
-        if((key == 's' || key == 'S') && direction[1] != 2 && myNanoTime() > cooldown + DELAY){
+        if((key == 's' || key == 'S') && direction[1] != 2 && myNanoTime() > cooldown){
             direction[0] = 2;
             direction[1] = 1;
             direction[2] = 0;
@@ -173,10 +173,10 @@ public class Panel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(running){
-            keyControl();
             move();
             repaint();
             checkBorder();
+            keyControl();
         }
         else{
             JOptionPane.showMessageDialog(null, "Your score: "+score, "Score", 1);

@@ -1,4 +1,4 @@
-package javawindow.src;
+// package javawindow.src;
 
 import javax.swing.*;
 
@@ -12,6 +12,5 @@ public class Frame extends JFrame{
         this.setResizable(false);
         this.pack();
         this.setVisible(true);
-        this.setLocation(null);
     }
 }
