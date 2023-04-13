@@ -7,10 +7,13 @@ public class Frame extends JFrame{
         Panel panel = new Panel();
         this.add(panel);
 
-        this.setTitle("mytitle");
+        this.setTitle(Panel.title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.pack();
         this.setVisible(true);
+    }
+    public void changeTitle(String title){
+        this.setTitle(title);
     }
 }

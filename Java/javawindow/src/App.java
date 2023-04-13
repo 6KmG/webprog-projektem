@@ -1,9 +1,8 @@
 // package javawindow.src;
 
 public class App{
-    
+    static Frame myframe;
     public static void main(String[] args) throws Exception {
-        new Frame();
-        
+        myframe = new Frame();
     }
 }

@@ -169,19 +169,19 @@ int main(int argc, char *argv[])
                 // Keys: each if case checks if any of these key pressed down, checks if the move in
                 // opposite direction is forbidden and checks if the cooldown is over
                 case SDL_KEYDOWN:
-                    if(windowEvent.key.keysym.sym == SDLK_d && movements[3] != locked && uTime()>cooldown){
+                    if(windowEvent.key.keysym.sym == SDLK_d && movements[3] != locked && uTime() > cooldown){
                         movements[0] = false; movements[1] = false; movements[2] = locked; movements[3] = true;
                         cooldown = uTime()+DELAY;
                     }
-                    if(windowEvent.key.keysym.sym == SDLK_a && movements[2] != locked && uTime()>cooldown){
+                    if(windowEvent.key.keysym.sym == SDLK_a && movements[2] != locked && uTime() > cooldown){
                         movements[0] = false; movements[1] = false; movements[2] = true; movements[3] = locked;
                         cooldown = uTime()+DELAY;
                     }
-                    if(windowEvent.key.keysym.sym == SDLK_w && movements[0] != locked && uTime()>cooldown){
+                    if(windowEvent.key.keysym.sym == SDLK_w && movements[0] != locked && uTime() > cooldown){
                         movements[0] = true; movements[1] = locked; movements[2] = false; movements[3] = false;
                         cooldown = uTime()+DELAY;
                     }
-                    if(windowEvent.key.keysym.sym == SDLK_s && movements[1] != locked && uTime()>cooldown){
+                    if(windowEvent.key.keysym.sym == SDLK_s && movements[1] != locked && uTime() > cooldown){
                         movements[0] = locked; movements[1] = true; movements[2] = false; movements[3] = false;
                         cooldown = uTime()+DELAY;
                     }

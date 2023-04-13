@@ -22,7 +22,7 @@ public class Panel extends JPanel implements ActionListener{
     final static int HEIGHT = 600;
     final static int FPS = 77;
     final static int FRAMESPEED = 1000 / FPS;
-    final static int SPEED = 700;
+    final static int SPEED = 77*9;
     final static double DELAY = 0.125;
     final static int SNAKE_SIZE = 30;
     final static int CIRCLE_SIZE = 50;
@@ -35,7 +35,7 @@ public class Panel extends JPanel implements ActionListener{
     int y = 0;
     int circleX = rand.nextInt(WIDTH - CIRCLE_SIZE);
     int circleY = rand.nextInt(HEIGHT - CIRCLE_SIZE);
-    int score = 0;
+    static int score = 0;
     
     char key = 'd';
     double cooldown = 0;
@@ -46,6 +46,8 @@ public class Panel extends JPanel implements ActionListener{
     public static int start;
     int direction[] = {0, 0, 2, 1}; // W, S, A, D
     int[] snakeLen = new int[MAX_SNAKE_LEN];
+
+    static String title = "Snake Game in Java Swing | Score: " + score;
 
     private double myNanoTime(){
         return nanoTime() / 1_000_000_000.0;
@@ -98,8 +100,8 @@ public class Panel extends JPanel implements ActionListener{
         }
 
         // dangerous
-        int incrementation = (FPS/14) * 2;
-        for(start = ((int)(FPS/14)*2)*4+2; start < count; start += incrementation){
+        int incrementation = (FPS/16) * 2;
+        for(start = ((int)(FPS/14) * 2) * 4; start < count; start += incrementation){
             g.fillRect(snakeLen[start], snakeLen[start+1], SNAKE_SIZE, SNAKE_SIZE);
             if (x > snakeLen[start] && y > snakeLen[start+1] && x < snakeLen[start] + SNAKE_SIZE && y < snakeLen[start+1] + SNAKE_SIZE){
                 running = false;
@@ -111,6 +113,8 @@ public class Panel extends JPanel implements ActionListener{
             circleY = rand.nextInt(HEIGHT - CIRCLE_SIZE);
             count+=(FPS/14)*2;
             score++;
+            title = "Snake Game in Java Swing | Score: " + score;
+            App.myframe.setTitle(title);
         }
     }
 
