@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
     // I store the cords in 2 elements of list, first is x, second is y and so on
     short SnakeLen[MAXSNAKELEN];
     memset(SnakeLen, -100, MAXSNAKELEN * sizeof(short));
-
+    
     // Random circle position
     short circleX = rand()% (WIDTH - 30) + 15;
     short circleY = rand()% (HEIGHT - 30) + 15;

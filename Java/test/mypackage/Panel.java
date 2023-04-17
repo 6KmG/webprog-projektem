@@ -1,8 +1,9 @@
 package test.mypackage;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Panel extends JPanel{
     Panel(){
+
     }
 }
