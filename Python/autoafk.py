@@ -27,7 +27,7 @@ while True:
         pyautogui.moveTo(160, 220, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(460, 60, 0.5)
+        pyautogui.moveTo(360, 60, 0.5)
         pyautogui.click()
 
         pyautogui.moveTo(640, 650, 0.5)
@@ -41,4 +41,6 @@ while True:
 
         pyautogui.moveTo(640, 540, 0.5)
         pyautogui.click()
+        
         counter = 0
+        

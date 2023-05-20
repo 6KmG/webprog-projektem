@@ -1,17 +1,7 @@
 import time
 import pyautogui
+import random
 
-while True:
-    time.sleep(3)
-    
-    pyautogui.keyDown('w')
-    time.sleep(0.86)
-    pyautogui.keyUp('w')
-    
-    time.sleep(0.79)
+keys = ['w','a','s','d']
 
-    pyautogui.press('f5')
-    time.sleep(0.25)
-    
-    pyautogui.press('f5')
-    time.sleep(0.25)
+pyautogui.displayMousePosition()
