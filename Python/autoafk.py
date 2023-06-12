@@ -1,18 +1,20 @@
 import time
 import pyautogui
+import random
 
 counter = 7
 
 while True:
+    a = random.choice(['w','a','s','d'])
     time.sleep(3)
     
-    pyautogui.keyDown('w')
+    pyautogui.keyDown(a)
     time.sleep(0.5)
-    pyautogui.keyUp('w')
+    pyautogui.keyUp(a)
 
     time.sleep(0.5)
 
-    pyautogui.press('f5')
+    pyautogui.press('f5') 
     time.sleep(0.25)
     
     pyautogui.press('f5')
@@ -27,7 +29,7 @@ while True:
         pyautogui.moveTo(160, 220, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(360, 60, 0.5)
+        pyautogui.moveTo(400, 60, 0.5)
         pyautogui.click()
 
         pyautogui.moveTo(640, 650, 0.5)

@@ -3,6 +3,9 @@
 
 #define len(array) sizeof(array) / sizeof(array [0])
 
+#define true 1
+#define false 0
+
 double nanoTime(){
     struct timespec tp;
     clock_gettime(CLOCK_REALTIME, &tp);
