@@ -2,31 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "Feladat1.src.App",
-            "projectName": "pcs_7906c466"
-        },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "javawindow.src.App",
-            "projectName": "pcs_7906c466"
-        },
-        {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "program": "${workspaceFolder}/${fileNameWithoutExtention}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "E:\\Program Files\\Programming Languages\\C++\\w64devkit\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -40,54 +25,5 @@
                 }
             ]
         },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "test.mypackage.App",
-            "projectName": "pcs_7906c466"
-        },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "src.App",
-            "projectName": "pcs_7906c466"
-        },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "App"
-        },
-        {
-            "type": "java",
-            "name": "Launch test",
-            "request": "launch",
-            "mainClass": "test",
-            "projectName": "pcs_7906c466"
-        },
-        {
-            "type": "java",
-            "name": "Launch benchmark",
-            "request": "launch",
-            "mainClass": "benchmark"
-        },
-        {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/c#/benchmark/bin/Debug/net7.0/benchmark.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/c#/benchmark",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach"
-        }
     ]
 }
