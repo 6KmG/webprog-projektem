@@ -1,3 +1,1 @@
-import pyautogui
-
-pyautogui.displayMousePosition()
+print("asdf")

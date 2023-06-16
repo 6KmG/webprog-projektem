@@ -1,23 +1,23 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://icon.png" type="Texture2D" id=1]
 [ext_resource path="res://source/actors/playerbullet.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+size = Vector2( 8, 8 )
 
 [node name="RigidBody2D" type="RigidBody2D" groups=["playerbullet"]]
 collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
-contacts_reported = 1
+max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="Icon" type="Sprite" parent="CollisionShape2D"]
+[node name="Icon" type="Sprite2D" parent="CollisionShape2D"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 

@@ -1,40 +1,41 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://dr6cpx066rs5l"]
 
-[ext_resource path="res://Main menu.gd" type="Script" id=1]
-[ext_resource path="res://New game.gd" type="Script" id=2]
-[ext_resource path="res://background_lose.png" type="Texture" id=4]
+[ext_resource type="Script" path="res://Main menu.gd" id="1"]
+[ext_resource type="Script" path="res://New game.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://c8sfph2qogm4w" path="res://background_lose.png" id="4"]
 
 [node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -320.0
-margin_top = -240.0
-margin_right = 1600.0
-margin_bottom = 840.0
-texture = ExtResource( 4 )
-expand = true
+layout_mode = 0
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 1600.0
+offset_bottom = 840.0
+texture = ExtResource("4")
+expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 540.0
-margin_top = 260.0
-margin_right = 624.0
-margin_bottom = 304.0
-rect_scale = Vector2( 2, 2 )
+layout_mode = 0
+offset_left = 540.0
+offset_top = 260.0
+offset_right = 624.0
+offset_bottom = 304.0
+scale = Vector2(2, 2)
 
 [node name="New game" type="Button" parent="VBoxContainer"]
-margin_right = 84.0
-margin_bottom = 20.0
+layout_mode = 2
 text = "New game"
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Main menu" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 84.0
-margin_bottom = 44.0
+layout_mode = 2
 text = "Main menu"
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [connection signal="pressed" from="VBoxContainer/New game" to="VBoxContainer/New game" method="_on_New_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Main menu" to="VBoxContainer/Main menu" method="_on_Main_menu_pressed"]

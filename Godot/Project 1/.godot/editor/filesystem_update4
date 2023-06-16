@@ -1,0 +1,7 @@
+res://default_env.tres
+res://source/actors/main menu.tscn
+res://source/actors/main menu.gd
+res://source/actors/Player.gd
+res://Control.tscn
+res://source/actors/lose scene.tscn
+res://source/actors/Player.tscn

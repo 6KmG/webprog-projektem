@@ -1,6 +1,3 @@
-
-
-
 #include <math.h>
 #include <Windows.h>
 #include "myfunctions.h"

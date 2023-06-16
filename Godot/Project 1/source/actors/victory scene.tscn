@@ -3,37 +3,37 @@
 [ext_resource path="res://Main menu.gd" type="Script" id=1]
 [ext_resource path="res://New game.gd" type="Script" id=2]
 [ext_resource path="res://source/actors/TextureRect.gd" type="Script" id=3]
-[ext_resource path="res://background_win.png" type="Texture" id=4]
+[ext_resource path="res://background_win.png" type="Texture2D" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -190.0
-margin_right = 1490.0
-margin_bottom = 1000.0
+offset_left = -190.0
+offset_right = 1490.0
+offset_bottom = 1000.0
 texture = ExtResource( 4 )
 expand = true
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 540.0
-margin_top = 260.0
-margin_right = 624.0
-margin_bottom = 304.0
-rect_scale = Vector2( 2, 2 )
+offset_left = 540.0
+offset_top = 260.0
+offset_right = 624.0
+offset_bottom = 304.0
+scale = Vector2( 2, 2 )
 
 [node name="New game" type="Button" parent="VBoxContainer"]
-margin_right = 84.0
-margin_bottom = 20.0
+offset_right = 84.0
+offset_bottom = 20.0
 text = "New game"
 script = ExtResource( 2 )
 
 [node name="Main menu" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 84.0
-margin_bottom = 44.0
+offset_top = 24.0
+offset_right = 84.0
+offset_bottom = 44.0
 text = "Main menu"
 script = ExtResource( 1 )
 

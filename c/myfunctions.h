@@ -1,5 +1,6 @@
 #pragma once
 #include <time.h>
+#include <stdio.h>
 
 #define len(array) sizeof(array) / sizeof(array [0])
 
