@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1686934438
+::res://::1689677020
 2head1-removebg-preview.png::CompressedTexture2D::3332685727934822425::1686551283::1686934247::1::::<><>::
 2head2-removebg-preview.png::CompressedTexture2D::4236133730373845781::1686551283::1686934247::1::::<><>::
 background.png::CompressedTexture2D::1291807202623607469::1686551283::1686934247::1::::<><>::
@@ -8,8 +8,8 @@ background_win.png::CompressedTexture2D::5368657541415200198::1686551283::168693
 body1-removebg-preview.png::CompressedTexture2D::7258273983627076581::1686551283::1686934247::1::::<><>::
 body2-removebg-preview.png::CompressedTexture2D::1744118857169156741::1686551283::1686934248::1::::<><>::
 bodyanimation.png::CompressedTexture2D::8546922757270949857::1686551283::1686934248::1::::<><>::
-Control.tscn::PackedScene::-1::1686933989::0::1::::<><>::
-default_env.tres::Environment::6069557559730206894::1686934423::0::1::::<><>::
+Control.tscn::PackedScene::3381371553395409193::1686935515::0::1::::<><>::
+default_env.tres::Environment::6069557559730206894::1686935979::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1686551283::0::1::::<><>::
 head1-removebg-preview.png::CompressedTexture2D::3455415611936430988::1686551283::1686934248::1::::<><>::
 head2-removebg-preview.png::CompressedTexture2D::2382804788515825673::1686551283::1686934248::1::::<><>::
@@ -18,7 +18,7 @@ Main menu.gd::GDScript::-1::1686933989::0::1::::<>Button<>::
 New game.gd::GDScript::-1::1686933989::0::1::::<>Button<>::
 rickastley-removebg-preview.png::CompressedTexture2D::5532099007014086409::1686551283::1686934249::1::::<><>::
 ::res://source/::1686551283
-::res://source/actors/::1686934423
+::res://source/actors/::1686935979
 Area2D2.gd::GDScript::-1::1686933989::0::1::::<>Area2D<>::
 Area2D.gd::GDScript::-1::1686551283::0::1::::<>RefCounted<>::
 background3-720.png::CompressedTexture2D::2693734709413207764::1686551283::1686934249::1::::<><>::
@@ -26,12 +26,12 @@ bullet.gd::GDScript::-1::1686933989::0::1::::<>RigidBody2D<>::
 bullet.tscn::PackedScene::-1::1686933989::0::1::::<><>::res://icon.png<>res://source/actors/bullet.gd
 head.gd::GDScript::-1::1686933990::0::1::::<>CollisionShape2D<>::
 hp.gd::GDScript::-1::1686933990::0::1::::<>Label<>::
-lose scene.tscn::PackedScene::-1::1686933990::0::1::::<><>::res://Main menu.gd<>res://New game.gd<>res://background_lose.png
-main menu.gd::GDScript::-1::1686933990::0::1::::<>Control<>::
-main menu.tscn::PackedScene::8132883649892404065::1686934423::0::1::::<><>::res://source/actors/Start button.gd<>res://source/actors/Quit button.gd<>res://source/actors/main menu.gd
+lose scene.tscn::PackedScene::8416617572303591399::1686935978::0::1::::<><>::res://Main menu.gd<>res://New game.gd<>uid://c8sfph2qogm4w
+main menu.gd::GDScript::-1::1686935617::0::1::::<>Control<>::
+main menu.tscn::PackedScene::8132883649892404065::1686935978::0::1::::<><>::res://source/actors/Start button.gd<>res://source/actors/Quit button.gd<>res://source/actors/main menu.gd
 main.gd::GDScript::-1::1686933990::0::1::::<>Node2D<>::
-Player.gd::GDScript::-1::1686933990::0::1::::<>CharacterBody2D<>::
-Player.tscn::PackedScene::-1::1686933990::0::1::::<><>::res://icon.png<>res://source/actors/Player.gd<>res://background.png<>res://source/actors/head.gd<>res://2head2-removebg-preview.png<>res://bodyanimation.png<>res://rickastley-removebg-preview.png<>res://source/actors/hp.gd<>res://source/actors/Villain.gd<>res://source/actors/Time.gd
+Player.gd::GDScript::-1::1686935798::0::1::::<>CharacterBody2D<>::
+Player.tscn::PackedScene::4069845075541317859::1686935979::0::1::::<><>::uid://brcmg16mmfq4s<>res://source/actors/Player.gd<>uid://sn041sb1cbvp<>res://source/actors/head.gd<>uid://b1mareg1co174<>uid://dt1gtl4tcoipt<>uid://ck214k6uqgk06<>res://source/actors/hp.gd<>res://source/actors/Villain.gd<>res://source/actors/Time.gd
 playerbullet.gd::GDScript::-1::1686933990::0::1::::<>RigidBody2D<>::
 playerbullet.tscn::PackedScene::-1::1686933990::0::1::::<><>::res://icon.png<>res://source/actors/playerbullet.gd
 Quit button.gd::GDScript::-1::1686933990::0::1::::<>Button<>::

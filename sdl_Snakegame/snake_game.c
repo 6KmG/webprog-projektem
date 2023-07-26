@@ -1,8 +1,8 @@
-// Snake game made by Champ. Made with using the SDL library. Credits to ChatGPT too.
+// Snake game made by 6kmg. Made with using the SDL library. Credits to ChatGPT too.
 // Note: Changing the speed might break the game and the score counter is an unsigned char, so if u reach 256 it turns to 0
 // Compile with Powershell
-// Debug mode compilation: g++ snake_game.cpp -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game
-// Release mode compilation: g++ snake_game.cpp -s -mwindows -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o sdl_main
+// Debug mode: gcc -g snake_game.c -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game_debug
+// Release mode: gcc snake_game.c -s -mwindows -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game
 
 #include "SDL2/SDL.h"
 
@@ -17,7 +17,7 @@
 #define HEADCOLOR 255,255,255,255
 #define CIRCLECOLOR 0,68,130,255
 #define SPEED 600
-#define FPS 77
+#define FPS 60
 #define MAXSNAKELEN 10000   // Don't go above 1 million
 #define locked 2   // I set up a third option alongside true and false
 #define false 0
