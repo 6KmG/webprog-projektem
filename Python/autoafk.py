@@ -22,17 +22,17 @@ while True:
     
     counter += 1
     
-    if counter >= 8:
+    if counter % 8 == 0:
         pyautogui.moveTo(640, 10, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(160, 220, 0.5)
+        pyautogui.moveTo(160, 250, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(400, 60, 0.5)
+        pyautogui.moveTo(300, 50, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(640, 650, 0.5)
+        pyautogui.moveTo(640, 640, 0.5)
         pyautogui.click()
 
         pyautogui.moveTo(420, 620, 0.5)
@@ -43,6 +43,4 @@ while True:
 
         pyautogui.moveTo(640, 540, 0.5)
         pyautogui.click()
-        
-        counter = 0
         
