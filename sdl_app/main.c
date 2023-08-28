@@ -1,10 +1,11 @@
-#include "SDL.h"
+#include "SDL2\SDL.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
 #include "myfunctions.h"
+#include "mysdlfuctions.h"
 
 #define true 1
 #define false 0
