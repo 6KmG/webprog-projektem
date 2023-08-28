@@ -4,7 +4,7 @@
         {
             "label": "Pull changes",
             "type": "shell",
-            "command": "git remote add origin https://github.com/6KmG/pcs.git && git pull origin master && git add . && git commit",
+            "command": "git remote add origin https://github.com/6KmG/pcs.git; git pull origin master; git add .; git commit",
             "group": "none",
             "presentation": {
                 "reveal": "always",
