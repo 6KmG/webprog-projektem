@@ -1,13 +1,5 @@
-
-
-
-#include <math.h>
-#include <Windows.h>
-#include "myfunctions.h"
-
-int main(int argc, char *argv[]){
-    int a = 5;
-    int b = 7;
-    int c = a + b;
-    printf("%d", c);
+#include <windows.h>
+int _main(){
+    MessageBox(0, 0, 0, 0);
+    ExitProcess(0);
 }
