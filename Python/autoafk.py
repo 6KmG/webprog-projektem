@@ -1,8 +1,15 @@
 import time
 import pyautogui
 import random
+import ctypes
 
 counter = 7
+
+user32 = ctypes.windll.user32
+user32.SetProcessDPIAware()
+
+x = user32.GetSystemMetrics(0) / 1280
+y = user32.GetSystemMetrics(1) / 720
 
 while True:
     a = random.choice(['w','a','s','d'])
@@ -23,24 +30,24 @@ while True:
     counter += 1
     
     if counter % 8 == 0:
-        pyautogui.moveTo(640, 10, 0.5)
+        pyautogui.moveTo(640 * x, 10 * y, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(160, 250, 0.5)
+        pyautogui.moveTo(150 * x, 200 * y, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(300, 50, 0.5)
+        pyautogui.moveTo(300 * x, 50 * y, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(640, 640, 0.5)
+        pyautogui.moveTo(640 * x, 640 * y, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(420, 620, 0.5)
+        pyautogui.moveTo(420 * x, 620 * y, 0.5)
         pyautogui.click()
         
-        pyautogui.moveTo(360, 620, 0.5)
+        pyautogui.moveTo(360 * x, 620 * y, 0.5)
         pyautogui.click()
 
-        pyautogui.moveTo(640, 540, 0.5)
+        pyautogui.moveTo(640 * x, 540 * y, 0.5)
         pyautogui.click()
         
