@@ -36,11 +36,7 @@ while True:
         pyautogui.moveTo(150 * x, 200 * y, 0.5)
         pyautogui.click()
 
-<<<<<<< HEAD
-        pyautogui.moveTo(370, 60, 0.5)
-=======
         pyautogui.moveTo(300 * x, 50 * y, 0.5)
->>>>>>> e3fb36dbbbfd4271d371da7f1eaeb81c9bb9cf55
         pyautogui.click()
 
         pyautogui.moveTo(640 * x, 640 * y, 0.5)
