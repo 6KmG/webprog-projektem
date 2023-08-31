@@ -1,23 +1,23 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-var velocity = Vector2(0,0)
+var velo = Vector2(0,0)
 var speed=300
 var gravity=1800
 var jump=-600
-onready var animatedSprite = $Body/AnimatedSprite
+@onready var animatedSprite = $Body/AnimatedSprite2D
 
 func _physics_process(delta):
 	#Move left
 	if Input.is_action_pressed("key_a"):
-		velocity.x=-speed
+		velo.x=-speed
 	#Move right
 	if Input.is_action_pressed("key_d"):
-		velocity.x=speed
+		velo.x=speed
 	#Jump
 	if Input.is_action_just_pressed("spacebar") and is_on_floor():
-		velocity.y=jump
+		velo.y=jump
 	#Moving animation
-	if velocity.x>100:
+	if velo.x>100:
 		animatedSprite.play("run")
 		animatedSprite.set_flip_h(false)
 	elif velocity.x<-100:
@@ -26,12 +26,15 @@ func _physics_process(delta):
 	else:
 		animatedSprite.stop()
 	#Fall
-	if velocity.y<-jump:
-		velocity.y+=gravity*delta
+	if velo.y<-jump:
+		velo.y+=gravity*delta
 
-	move_and_slide(velocity,Vector2.UP,true)
-	velocity.x=lerp(velocity.x,0,0.4)
+	set_velocity(velo)
+	set_up_direction(Vector2.UP)
+	set_floor_stop_on_slope_enabled(true)
+	move_and_slide()
+	velo.x=lerp(velo.x,0.0,0.4)
 
 func _on_fallout_body_entered(body):
 	if body==self:
-		get_tree().change_scene("res://source/actors/lose scene.tscn")
+		get_tree().change_scene_to_file("res://source/actors/lose scene.tscn")

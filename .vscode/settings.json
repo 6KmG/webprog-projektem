@@ -52,7 +52,8 @@
         "test.h": "c",
         "sdl.h": "c",
         "math.h": "c",
-        "myfunctions.h": "c"
+        "myfunctions.h": "c",
+        "mysdlfuctions.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "java.compile.nullAnalysis.mode": "automatic",
