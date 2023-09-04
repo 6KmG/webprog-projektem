@@ -1,12 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <math.h>
-#include "myfunctions.h"
+#include <windows.h>
 
-int main(int argc, char *argv[]){
-    printf("%d\n",5|4);
-    printf("%d\n", 5||4);
-
-    return 0;
+int _main(){
+    MessageBoxA(0, "Message", "Title", 0);
+    ExitProcess(0);
 }

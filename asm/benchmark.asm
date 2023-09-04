@@ -1,7 +1,11 @@
 ;Built using MASM32 https://www.masm32.com/
 ;Compilation and linking command (VSCode):
-;cd $dir && ml /c /coff /nologo $fileName && link /subsystem:console /nologo /entry:main $fileNameWithoutExt.obj && $dir$fileNameWithoutExt;echo `nRet:$LASTEXITCODE
-;ml /c /coff /nologo $fileName && link /subsystem:console /nologo /entry:main $fileNameWithoutExt.obj && 
+;
+; cd $dir && ml /c /coff /nologo $fileName && 
+; link /subsystem:console /nologo /entry:main 
+; $fileNameWithoutExt.obj && $dir$fileNameWithoutExt;
+; echo `nRet:$LASTEXITCODE
+
 .386
 .model flat, stdcall
 

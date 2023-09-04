@@ -8,7 +8,6 @@
 
 #include <stdio.h>  // For sprintf
 #include <time.h>
-#include <string.h>
 
 #define WIDTH 800
 #define HEIGHT 480
