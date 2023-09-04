@@ -15,23 +15,23 @@
 #define bool char
 
 #define WIDTH 800
-#define HEIGHT 480
-#define SPEED 300
-#define FPS 120
+#define HEIGHT 450
+#define SPEED 1
+#define FPS 500
 #define BACKGROUNDCOLOR 101,154,210,255
 #define PLAYERCOLOR 255,255,255,255
 #define GRAVITY 0
 
-int main(int argc, char *argv[])
+bool keyD = false;
+bool keyA = false;
+bool keySpace = false;
+
+double previousTime = 0;
+double deltaTime = 0;
+double velocity;
+
+int SDL_main(int argc, char *argv[])
 {
-    bool keyD = false;
-    bool keyA = false;
-    bool keySpace = false;
-
-    double previousTime = 0;
-    double deltaTime = 0;
-    int velocity;
-
     SDL_Init(SDL_INIT_EVERYTHING);
 
     SDL_Window *window = SDL_CreateWindow(
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     SDL_Rect player;
     player.h = 30;
     player.w = 30;
-    player.x = 30;
+    player.x = 30; velocity = player.x;
     player.y = 30;
 
     SDL_Event event;
@@ -77,12 +77,12 @@ int main(int argc, char *argv[])
         SDL_RenderClear(renderer); 
         SDL_SetRenderDrawColor(renderer, PLAYERCOLOR);
         SDL_RenderFillRect(renderer, &player);
-
         SDL_RenderPresent(renderer); 
 
-        if(keyD) player.x += velocity;
-        if(keyA) player.x -= velocity;
+        if(keyD) velocity += SPEED;
+        if(keyA) velocity -= SPEED;
 
+        player.x = (int) velocity;
         player.y += round(GRAVITY * deltaTime);
 
         previousTime = nanoTime();
@@ -90,10 +90,6 @@ int main(int argc, char *argv[])
         if(FPS) SDL_Delay(1000 / FPS);
 
         deltaTime = nanoTime() - previousTime;
-
-        velocity = round(deltaTime * SPEED)+1;
-
-        if(velocity > SPEED) velocity = velocity / FPS;
     }
 
     SDL_DestroyRenderer(renderer);

@@ -23,7 +23,10 @@
 #define false 0
 #define true 1
 
-void DrawRect(SDL_Renderer* renderer, short x, short y, short w, short h, char r, char g, char b, char a) {
+void DrawRect(
+    SDL_Renderer* renderer, 
+    short x, short y, short w, short h, 
+    char r, char g, char b, char a) {
     SDL_Rect rect;
     rect.x = x;
     rect.y = y;
@@ -59,7 +62,7 @@ void DrawCircle(SDL_Renderer *renderer, short x, short y, short radius, char r, 
     }
 }
 
-int main(int argc, char *argv[])  
+int SDL_main(int argc, char *argv[])  
 {
     const short UpdateFrameSpeed = 1000 / FPS;
     const float DELAY = 0.125;
@@ -221,7 +224,7 @@ int main(int argc, char *argv[])
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     sprintf(ending,"Score: %d",score);
-    SDL_ShowSimpleMessageBox(0, "Your Score", ending, 0);
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Your Score", ending, 0);
     SDL_Quit();
 
     return 0;
