@@ -1,3 +1,5 @@
+// Yoda notation is used occasionally
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -16,19 +18,22 @@
 
 #define WIDTH 800
 #define HEIGHT 450
-#define SPEED 1
-#define FPS 500
-#define BACKGROUNDCOLOR 101,154,210,255
-#define PLAYERCOLOR 255,255,255,255
-#define GRAVITY 0
+#define SPEED 0.25
+#define FPS 60
+#define BACKGROUND_COLOR 101,154,210,255
+#define PLAYER_COLOR 255,255,255,255
+#define GRAVITY 0.25
+#define JUMP_HEIGHT 2
 
 bool keyD = false;
 bool keyA = false;
 bool keySpace = false;
+bool falling = true;
 
-double previousTime = 0;
-double deltaTime = 0;
-double velocity;
+// Using double type as subpixels
+double posX = 0;
+double posY = 0;
+double jumpForce = 0;
 
 int SDL_main(int argc, char *argv[])
 {
@@ -40,17 +45,18 @@ int SDL_main(int argc, char *argv[])
         SDL_WINDOWPOS_UNDEFINED,
         WIDTH,
         HEIGHT,
-        0
+        0 // No flags set
     );
     
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0); // No flags set
 
     SDL_Rect player;
     player.h = 30;
     player.w = 30;
-    player.x = 30; velocity = player.x;
-    player.y = 30;
+    player.x = 30; posX = player.x;
+    player.y = 30; posY = player.y;
 
+    // Loop
     SDL_Event event;
     bool running = true;
     while(running)
@@ -61,35 +67,47 @@ int SDL_main(int argc, char *argv[])
                     running = false;
                     break;
                 case SDL_KEYDOWN:
-                    if(event.key.keysym.sym == SDLK_d) keyD = true;
-                    if(event.key.keysym.sym == SDLK_a) keyA = true;
-                    if(event.key.keysym.sym == SDLK_SPACE) keySpace = true;
+                    if(SDLK_d == event.key.keysym.sym) keyD = true;
+                    if(SDLK_a == event.key.keysym.sym) keyA = true;
+                    if(SDLK_SPACE == event.key.keysym.sym) keySpace = true;
                     break;
                 case SDL_KEYUP:
-                    if(event.key.keysym.sym == SDLK_d) keyD = false;
-                    if(event.key.keysym.sym == SDLK_a) keyA = false;
-                    if(event.key.keysym.sym == SDLK_SPACE) keySpace = false;
+                    if(SDLK_d == event.key.keysym.sym) keyD = false;
+                    if(SDLK_a == event.key.keysym.sym) keyA = false;
+                    if(SDLK_SPACE == event.key.keysym.sym) keySpace = false;
                     break;
             }
         }
 
-        SDL_SetRenderDrawColor(renderer, BACKGROUNDCOLOR);
+        SDL_SetRenderDrawColor(renderer, BACKGROUND_COLOR);
         SDL_RenderClear(renderer); 
-        SDL_SetRenderDrawColor(renderer, PLAYERCOLOR);
+
+        // Everything is rendered here
+        SDL_SetRenderDrawColor(renderer, PLAYER_COLOR);
         SDL_RenderFillRect(renderer, &player);
+
+        drawRect(renderer, 100, 300, 400, 50, 255, 255, 255, 255);
+
+        // End of rendering
         SDL_RenderPresent(renderer); 
 
-        if(keyD) velocity += SPEED;
-        if(keyA) velocity -= SPEED;
+        if(player.y >= 300) falling = false;
+        else falling = true;
 
-        player.x = (int) velocity;
-        player.y += round(GRAVITY * deltaTime);
+        if(keyD) posX += SPEED;
+        if(keyA) posX -= SPEED;
+        if(keySpace || false == falling) jumpForce = JUMP_HEIGHT;
+        if(falling) posY += GRAVITY; 
 
-        previousTime = nanoTime();
+        if(jumpForce > 0){
+            posY -= jumpForce;
+            jumpForce /= 2;
+        }
 
-        if(FPS) SDL_Delay(1000 / FPS);
+        player.x = (int) posX;
+        player.y = (int) posY;
 
-        deltaTime = nanoTime() - previousTime;
+        if(player.y > HEIGHT) running = false; // ending the game when falling off
     }
 
     SDL_DestroyRenderer(renderer);

@@ -113,7 +113,7 @@ while(running)
     }
 
     // Render the background
-    SDL_SetRenderDrawColor(renderer, BACKGROUNDCOLOR);
+    SDL_SetRenderDrawColor(renderer, BACKGROUND_COLOR);
     SDL_RenderClear(renderer);
 
     // Drawing the player

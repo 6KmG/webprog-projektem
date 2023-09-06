@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
     bool running = true;
     while(running)
     {
-        SDL_SetRenderDrawColor(renderer, BACKGROUNDCOLOR);
+        SDL_SetRenderDrawColor(renderer, BACKGROUND_COLOR);
         SDL_RenderClear(renderer); 
 
         SDL_Rect myrect = drawRect(renderer, 200, 200, 100, 50, 255, 255, 255, 255);
