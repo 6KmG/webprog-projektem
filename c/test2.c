@@ -1,6 +1,7 @@
 #include <windows.h>
 
-int _main(){
-    MessageBoxA(0, "Message", "Title", 0);
+int main(){
+    HANDLE a = GetStdHandle(-11);
+    WriteConsoleA(a, "Hello world!", 15, 0, 0);
     ExitProcess(0);
 }
