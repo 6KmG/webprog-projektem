@@ -1,7 +1,14 @@
 #include <windows.h>
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
+long long a;
 int main(){
-    HANDLE a = GetStdHandle(-11);
-    WriteConsoleA(a, "Hello world!", 15, 0, 0);
-    ExitProcess(0);
+    time(&a);
+    srand(a);
+    for(int i = 0; i < 5; i++){
+        printf("%d ", rand());
+    }
+    
 }
