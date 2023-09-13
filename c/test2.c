@@ -1,14 +1,5 @@
-#include <windows.h>
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
+int printf(const char*, ...);
 
-long long a;
-int main(){
-    time(&a);
-    srand(a);
-    for(int i = 0; i < 5; i++){
-        printf("%d ", rand());
-    }
-    
+int _main(){
+    printf("Hello world! %d", 5);
 }
