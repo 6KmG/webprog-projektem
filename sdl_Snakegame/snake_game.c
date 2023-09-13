@@ -4,10 +4,24 @@
 // Debug mode: gcc -g snake_game.c -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game_debug
 // Release mode: gcc snake_game.c -s -mwindows -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game
 
-#include "SDL2/SDL.h"
+#include <SDL.h>
 
-#include <stdio.h>  // For sprintf
-#include <time.h>
+struct systemTime {
+  short wYear;
+  short wMonth;
+  short wDayOfWeek;
+  short wDay;
+  short wHour;
+  short wMinute;
+  short wSecond;
+  short wMilliseconds;
+};
+
+// #include <stdio.h>  // For sprintf
+// #include <time.h>
+void GetSystemTime(struct systemTime*);
+int time(long);
+int sprintf(char*, const char*, ...);
 
 #define WIDTH 800
 #define HEIGHT 480
@@ -37,9 +51,9 @@ void DrawRect(
 
 // There's no ready to use time function with sub-second detail, so I made one based on chatGPT's idea
 double uTime(){
-    struct timespec tp;
-    clock_gettime(CLOCK_REALTIME, &tp);
-    return (double)time(0) + ((double)tp.tv_nsec / 1000000000);
+    struct systemTime st;
+    GetSystemTime(&st);
+    return (double) time(0) + ((double)st.wMilliseconds / 1000);
 }
 
 // I haven't found a function in the sdl library which draws 
@@ -61,7 +75,7 @@ void DrawCircle(SDL_Renderer *renderer, short x, short y, short radius, char r, 
     }
 }
 
-int SDL_main(int argc, char *argv[])  
+int _main(int argc, char *argv[])  
 {
     const short UpdateFrameSpeed = 1000 / FPS;
     const float DELAY = 0.125;

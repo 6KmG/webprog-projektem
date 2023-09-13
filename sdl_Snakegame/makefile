@@ -1,2 +1,2 @@
 all:
-	g++ -g snake_game.c -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game_debug
+	gcc -nostdlib -Iinclude -c snake_game.c -o snake_game.obj; gcc snake_game.obj -nostdlib -Llib -lSDL2 -lkernel32 -lSDL2main -lmsvcrt -o snake_game; snake_game
