@@ -3,30 +3,25 @@ extern scanf:proc
 extern time:proc
 extern rand:proc
 extern srand:proc 
+extern ExitProcess:proc
 
 .data
-    intFormat   db "%d", 10, 0
-    a           dq ?
+    intFormat   db "%d, %d, %d, %d, %d, %d", 10, 0
 
 .code
 main proc
     push rbp
     mov rbp, rsp
+    sub rsp, 4
 
-    mov rcx, offset a
-    call time 
 
-    mov rcx, [a]
-    call srand
+    push 444444444
 
-    call rand
-    call rand
 
-    mov rax, rcx
-    mov rbx, 100
-    idiv rbx
+    mov rdx, 1
+    mov r8, 2
+    mov r9, 3
 
-    ; mov rdx, rdx
     mov rcx, offset intFormat
     call printf
 
