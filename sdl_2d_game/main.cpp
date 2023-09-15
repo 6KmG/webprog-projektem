@@ -4,17 +4,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-#include "SDL2/SDL.h"
+#include <SDL.h>
 #include "myfunctions.h"
 
 // next to do:
-// gravity
 // collision detection
-// jumping
+// deltatime
 
-#define true 1
-#define false 0
-#define bool char
+// #define true 1
+// #define false 0
+// #define bool char
 
 #define WIDTH 800
 #define HEIGHT 450
@@ -22,18 +21,20 @@
 #define FPS 60
 #define BACKGROUND_COLOR 101,154,210,255
 #define PLAYER_COLOR 255,255,255,255
-#define GRAVITY 0.25
-#define JUMP_HEIGHT 2
+#define GRAVITY 0.375
+#define JUMP_DURATION 1.5
+#define JUMP_POWER 0.0075
 
 bool keyD = false;
 bool keyA = false;
 bool keySpace = false;
 bool falling = true;
+bool jumping = false;
 
 // Using double type as subpixels
 double posX = 0;
 double posY = 0;
-double jumpForce = 0;
+double jumpForce = JUMP_DURATION;
 
 int SDL_main(int argc, char *argv[])
 {
@@ -79,6 +80,33 @@ int SDL_main(int argc, char *argv[])
             }
         }
 
+        falling = true;
+
+        // Collision detection
+        if(player.y + 30 >= 300) falling = false;
+
+        // Keys
+        if(keyD) posX += SPEED;
+        if(keyA) posX -= SPEED;
+        if(keySpace && false == falling) jumping = true;
+
+        if(falling) posY += GRAVITY; 
+
+        if(true == jumping){
+            posY -= jumpForce;
+            jumpForce -= JUMP_POWER;
+            if(0 >= jumpForce) {
+                jumpForce = JUMP_DURATION;
+                jumping = false;
+            }
+        }
+
+        player.x = (int) posX;
+        player.y = (int) posY;
+
+        // ending the game when falling off
+        if(player.y > HEIGHT) running = false;
+
         SDL_SetRenderDrawColor(renderer, BACKGROUND_COLOR);
         SDL_RenderClear(renderer); 
 
@@ -90,24 +118,6 @@ int SDL_main(int argc, char *argv[])
 
         // End of rendering
         SDL_RenderPresent(renderer); 
-
-        if(player.y >= 300) falling = false;
-        else falling = true;
-
-        if(keyD) posX += SPEED;
-        if(keyA) posX -= SPEED;
-        if(keySpace || false == falling) jumpForce = JUMP_HEIGHT;
-        if(falling) posY += GRAVITY; 
-
-        if(jumpForce > 0){
-            posY -= jumpForce;
-            jumpForce /= 2;
-        }
-
-        player.x = (int) posX;
-        player.y = (int) posY;
-
-        if(player.y > HEIGHT) running = false; // ending the game when falling off
     }
 
     SDL_DestroyRenderer(renderer);
