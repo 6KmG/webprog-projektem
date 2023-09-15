@@ -7,13 +7,30 @@
 #include <SDL.h>
 #include "myfunctions.h"
 
-// next to do:
+// Things to do:
 // collision detection
 // deltatime
+// lerping
 
 // #define true 1
 // #define false 0
 // #define bool char
+
+void moveRight(double *vectorX, double value){
+    *vectorX += value;
+}
+void moveLeft(double *vectorX, double value){
+    *vectorX -= value;
+}
+void jump(bool* switcher, double* vectorY, double* jumpForce, const double jumpHeight, const double jumpDuration){
+    if(false == *switcher) return;
+    *vectorY -= *jumpForce;
+    *jumpForce -= jumpHeight;
+    if(0 >= *jumpForce) {
+        *switcher = false;
+        *jumpForce = jumpDuration;
+    }
+}
 
 #define WIDTH 800
 #define HEIGHT 450
@@ -21,7 +38,7 @@
 #define FPS 60
 #define BACKGROUND_COLOR 101,154,210,255
 #define PLAYER_COLOR 255,255,255,255
-#define GRAVITY 0.375
+#define GRAVITY 0.5
 #define JUMP_DURATION 1.5
 #define JUMP_POWER 0.0075
 
@@ -34,7 +51,7 @@ bool jumping = false;
 // Using double type as subpixels
 double posX = 0;
 double posY = 0;
-double jumpForce = JUMP_DURATION;
+double jumpForce;
 
 int SDL_main(int argc, char *argv[])
 {
@@ -86,20 +103,13 @@ int SDL_main(int argc, char *argv[])
         if(player.y + 30 >= 300) falling = false;
 
         // Keys
-        if(keyD) posX += SPEED;
-        if(keyA) posX -= SPEED;
+        if(keyD) moveRight(&posX, SPEED);
+        if(keyA) moveLeft(&posX, SPEED);
         if(keySpace && false == falling) jumping = true;
 
         if(falling) posY += GRAVITY; 
 
-        if(true == jumping){
-            posY -= jumpForce;
-            jumpForce -= JUMP_POWER;
-            if(0 >= jumpForce) {
-                jumpForce = JUMP_DURATION;
-                jumping = false;
-            }
-        }
+        jump(&jumping, &posY, &jumpForce, JUMP_POWER, JUMP_DURATION);
 
         player.x = (int) posX;
         player.y = (int) posY;

@@ -3,25 +3,31 @@
 // Compile with Powershell
 // Debug mode: gcc -g snake_game.c -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game_debug
 // Release mode: gcc snake_game.c -s -mwindows -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game
-
+// gcc -nostdlib -Iinclude -c snake_game.c -o snake_game.obj; gcc snake_game.obj -nostdlib -Llib -lSDL2 -lkernel32 -lSDL2main -lmsvcrt -o snake_game; snake_game
 #include <SDL.h>
 
-struct systemTime {
-  short wYear;
-  short wMonth;
-  short wDayOfWeek;
-  short wDay;
-  short wHour;
-  short wMinute;
-  short wSecond;
-  short wMilliseconds;
-};
+// struct systemTime {
+//   short wYear;
+//   short wMonth;
+//   short wDayOfWeek;
+//   short wDay;
+//   short wHour;
+//   short wMinute;
+//   short wSecond;
+//   short wMilliseconds;
+// };
 
-// #include <stdio.h>  // For sprintf
-// #include <time.h>
-void GetSystemTime(struct systemTime*);
-int time(long);
-int sprintf(char*, const char*, ...);
+// struct timespec{
+//     long long tv_sec;
+//     long long tv_nsec;
+// };
+
+#include <stdio.h>  // For sprintf
+#include <time.h>
+
+// void GetSystemTime(struct systemTime*);
+// int time(long);
+// int sprintf(char*, const char*, ...);
 
 #define WIDTH 800
 #define HEIGHT 480
@@ -39,7 +45,8 @@ int sprintf(char*, const char*, ...);
 void DrawRect(
     SDL_Renderer* renderer, 
     short x, short y, short w, short h, 
-    char r, char g, char b, char a) {
+    char r, char g, char b, char a
+    ) {
     SDL_Rect rect;
     rect.x = x;
     rect.y = y;
@@ -51,14 +58,21 @@ void DrawRect(
 
 // There's no ready to use time function with sub-second detail, so I made one based on chatGPT's idea
 double uTime(){
-    struct systemTime st;
-    GetSystemTime(&st);
-    return (double) time(0) + ((double)st.wMilliseconds / 1000);
+    // struct systemTime st;
+    // GetSystemTime(&st);
+    // return (double) time(0) + ((double)st.wMilliseconds / 1000);
+    struct timeval tv;
+    mingw_gettimeofday(&tv, 0);
+    return (double) time(0) + ((double) tv.tv_usec / 1000000000);
 }
 
 // I haven't found a function in the sdl library which draws 
 // a filled circle so I copy pasted one from Stackoverflow
-void DrawCircle(SDL_Renderer *renderer, short x, short y, short radius, char r, char g, char b, char a)
+void DrawCircle(
+    SDL_Renderer *renderer, 
+    short x, short y, short radius, 
+    char r, char g, char b, char a
+    )
 {
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     for (short w = 0; w < radius * 2; w++)
@@ -67,7 +81,7 @@ void DrawCircle(SDL_Renderer *renderer, short x, short y, short radius, char r, 
         {
             short dx = radius - w;
             short dy = radius - h;
-            if ((dx*dx + dy*dy) <= (radius * radius))
+            if ((dx * dx + dy * dy) <= (radius * radius))
             {
                 SDL_RenderDrawPoint(renderer, x + dx, y + dy);
             }
@@ -75,14 +89,14 @@ void DrawCircle(SDL_Renderer *renderer, short x, short y, short radius, char r, 
     }
 }
 
-int _main(int argc, char *argv[])  
+int SDL_main(int argc, char *argv[])  
 {
     const short UpdateFrameSpeed = 1000 / FPS;
     const float DELAY = 0.125;
 
     double cooldown = 0;
     unsigned short i = 0;
-    unsigned short count = (FPS/14)*6+3;
+    unsigned short count = (FPS / 14) * 6 + 3;
     unsigned short start;
     char title[64];
     unsigned short score = 0;
@@ -119,8 +133,8 @@ int _main(int argc, char *argv[])
     memset(SnakeLen, -100, MAXSNAKELEN * sizeof(short));
     
     // Random circle position
-    short circleX = rand()% (WIDTH - 30) + 15;
-    short circleY = rand()% (HEIGHT - 30) + 15;
+    short circleX = rand() % (WIDTH - 30) + 15;
+    short circleY = rand() % (HEIGHT - 30) + 15;
 
     SDL_Event windowEvent;
     char running = true;
@@ -128,8 +142,8 @@ int _main(int argc, char *argv[])
     {
         // The window title with the simpliest fps counter
         FrameCounter++;
-        if (time(0)>FrameRateOutputSpeed){
-            sprintf(title, "Snake game | FPS: %d | Score: %d",FrameCounter,score);
+        if (time(0) > FrameRateOutputSpeed){
+            sprintf(title, "Snake game | FPS: %d | Score: %d", FrameCounter, score);
             SDL_SetWindowTitle(window, title);
             FrameRateOutputSpeed++;
             FrameCounter = 0;
@@ -149,27 +163,59 @@ int _main(int argc, char *argv[])
         SnakeLen[0] = head.x;
         SnakeLen[1] = head.y;
         
-        if(i < FPS/2){
+        if(i < FPS / 2){
             SnakeLen[i] = head.x;
-            SnakeLen[i+1] = head.y;
+            SnakeLen[i + 1] = head.y;
             i+=2;
         }
         // Draws the first 3 tiles and updates the array
         else{ 
-            DrawRect(renderer, SnakeLen[(int)(FPS/14)*2], SnakeLen[(int)(FPS/14)*2+1], 30, 30, BODYCOLOR);
-            DrawRect(renderer, SnakeLen[(int)(FPS/14)*4], SnakeLen[(int)(FPS/14)*4+1], 30, 30, BODYCOLOR);
-            DrawRect(renderer, SnakeLen[(int)(FPS/14)*6], SnakeLen[(int)(FPS/14)*6+1], 30, 30, BODYCOLOR);
+            DrawRect(
+                renderer, 
+                SnakeLen[(int)(FPS/14)*2], SnakeLen[(int)(FPS/14)*2+1], 
+                30, 
+                30, 
+                BODYCOLOR
+            );
+            DrawRect(
+                renderer, 
+                SnakeLen[(int) (FPS / 14) * 4], SnakeLen[(int) (FPS / 14) * 4 + 1], 
+                30, 
+                30, 
+                BODYCOLOR
+            );
+            DrawRect(
+                renderer, 
+                SnakeLen[(int) (FPS / 14) * 6], SnakeLen[(int) (FPS / 14) * 6 + 1], 
+                30, 
+                30, 
+                BODYCOLOR
+            );
             SnakeLen[0] = head.x;
             SnakeLen[1] = head.y;
-            for (short j = count; j>2; j-=2){
-                SnakeLen[j] = SnakeLen[j-2];
-                SnakeLen[j-1] = SnakeLen[j-3];
+            for (short j = count; j > 2; j -= 2){
+                SnakeLen[j] = SnakeLen[j - 2];
+                SnakeLen[j - 1] = SnakeLen[j - 3];
             }
         }
-        int incrementation = (FPS/14) * 2;
-        for(start = ((int)(FPS/14)*2)*4+2; start < count; start += incrementation){
-            DrawRect(renderer, SnakeLen[start], SnakeLen[start+1], 30, 30, BODYCOLOR);
-            if (head.x > SnakeLen[start] && head.y > SnakeLen[start+1] && head.x < SnakeLen[start]+30 && head.y < SnakeLen[start+1]+30){
+        int incrementation = (FPS / 14) * 2;
+        for(
+            start = ((int) (FPS / 14) * 2) * 4 + 2; 
+            start < count; 
+            start += incrementation
+            ){
+            DrawRect(
+                renderer, 
+                SnakeLen[start], 
+                SnakeLen[start + 1], 
+                30, 30, BODYCOLOR
+            );
+            if (
+                head.x > SnakeLen[start] && 
+                head.y > SnakeLen[start + 1] && 
+                head.x < SnakeLen[start] + 30 && 
+                head.y < SnakeLen[start + 1] + 30
+                ){
                 running = false;
             }
         }
@@ -185,21 +231,49 @@ int _main(int argc, char *argv[])
                 // Keys: each if case checks if any of these key pressed down, checks if the move in
                 // opposite direction is forbidden and checks if the cooldown is over
                 case SDL_KEYDOWN:
-                    if(windowEvent.key.keysym.sym == SDLK_d && movements[3] != locked && uTime() > cooldown){
-                        movements[0] = false; movements[1] = false; movements[2] = locked; movements[3] = true;
+                    if(
+                        windowEvent.key.keysym.sym == SDLK_d && 
+                        movements[3] != locked && 
+                        uTime() > cooldown
+                        ){
+                        movements[0] = false; 
+                        movements[1] = false; 
+                        movements[2] = locked; 
+                        movements[3] = true;
+                        cooldown = uTime() + DELAY;
+                    }
+                    if(
+                        windowEvent.key.keysym.sym == SDLK_a && 
+                        movements[2] != locked && 
+                        uTime() > cooldown
+                        ){
+                        movements[0] = false; 
+                        movements[1] = false; 
+                        movements[2] = true; 
+                        movements[3] = locked;
                         cooldown = uTime()+DELAY;
                     }
-                    if(windowEvent.key.keysym.sym == SDLK_a && movements[2] != locked && uTime() > cooldown){
-                        movements[0] = false; movements[1] = false; movements[2] = true; movements[3] = locked;
-                        cooldown = uTime()+DELAY;
+                    if(
+                        windowEvent.key.keysym.sym == SDLK_w && 
+                        movements[0] != locked && 
+                        uTime() > cooldown
+                        ){
+                        movements[0] = true; 
+                        movements[1] = locked; 
+                        movements[2] = false; 
+                        movements[3] = false;
+                        cooldown = uTime() + DELAY;
                     }
-                    if(windowEvent.key.keysym.sym == SDLK_w && movements[0] != locked && uTime() > cooldown){
-                        movements[0] = true; movements[1] = locked; movements[2] = false; movements[3] = false;
-                        cooldown = uTime()+DELAY;
-                    }
-                    if(windowEvent.key.keysym.sym == SDLK_s && movements[1] != locked && uTime() > cooldown){
-                        movements[0] = locked; movements[1] = true; movements[2] = false; movements[3] = false;
-                        cooldown = uTime()+DELAY;
+                    if(
+                        windowEvent.key.keysym.sym == SDLK_s && 
+                        movements[1] != locked && 
+                        uTime() > cooldown
+                        ){
+                        movements[0] = locked; 
+                        movements[1] = true; 
+                        movements[2] = false; 
+                        movements[3] = false;
+                        cooldown = uTime() + DELAY;
                     }
                     break;
             }
@@ -218,9 +292,14 @@ int _main(int argc, char *argv[])
             head.y -= SPEED/FPS;
         }
         // On snake eating the circle
-        if (head.x > circleX-50 && head.y > circleY-50 && head.x < circleX+20 && head.y < circleY+20){
-            circleX = rand()%(WIDTH - 30) + 15;
-            circleY = rand()%(HEIGHT - 30) + 15;
+        if (
+            head.x > circleX - 50 && 
+            head.y > circleY - 50 && 
+            head.x < circleX + 20 && 
+            head.y < circleY + 20
+            ){
+            circleX = rand() % (WIDTH - 30) + 15;
+            circleY = rand() % (HEIGHT - 30) + 15;
             count+=(FPS/14)*2;
             score++;
         }
@@ -236,7 +315,7 @@ int _main(int argc, char *argv[])
     // Closing the program
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    sprintf(ending,"Score: %d",score);
+    sprintf(ending, "Score: %d", score);
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Your Score", ending, 0);
     SDL_Quit();
 
