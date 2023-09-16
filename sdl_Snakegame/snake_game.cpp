@@ -1,33 +1,9 @@
 // Snake game made by 6kmg. Made with using the SDL library. Credits to ChatGPT too.
 // Note: Changing the speed might break the game and the score counter is an unsigned char, so if u reach 256 it turns to 0
-// Compile with Powershell
-// Debug mode: gcc -g snake_game.c -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game_debug
-// Release mode: gcc snake_game.c -s -mwindows -Iinclude -Llib -Wall -lmingw32 -lSDL2main -lSDL2 -o snake_game
-// gcc -nostdlib -Iinclude -c snake_game.c -o snake_game.obj; gcc snake_game.obj -nostdlib -Llib -lSDL2 -lkernel32 -lSDL2main -lmsvcrt -o snake_game; snake_game
+
 #include <SDL.h>
-
-// struct systemTime {
-//   short wYear;
-//   short wMonth;
-//   short wDayOfWeek;
-//   short wDay;
-//   short wHour;
-//   short wMinute;
-//   short wSecond;
-//   short wMilliseconds;
-// };
-
-// struct timespec{
-//     long long tv_sec;
-//     long long tv_nsec;
-// };
-
 #include <stdio.h>  // For sprintf
 #include <time.h>
-
-// void GetSystemTime(struct systemTime*);
-// int time(long);
-// int sprintf(char*, const char*, ...);
 
 #define WIDTH 800
 #define HEIGHT 480
@@ -58,12 +34,9 @@ void DrawRect(
 
 // There's no ready to use time function with sub-second detail, so I made one based on chatGPT's idea
 double uTime(){
-    // struct systemTime st;
-    // GetSystemTime(&st);
-    // return (double) time(0) + ((double)st.wMilliseconds / 1000);
     struct timeval tv;
     mingw_gettimeofday(&tv, 0);
-    return (double) time(0) + ((double) tv.tv_usec / 1000000000);
+    return (double) time(0) + ((double) tv.tv_usec / 1000000);
 }
 
 // I haven't found a function in the sdl library which draws 
