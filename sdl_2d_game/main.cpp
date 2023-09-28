@@ -22,7 +22,7 @@ void moveRight(double *vectorX, double value){
 void moveLeft(double *vectorX, double value){
     *vectorX -= value;
 }
-void jump(bool* switcher, double* vectorY, double* jumpForce, const double jumpHeight, const double jumpDuration){
+void jump(bool *switcher, double *vectorY, double *jumpForce, const double jumpHeight, const double jumpDuration){
     if(false == *switcher) return;
     *vectorY -= *jumpForce;
     *jumpForce -= jumpHeight;

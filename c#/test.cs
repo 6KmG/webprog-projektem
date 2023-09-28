@@ -1,5 +1,7 @@
+using System;
+
 class Program{
     static void Main(){
-        System.Console.WriteLine("asd");
+        DNS.getHostByName("localhost");
     }
 }

@@ -14,7 +14,7 @@
 
 .code
 main:
-    mov edi, 3                  ;Outer loop iterator
+    mov edi, 3                  ;Outer loop iterator (bottom)
     mov ecx, 1                  ;Counter
     ;ebp -> Square root of the outer loop
     ;eax -> Result of division
@@ -39,7 +39,7 @@ main:
             cmp ebx, ebp
             jle InnerLoop
         inc ecx
-        cmp edi, 100000000
+        cmp edi, 10000000        ;top
         jl OuterLoop
 
     mov eax, ecx                        ;Returning the number of primes

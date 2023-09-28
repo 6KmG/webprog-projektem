@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <math.h>
-//gcc $fileName -o $fileNameWithoutExt && 
+
 int count1 = 1;
 int count2 = 0;
 int count3 = 0;
 int count4 = 0;
+
+#define RANGE 7
 
 void* primes1(){
     register int i1;
@@ -13,7 +15,10 @@ void* primes1(){
     char is_prime;
     register int square;
 
-    for (i1=3;i1<38000000;i1+=2){
+    const int bottom = 2 + 1;
+    const int top = 38 * pow(10, RANGE);
+
+    for (i1 = bottom; i1 < top; i1 += 2){
         is_prime = 1;
         square = sqrt(i1);
         for (j1 = 3; j1<=square; j1+=2){
@@ -33,7 +38,10 @@ void* primes2(){
     char is_prime;
     register int square;
 
-    for (i2=38000001;i2<62000000;i2+=2){
+    const int bottom = 38 * pow(10, RANGE) + 1;
+    const int top = 62 * pow(10, RANGE);
+
+    for (i2=bottom;i2<top;i2+=2){
         is_prime = 1;
         square = sqrt(i2);
         for (j2 = 3; j2<=square; j2+=2){
@@ -53,7 +61,10 @@ void* primes3(){
     char is_prime;
     register int square;
 
-    for (i3=62000001;i3<82000000;i3+=2){
+    const int bottom = 62 * pow(10, RANGE) + 1;
+    const int top = 82 * pow(10, RANGE);
+
+    for (i3=bottom;i3<top;i3+=2){
         is_prime = 1;
         square = sqrt(i3);
         for (j3 = 3; j3<=square; j3+=2){
@@ -73,7 +84,10 @@ void* primes4(){
     char is_prime;
     register int square;
 
-    for (i4=82000001;i4<100000000;i4+=2){
+    const int bottom = 82 * pow(10, RANGE) + 1;
+    const int top = 100 * pow(10, RANGE);
+
+    for (i4=bottom;i4<top;i4+=2){
         is_prime = 1;
         square = sqrt(i4);
         for (j4 = 3; j4<=square; j4+=2){

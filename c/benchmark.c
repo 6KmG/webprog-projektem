@@ -8,7 +8,7 @@ int main(){
     bool is_prime;
     register long int square;
 
-    for (register long int i = 3; i<100000000;i+=2){
+    for (register long int i = 3; i<1000000;i+=2){
         is_prime = 1;
         square = sqrt(i);
         for (register long int j = 3; j<=square; j+=2){
