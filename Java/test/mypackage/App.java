@@ -1,14 +1,11 @@
-package test.mypackage;
-
 import static java.lang.System.*;
+
+import java.util.Calendar;
+import java.util.Date;
+
 public class App {
     public static void main(String[] args){
-        Decide myfunc = new Decide() {
-            @Override
-            public boolean isEven(int x) {
-                return x % 2 == 0;
-            }
-        };
-        out.println(myfunc.isEven(2));
+        Date birth = new Date(2003 - 1900, Calendar.JANUARY, 1);
+        System.out.print(birth);
     }
 }

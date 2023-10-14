@@ -70,7 +70,12 @@
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
         "xlocmon": "cpp",
-        "xloctime": "cpp"
+        "xloctime": "cpp",
+        "MAIN.C": "cpp",
+        "TINYMAIN.C": "cpp",
+        "NONAME.C": "cpp",
+        "string.h": "c",
+        "STRING.H": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "java.compile.nullAnalysis.mode": "automatic",

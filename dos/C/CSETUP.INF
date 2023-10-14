@@ -1,0 +1,2952 @@
+;
+; INFORMATION FILE FOR C 7.0 SETUP
+;
+
+[macro]
+VERS = "7.00"
+
+; default directory names (must end with \)
+DEFDIRBASE     = "C:\C700\"
+DEFDIRBIN      = "BIN\"
+DEFDIRHELP     = "HELP\"
+DEFDIRINCL     = "INCLUDE\"
+DEFDIRINIT     = "INIT\"
+DEFDIRLIB      = "LIB\"
+DEFDIRMFC      = "MFC\"
+DEFDIRSOURCE   = "SOURCE\"
+DEFDIRSAMPLES  = "SAMPLES\"
+DEFDIRTMP      = ""
+
+PACKINGLIST = "PACKING.TXT"
+READMEFILE  = "README.TXT"
+
+; This definition is needed ...
+SETUP_VER   =
+MS_SETUP    = "Microsoft (R) Setup Version"
+COPYRIGHT   = "Copyright (C) Microsoft Corp. 1986, 1992. All rights reserved."
+
+; filename of linker, and backup name used during version checking
+LINK_NAME      = "link.exe"
+TEMP_LINK_NAME = "$$$link.tmp"
+
+
+; ************** lists ********************
+
+;;; Insert Source Media Description here ... VVVVVV ....
+
+[list sdisks]
+0:dos, "Your MS-DOS SYSTEM disk"
+1:x,   "Disk1: Setup"
+2:x,   "Disk2: Utilities"
+3:x,   "Disk3: C and C++ Compiler"
+4:x,   "Disk4: Help Files - I"
+5:x,   "Disk5: Library Files"
+6:x,   "Disk6: Codeview"
+7:x,   "Disk7: Microsoft Foundation Classes - I"
+8:x,   "Disk8: Microsoft Foundation Classes - II"
+9:x,   "Disk9: Microsoft Foundation Classes - III"
+
+; not only must these paths be relative to setup.exe, they must be
+; relative to each other, so that from within any dir, the relative
+; path will get you to any other dir.  This means that setup.exe must
+; be in one of the named dirs.
+[list netsetup]
+0:x,  " "
+1:x,  "..\disk1"
+2:x,  "..\disk2"
+3:x,  "..\disk3"
+4:x,  "..\disk4"
+5:x,  "..\disk5"
+6:x,  "..\disk6"
+7:x,  "..\disk7"
+8:x,  "..\disk8"
+9:x,  "..\disk9"
+
+;;; End of Source Media Description here ... ^^^^^^ ....
+
+; very rarely used
+[list ddisks]
+1:x,  "the destination disk, tape, or cartridge"
+
+
+; LIBRARY-BUILDING LISTS and MACROS
+
+[macro]
+LIB_EXE       = "LIB.EXE"
+
+; These are used in the building of the mondo library names
+LIB_BASE      = "LIBC"
+LIBDLL_BASE   = "DLLC"
+MATH_LETTERS  = "E7A"
+MODEL_LETTERS = "SMCL"
+MODE_LETTERS  = "RWQW"
+
+[list libbuild]
+;   the number is insignificant, the filename is the library to build,
+;   the description is the lib operations line
+
+; DOS MONDO LIBRARIES
+1:slibcer, "+SLIBCR.LIB +LIBH.LIB +EM.LIB +SLIBFP.LIB +SGRAPHFP.LIB +SLIBCXX.LIB +PCD.LIB           +VM.LIB"
+1:slibcar, "+SLIBCR.LIB +LIBH.LIB         +SLIBFA.LIB +SGRAPHFA.LIB +SLIBCXX.LIB +PCD.LIB           +VM.LIB"
+1:slibc7r, "+SLIBCR.LIB +LIBH.LIB +87.LIB +SLIBFP.LIB +SGRAPHFP.LIB +SLIBCXX.LIB +PCD.LIB           +VM.LIB"
+
+1:mlibcer, "+MLIBCR.LIB +LIBH.LIB +EM.LIB +MLIBFP.LIB +MGRAPHFP.LIB +MLIBCXX.LIB +PCD.LIB +MOVE.LIB +VM.LIB"
+1:mlibcar, "+MLIBCR.LIB +LIBH.LIB         +MLIBFA.LIB +MGRAPHFA.LIB +MLIBCXX.LIB +PCD.LIB +MOVE.LIB +VM.LIB"
+1:mlibc7r, "+MLIBCR.LIB +LIBH.LIB +87.LIB +MLIBFP.LIB +MGRAPHFP.LIB +MLIBCXX.LIB +PCD.LIB +MOVE.LIB +VM.LIB"
+
+1:clibcer, "+CLIBCR.LIB +LIBH.LIB +EM.LIB +CLIBFP.LIB +SGRAPHFP.LIB +CLIBCXX.LIB +PCD.LIB           +VM.LIB"
+1:clibcar, "+CLIBCR.LIB +LIBH.LIB         +CLIBFA.LIB +SGRAPHFA.LIB +CLIBCXX.LIB +PCD.LIB           +VM.LIB"
+1:clibc7r, "+CLIBCR.LIB +LIBH.LIB +87.LIB +CLIBFP.LIB +SGRAPHFP.LIB +CLIBCXX.LIB +PCD.LIB           +VM.LIB"
+
+1:llibcer, "+LLIBCR.LIB +LIBH.LIB +EM.LIB +LLIBFP.LIB +MGRAPHFP.LIB +LLIBCXX.LIB +PCD.LIB +MOVE.LIB +VM.LIB"
+1:llibcar, "+LLIBCR.LIB +LIBH.LIB         +LLIBFA.LIB +MGRAPHFA.LIB +LLIBCXX.LIB +PCD.LIB +MOVE.LIB +VM.LIB"
+1:llibc7r, "+LLIBCR.LIB +LIBH.LIB +87.LIB +LLIBFP.LIB +MGRAPHFP.LIB +LLIBCXX.LIB +PCD.LIB +MOVE.LIB +VM.LIB"
+
+;  WINDOWS MONDO LIBRARIES
+1:slibcewq,  "+SLIBCW.LIB +SLIBCQ.LIB +LIBH.LIB +SLIBFPW.LIB +QWIN.LIB   +SLIBCXX.LIB +PCD.LIB"
+1:slibcawq,  "+SLIBCW.LIB +SLIBCQ.LIB +LIBH.LIB +SLIBFAW.LIB +QWIN.LIB   +SLIBCXX.LIB +PCD.LIB"
+1:slibcew,   "+SLIBCW.LIB             +LIBH.LIB +SLIBFPW.LIB +NOQWIN.LIB +SLIBCXX.LIB +PCD.LIB"
+1:slibcaw,   "+SLIBCW.LIB             +LIBH.LIB +SLIBFAW.LIB +NOQWIN.LIB +SLIBCXX.LIB +PCD.LIB"
+
+1:mlibcewq,  "+MLIBCW.LIB +MLIBCQ.LIB +LIBH.LIB +MLIBFPW.LIB +QWIN.LIB   +MLIBCXX.LIB +PCD.LIB"
+1:mlibcawq,  "+MLIBCW.LIB +MLIBCQ.LIB +LIBH.LIB +MLIBFAW.LIB +QWIN.LIB   +MLIBCXX.LIB +PCD.LIB"
+1:mlibcew,   "+MLIBCW.LIB             +LIBH.LIB +MLIBFPW.LIB +NOQWIN.LIB +MLIBCXX.LIB +PCD.LIB"
+1:mlibcaw,   "+MLIBCW.LIB             +LIBH.LIB +MLIBFAW.LIB +NOQWIN.LIB +MLIBCXX.LIB +PCD.LIB"
+
+1:clibcewq,  "+CLIBCW.LIB +CLIBCQ.LIB +LIBH.LIB +CLIBFPW.LIB +QWIN.LIB   +CLIBCXX.LIB +PCD.LIB"
+1:clibcawq,  "+CLIBCW.LIB +CLIBCQ.LIB +LIBH.LIB +CLIBFAW.LIB +QWIN.LIB   +CLIBCXX.LIB +PCD.LIB"
+1:clibcew,   "+CLIBCW.LIB             +LIBH.LIB +CLIBFPW.LIB +NOQWIN.LIB +CLIBCXX.LIB +PCD.LIB"
+1:clibcaw,   "+CLIBCW.LIB             +LIBH.LIB +CLIBFAW.LIB +NOQWIN.LIB +CLIBCXX.LIB +PCD.LIB"
+
+1:llibcewq,  "+LLIBCW.LIB +LLIBCQ.LIB +LIBH.LIB +LLIBFPW.LIB +QWIN.LIB   +LLIBCXX.LIB +PCD.LIB"
+1:llibcawq,  "+LLIBCW.LIB +LLIBCQ.LIB +LIBH.LIB +LLIBFAW.LIB +QWIN.LIB   +LLIBCXX.LIB +PCD.LIB"
+1:llibcew,   "+LLIBCW.LIB             +LIBH.LIB +LLIBFPW.LIB +NOQWIN.LIB +LLIBCXX.LIB +PCD.LIB"
+1:llibcaw,   "+LLIBCW.LIB             +LIBH.LIB +LLIBFAW.LIB +NOQWIN.LIB +LLIBCXX.LIB +PCD.LIB"
+
+;  WINDOWS MONDO DLL LIBRARIES
+1:sdllcew,   "+SDLLCW.LIB             +LIBH.LIB +SLIBFPW.LIB +NOQWIN.LIB +SDLLCXXW.LIB +PCDM.LIB"
+1:sdllcaw,   "+SDLLCW.LIB             +LIBH.LIB +SLIBFAW.LIB +NOQWIN.LIB +SDLLCXXW.LIB +PCDM.LIB"
+
+1:mdllcew,   "+MDLLCW.LIB             +LIBH.LIB +MLIBFPW.LIB +NOQWIN.LIB +MDLLCXXW.LIB +PCDM.LIB"
+1:mdllcaw,   "+MDLLCW.LIB             +LIBH.LIB +MLIBFAW.LIB +NOQWIN.LIB +MDLLCXXW.LIB +PCDM.LIB"
+
+1:cdllcew,   "+CDLLCW.LIB             +LIBH.LIB +CLIBFPW.LIB +NOQWIN.LIB +CDLLCXXW.LIB +PCDM.LIB"
+1:cdllcaw,   "+CDLLCW.LIB             +LIBH.LIB +CLIBFAW.LIB +NOQWIN.LIB +CDLLCXXW.LIB +PCDM.LIB"
+
+1:ldllcew,   "+LDLLCW.LIB             +LIBH.LIB +LLIBFPW.LIB +NOQWIN.LIB +LDLLCXXW.LIB +PCDM.LIB"
+1:ldllcaw,   "+LDLLCW.LIB             +LIBH.LIB +LLIBFAW.LIB +NOQWIN.LIB +LDLLCXXW.LIB +PCDM.LIB"
+
+; ****** FILE LAYOUT ******
+;
+;  disk#: path [, "descr"][, size = xxx][, dest = x][, comment=][, actions]
+;
+;     action codes: rename, append, noreplace, ignoreerr (default; synonym
+;           is "nonvital"), vital, timestamp, nocopy, root
+;     dest= R(Real), I(Include), T(Init), H(Help), L(Lib), S(Source),
+;           C(CRT Startup), M(MFC)
+;
+;        [dest setting gets propagated down a list, but not across lists]
+;        [comment=^ shares comment string with previous file (in same list)]
+;
+;INSERT HERE    VVVVVVVVVVV
+
+[list copy_always_lib 1]
+5: lib\LIBH.LIB, comment="Model independent routines library", size=32519
+
+[list copy_always_real_lib 1]
+5: lib\VM.LIB, comment="MS-DOS Virtual Memory kernel", size=40133
+
+[list copy_always 1]
+1: bin\MSD.EXE, comment="Diagnostics utility ", size=155538
+1: bin\MSD.TXT, comment="Documentation for diagnostics utility", size=9003
+
+[list if_chipmath 1]
+5: lib\87.LIB, comment="Floating-point library for math coprocessor", size=5145
+
+[list if_codeview_real 1]
+6: bin\CV.EXE, comment="MS-DOS CodeView debugger for MS-DOS", size=468352
+1: bin\CV.ICO, comment="MS-DOS CodeView Icon", size=1086
+2: bin\EED1CAN.DLL, comment="Expression evaluator for MS-DOS  ANSI C", size=91030
+2: bin\EED1CXX.DLL, comment="Expression evaluator for MS-DOS  C++", size=105690
+2: bin\EMD1D1.DLL, comment="Execution model for MS-DOS  to MS-DOS", size=69306
+2: bin\EMD1W0.DLL, comment="MS-DOS to WIN3 Execution Model", size=74028
+2: bin\NMD1PCD.DLL, comment="MS-DOS Non-Native PCode Execution Model", size=38040
+2: bin\RCVCOM.EXE, comment="MS-DOS Serial Debug Monitor", size=92096
+2: bin\SHD1.DLL, comment="Symbol handler for MS-DOS", size=42804
+2: bin\TLD1COM.DLL, comment="MS-DOS Serial Transport Layer", size=22126
+2: bin\TLD1LOC.DLL, comment="Local transport layer for MS-DOS", size=16692
+
+[list if_codeview_win 1]
+6: bin\CVW.EXE, comment="CodeView for Windows - Single Monitor", size=63488
+6: bin\CVW4.EXE, comment="CodeView for Windows", size=410112
+6: bin\DMW0.DLL, comment="Debugging Monitor", size=44640
+6: bin\EEW0CAN.DLL, comment="Windows expression evaluator for ANSI C", size=91118
+6: bin\EEW0CXX.DLL, comment="Windows C++ expression evaluator", size=105039
+7: bin\EMW0W0.DLL, comment="Windows to windows execution model", size=74400
+6: bin\NMW0PCD.DLL, comment="WIN3 Non-Native PCode Execution Model", size=40672
+6: bin\RCVWCOM.EXE, comment="Windows serial remote debugging monitor", size=34432
+6: bin\SHW0.DLL, comment="Windows hosted symbol handler", size=42720
+6: bin\TLW0LOC.DLL, comment="Windows local transport layer", size=45184
+
+[list if_compact_alt 1]
+3: lib\CLIBFA.LIB, comment="Alternate math library (compact model)", size=60573
+
+[list if_compact_noalt 1]
+3: lib\CLIBFP.LIB, comment="Floating-point library (compact model)", size=74159
+
+[list if_compact_quick_win 1]
+3: lib\CLIBCQ.LIB, comment="Windows 3.x qwin C library- compact model", size=8865
+
+[list if_compact_real 1]
+3: lib\CLIBCR.LIB, comment="MS-DOS run-time library (compact model)", size=158209
+
+[list if_compact_win_alt 1]
+3: lib\CLIBFAW.LIB, comment="Windows 3.x alternate math library- compact model", size=60573
+
+[list if_compact_win_dll 1]
+5: lib\CDLLCW.LIB, comment="Windows 3.x dll libs- compact model", size=122687
+5: lib\CDLLCXXW.LIB, comment="Windows 3.x C++ DLL libs- compact model", size=65439
+
+[list if_compact_win_noalt 1]
+3: lib\CLIBFPW.LIB, comment="Windows 3.x em/87 math library- compact model", size=74683
+
+[list if_compact_win_nocrt 1]
+3: lib\CNOCRTDW.LIB, comment="Windows 3.x DLL nocrt library- compact model", size=2071
+3: lib\CNOCRTW.LIB, comment="Windows 3.x exe nocrt library-compact model", size=2583
+
+[list if_compact_win 1]
+3: lib\CLIBCW.LIB, comment="Windows 3.x exe libs- compact model", size=134031
+
+[list if_compact 1]
+5: lib\CLIBCXX.LIB, comment="C++ IOStream Library--compact model", size=70619
+
+[list if_config_cv 1]
+6: bin\CVW1.386, comment="CodeView for Windows Driver", size=5194
+1: bin\VMB.386, comment="Windows Spawn Driver", size=9273
+
+[list if_config_win 1]
+6: bin\OEM08.FON, comment="Font", size=4752
+6: bin\OEM10.FON, comment="Font", size=5264
+6: bin\VMCPD.386, comment="MS-DOSX32 DPMI support driver", size=9588
+6: bin\VPFD.386, comment="MS-DOSX32 DPMI support driver", size=9275
+
+[list if_config 1]
+7: bin\EMM386.EXE, comment="Expanded memory manager", size=91742
+7: bin\HIMEM.SYS, comment="Extended memory manager", size=11616
+7: bin\MOUSE.COM, comment="Mouse driver", size=56408
+7: bin\RAMDRIVE.SYS, comment="Virtual RAM disk drive", size=5873
+7: bin\SMARTDRV.EXE, comment="Disk cache", size=43609
+
+[list if_emulator 1]
+5: lib\EM.LIB, comment="Floating-point library for emulator", size=17945
+
+[list if_graphics_samples 1]
+9: samples\graphics\CHRTDEMO.C, comment="Graphics Demo", size=33493
+9: samples\graphics\CHRTDEMO.H, comment="Graphics Demo", size=5505
+9: samples\graphics\CHRTDEMO.MAK, comment="Graphics Demo", size=3353
+9: samples\graphics\CHRTDEMO.STS, comment="Graphics Demo", size=6641
+9: samples\graphics\CHRTOPT.C, comment="Graphics Demo", size=25309
+9: samples\graphics\CHRTSUPT.C, comment="Graphics Demo", size=12920
+9: samples\graphics\GRDEMO.C, comment="Graphics Demo", size=20715
+9: samples\graphics\GRDEMO.MAK, comment="Graphics Demo", size=3712
+9: samples\graphics\GRDEMO.STS, comment="Graphics Demo", size=6631
+9: samples\graphics\MENU.C, comment="Graphics Demo", size=13516
+9: samples\graphics\MENU.H, comment="Graphics Demo", size=2249
+9: samples\graphics\MOUSE.C, comment="Graphics Demo", size=9940
+9: samples\graphics\MOUSE.H, comment="Graphics Demo", size=1087
+9: samples\sortdemo\SORTDEMO.C, comment="Sort Demo", size=24560
+9: samples\sortdemo\SORTDEMO.MAK, comment="Sort Demo", size=2312
+9: samples\sortdemo\SORTDEMO.STS, comment="Sort Demo", size=6633
+9: samples\graphics\TURTLE.C, comment="Graphics Demo", size=13689
+9: samples\graphics\TURTLE.H, comment="Graphics Demo", size=4013
+
+[list if_graphics 1]
+1: bin\video\ATIVESA.BAT, comment="ATI VESA driver", size=398
+5: lib\CP437.OBJ, comment="Alternate code page for graphics library fonts", size=221
+1: bin\video\EVRXVESA.COM, comment="Everex VESA driver", size=4228
+9: include\FGRAPH.FD, comment="FORTRAN Graphics include file", size=12187
+9: include\FGRAPH.FI, comment="FORTRAN Graphics include file", size=13487
+9: include\GRAPH.H, comment="Graphics include file", size=17213
+5: lib\GRAPHICS.LIB, comment="Graphics library", size=97745
+1: bin\video\MSHERC.COM, comment="Hercules driver", size=6947
+9: include\PGCHART.H, comment="Pgchart routines header", size=9540
+5: lib\PGCHART.LIB, comment="Graphics charting package", size=47227
+5: lib\TXTONLY.OBJ, comment="Allows graphics calls to be stubbed out", size=423
+1: bin\video\V7VESA.COM, comment="Video 7 VESA driver", size=3650
+1: bin\video\VVESA.COM, comment="ATI VESA driver", size=9554
+1: bin\video\WDVESA.EXE, comment="Paradise VESA driver", size=2960
+
+[list if_help 1]
+9: help\ADVISOR.HLP, comment="Help for Advisor", size=26788
+6: help\CL.HLP, comment="Help for CL.EXE", size=385351
+4: help\CLANG.HLP, comment="Help for C Language", size=753596
+4: help\CV.HLP, comment="Help for CV.EXE", size=168185
+6: help\IOSTREAM.HLP, comment="Help for IOstream Libraries", size=111829
+7: help\LINK.HLP, comment="Help for LINK.EXE and run-time errors", size=168516
+2: bin\QH.EXE, comment="QuickHelp Utility", size=70065
+6: help\QH.HLP, comment="Help for QuickHelp", size=25205
+1: bin\QH.ICO, comment="QuickHelp Icon", size=1086
+6: help\UTILS.HLP, comment="Help for Miscellaneous Utilities", size=191198
+
+[list if_include 1]
+9: include\ASSERT.H, comment="Include file", size=588
+9: include\BIOS.H, comment="Include file", size=5713
+9: include\CONIO.H, comment="Include file", size=1624
+9: include\CTYPE.H, comment="Include file", size=3255
+9: include\DIRECT.H, comment="Include file", size=1111
+9: include\DOS.H, comment="Include file", size=7664
+9: include\ERRNO.H, comment="Include file", size=1433
+9: include\FCNTL.H, comment="Include file", size=1576
+9: include\FLOAT.H, comment="Include file", size=6679
+9: include\FSTREAM.H, comment="C++ IOStream include file", size=4118
+9: include\IO.H, comment="Include file", size=3935
+9: include\IOMANIP.H, comment="C++ IOStream include file", size=4048
+9: include\IOS.H, comment="C++ IOStream include file", size=5917
+9: include\IOSTREAM.H, comment="C++ IOStream include file", size=1616
+9: include\ISTREAM.H, comment="C++ IOStream include file", size=5612
+9: include\LIMITS.H, comment="Include file", size=1600
+9: include\LOCALE.H, comment="Include file", size=1512
+9: include\sys\LOCKING.H, comment="System include file", size=783
+9: include\MALLOC.H, comment="Include file", size=4230
+9: include\MATH.H, comment="Include file", size=6944
+9: include\MEMORY.H, comment="Include file", size=1925
+7: source\move\MOVEAPI.H, comment="MOVE API include file", size=1984
+7: source\move\MOVEAPI.TXT, comment="Additional documentation for MOVE", size=19724
+7: source\move\MOVEINIT.C, comment="MOVE startup source file", size=13401
+9: include\NEW.H, comment="C++ IOStream include file", size=907
+9: include\OSTREAM.H, comment="C++ IOStream include file", size=4249
+9: include\PROCESS.H, comment="Include file", size=3622
+9: include\SEARCH.H, comment="Include file", size=1414
+9: include\SETJMP.H, comment="Include file", size=872
+9: include\SHARE.H, comment="Include file", size=742
+9: include\SIGNAL.H, comment="Include file", size=1453
+9: include\sys\STAT.H, comment="Stat() and fstat() structure include file", size=2100
+9: include\STDARG.H, comment="Include file", size=1222
+9: include\STDDEF.H, comment="Include file", size=1249
+9: include\STDIO.H, comment="Include file", size=7467
+9: include\STDIOSTR.H, comment="C++ IOStream include file", size=1369
+9: include\STDLIB.H, comment="Include file", size=7351
+9: include\STREAMB.H, comment="C++ IOStream include file", size=4472
+9: include\STRING.H, comment="Include file", size=5510
+9: include\STRSTREA.H, comment="C++ IOStream include file", size=2572
+9: include\TIME.H, comment="Include file", size=2858
+9: include\sys\TIMEB.H, comment="Ftime() include file", size=1141
+9: include\sys\TYPES.H, comment="File and time information include file", size=1083
+9: include\sys\UTIME.H, comment="Utime() include file", size=1344
+9: include\VARARGS.H, comment="Include file", size=1257
+9: include\VMEMORY.H, comment="Include file", size=1526
+
+[list if_large_alt 1]
+5: lib\LLIBFA.LIB, comment="Alternate math library (large model)", size=61597
+
+[list if_large_noalt 1]
+5: lib\LLIBFP.LIB, comment="Floating-point library (large model)", size=76719
+
+[list if_large_quick_win 1]
+5: lib\LLIBCQ.LIB, comment="Windows 3.x qwin C library- large model", size=8865
+
+[list if_large_real 1]
+5: lib\LLIBCR.LIB, comment="MS-DOS run-time library (large model)", size=159235
+
+[list if_large_win_alt 1]
+5: lib\LLIBFAW.LIB, comment="Windows 3.x alternate math library- large model", size=63133
+
+[list if_large_win_dll 1]
+5: lib\LDLLCW.LIB, comment="Windows 3.x dll libs- large model", size=124735
+5: lib\LDLLCXXW.LIB, comment="Windows 3.x C++ DLL libs- large model", size=66975
+
+[list if_large_win_noalt 1]
+5: lib\LLIBFPW.LIB, comment="Windows 3.x em/87 math library- large model", size=78267
+
+[list if_large_win_nocrt 1]
+5: lib\LNOCRTDW.LIB, comment="Windows 3.x DLL nocrt library- large model", size=2071
+5: lib\LNOCRTW.LIB, comment="Windows 3.x exe nocrt library-large model", size=2583
+
+[list if_large_win 1]
+5: lib\LLIBCW.LIB, comment="Windows 3.x exe libs- large model", size=136591
+
+[list if_large 1]
+5: lib\LLIBCXX.LIB, comment="C++ IOStream Library--large model", size=72155
+
+[list if_libw 1]
+1: .\LIBW.EXE, comment="Library Manager (Windows Hosted)", size=72928
+
+[list if_lib 1]
+2: bin\LIB.EXE, comment="Library Manager", size=59171
+
+[list if_medium_alt 1]
+5: lib\MLIBFA.LIB, comment="Alternate math library (medium model)", size=60573
+
+[list if_medium_graph_alt 1]
+5: lib\MGRAPHFA.LIB, comment="Graphics alternate fp - medium/large", size=4131
+
+[list if_medium_graph_noalt 1]
+5: lib\MGRAPHFP.LIB, comment="Graphics emulator fp - medium/large", size=4131
+
+[list if_medium_noalt 1]
+5: lib\MLIBFP.LIB, comment="Floating-point library (medium model)", size=74155
+
+[list if_medium_or_large_real_lib 1]
+5: lib\MOVE.LIB, comment="MOVE library", size=8227
+
+[list if_medium_quick_win 1]
+5: lib\MLIBCQ.LIB, comment="Windows 3.x qwin C library- medium model", size=8865
+
+[list if_medium_real 1]
+5: lib\MLIBCR.LIB, comment="MS-DOS run-time library (medium model)", size=152039
+
+[list if_medium_win_alt 1]
+5: lib\MLIBFAW.LIB, comment="Windows 3.x alternate math library- medium model", size=62621
+
+[list if_medium_win_dll 1]
+5: lib\MDLLCW.LIB, comment="Windows 3.x dll libs- medium model", size=120121
+5: lib\MDLLCXXW.LIB, comment="Windows 3.x C++ DLL libs- medium model", size=58271
+
+[list if_medium_win_noalt 1]
+5: lib\MLIBFPW.LIB, comment="Windows 3.x em/87 math library- medium model", size=76731
+
+[list if_medium_win_nocrt 1]
+5: lib\MNOCRTDW.LIB, comment="Windows 3.x DLL nocrt library- medium model", size=2071
+5: lib\MNOCRTW.LIB, comment="Windows 3.x exe nocrt library-medium model", size=2583
+
+[list if_medium_win 1]
+5: lib\MLIBCW.LIB, comment="Windows 3.x exe libs- medium model", size=130943
+
+[list if_medium 1]
+5: lib\MLIBCXX.LIB, comment="C++ IOStream Library--medium model", size=62427
+
+[list if_mfc_help 1]
+4: help\MFC.HLP, comment="Help for MFC", size=896224
+
+[list if_mfc 1]
+7: mfc\src\abort.cpp, comment="MFC source code file", size=790
+7: mfc\samples\chart\about.dlg, comment="Charting sample application", size=1006
+7: mfc\samples\mdi\about.dlg, comment="Bounce/Hello MDI app", size=978
+7: mfc\samples\minmdi\about.dlg, comment="World's smallest MDI app", size=894
+7: mfc\samples\oserver\about.dlg, comment="OLE server sample app", size=964
+7: mfc\samples\showfont\about.dlg, comment="Showfont sample app", size=901
+9: mfc\samples\minsvr\about.dlg, comment="Minimal OLE Server", size=426
+9: mfc\samples\minsvrmi\about.dlg, comment="Minimal OLE Server/MI", size=441
+7: mfc\samples\about2\about2.cpp, comment="About2 sample from Petzold", size=7096
+7: mfc\samples\about2\about2.def, comment="About2 sample from Petzold", size=996
+7: mfc\samples\about2\about2.dlg, comment="About2 sample from Petzold", size=1932
+7: mfc\samples\about2\about2.h, comment="About2 sample from Petzold", size=3518
+7: mfc\samples\about2\about2.ico, comment="About2 sample from Petzold", size=766
+7: mfc\samples\about2\about2.mak, comment="About2 sample from Petzold", size=2836
+7: mfc\samples\about2\about2.rc, comment="About2 sample from Petzold", size=1037
+7: mfc\samples\about2\about2.sts, comment="About2 sample from Petzold", size=7030
+7: mfc\include\afx.h, comment="base mfc classes", size=35357
+7: mfc\src\afx.ini, comment=".ini file: controls Windows diagnostic trace options", size=685
+7: mfc\include\afx.inl, comment="inline functions for base", size=11926
+7: mfc\include\afxcoll.h, comment="collections", size=37199
+7: mfc\samples\templdef\afxcoll.htt, comment="template for afxcoll.h", size=1789
+7: mfc\include\afxdlgs.h, comment="COMMDLG classes", size=12572
+7: mfc\include\afxmsg.h, comment="implementation for message maps", size=22546
+7: mfc\include\afxole.h, comment="OLE support classes", size=19085
+7: mfc\include\afxoleui.h, comment="OLE user interface classes", size=1878
+7: mfc\include\afxoleui.rc, comment="OLE user interface resource definitions", size=2879
+7: mfc\include\afxpen.h, comment="Pen Windows classes", size=4880
+7: mfc\include\afxres.h, comment="windows resource ids", size=1101
+7: mfc\include\afxwin.h, comment="windows mfc classes", size=59629
+7: mfc\include\afxwin.inl, comment="inline functions for windows", size=76272
+7: mfc\src\archive.cpp, comment="MFC source code file", size=12396
+7: mfc\src\archivex.cpp, comment="MFC source code file", size=2223
+7: mfc\samples\templdef\array.ctt, comment="MFC array template", size=11430
+7: mfc\src\array_b.cpp, comment="MFC source code file", size=6350
+7: mfc\src\array_d.cpp, comment="MFC source code file", size=6388
+7: mfc\src\array_o.cpp, comment="MFC source code file", size=6400
+7: mfc\src\array_p.cpp, comment="MFC source code file", size=5999
+7: mfc\src\array_s.cpp, comment="MFC source code file", size=7056
+7: mfc\src\array_w.cpp, comment="MFC source code file", size=6350
+7: mfc\src\assert.cpp, comment="MFC source code file", size=2006
+7: mfc\samples\multipad\bar.cpp, comment="Multipad sample app", size=4215
+7: mfc\samples\multipad\bar.h, comment="Multipad sample app", size=1912
+9: mfc\samples\ctrltest\bbutton.cpp, comment="Custom Control sample", size=2968
+7: mfc\samples\oserver\bibdoc.cpp, comment="OLE server sample app", size=5840
+7: mfc\samples\oserver\bibdoc.h, comment="OLE server sample app", size=2284
+7: mfc\samples\oserver\bibitem.cpp, comment="OLE server sample app", size=2144
+7: mfc\samples\oserver\bibitem.h, comment="OLE server sample app", size=1581
+7: mfc\samples\oserver\bibref.cpp, comment="OLE server sample app", size=1987
+7: mfc\samples\oserver\bibref.def, comment="OLE server sample app", size=733
+7: mfc\samples\oserver\bibref.h, comment="OLE server sample app", size=1229
+7: mfc\samples\oserver\bibref.ico, comment="OLE server sample app", size=766
+7: mfc\samples\oserver\bibref.mak, comment="OLE server sample app", size=5431
+7: mfc\samples\oserver\bibref.rc, comment="OLE server sample app", size=1245
+7: mfc\samples\oserver\bibref.reg, comment="OLE server sample app", size=1417
+7: mfc\samples\oserver\bibref.sts, comment="OLE server sample app", size=7065
+7: mfc\samples\oserver\bibsvr.cpp, comment="OLE server sample app", size=1774
+7: mfc\samples\oserver\bibsvr.h, comment="OLE server sample app", size=1147
+9: mfc\samples\ctrltest\bmtest1.dlg, comment="Custom Control sample", size=463
+9: mfc\samples\ctrltest\bmtest2.dlg, comment="Custom Control sample", size=580
+7: mfc\samples\mdi\bounce.cpp, comment="Bounce/Hello MDI app", size=8514
+7: mfc\samples\mdi\bounce.h, comment="Bounce/Hello MDI app", size=1769
+9: mfc\samples\ctrltest\canceld.bmp, comment="Custom Control sample", size=1366
+9: mfc\samples\ctrltest\cancelf.bmp, comment="Custom Control sample", size=1366
+9: mfc\samples\ctrltest\cancelu.bmp, comment="Custom Control sample", size=1366
+7: mfc\samples\showfont\cfont.cpp, comment="Showfont sample app", size=10340
+7: mfc\samples\showfont\cfont.dlg, comment="Showfont sample app", size=4408
+9: mfc\samples\minsvr\change.dlg, comment="Minimal OLE Server", size=363
+9: mfc\samples\minsvrmi\change.dlg, comment="Minimal OLE Server/MI", size=363
+7: mfc\samples\chart\chart.cpp, comment="Charting sample application", size=1217
+7: mfc\samples\chart\chart.def, comment="Charting sample application", size=744
+7: mfc\samples\chart\chart.h, comment="Charting sample application", size=991
+7: mfc\samples\chart\chart.ico, comment="Charting sample application", size=766
+7: mfc\samples\chart\chart.mak, comment="Charting sample application", size=5540
+7: mfc\samples\chart\chart.rc, comment="Charting sample application", size=1467
+7: mfc\samples\chart\chart.sts, comment="Charting sample application", size=7053
+7: mfc\samples\chart\chartdlg.cpp, comment="Charting sample application", size=7976
+7: mfc\samples\chart\chartdlg.h, comment="Charting sample application", size=1694
+7: mfc\samples\chart\chartwnd.cpp, comment="Charting sample application", size=17730
+7: mfc\samples\chart\chartwnd.h, comment="Charting sample application", size=2278
+7: mfc\samples\chart\chfile.cpp, comment="Charting sample application", size=4247
+7: mfc\samples\minmdi\child.ico, comment="World's smallest MDI app", size=766
+7: mfc\samples\testclnt\clipbd.cpp, comment="MFC OLE Test Client Sample", size=6142
+7: mfc\samples\testserv\clipbd.cpp, comment="MFC OLE Test Server Sample", size=3483
+7: mfc\samples\tutorial\cmdbook, comment="tutorial samples applications", size=1533
+7: mfc\samples\tutorial\cmdbook.cpp, comment="tutorial samples applications", size=9338
+7: mfc\samples\tutorial\cmdbook.mak, comment="tutorial samples applications", size=2520
+7: mfc\samples\tutorial\cmdbook.sts, comment="tutorial samples applications", size=6278
+7: mfc\samples\mdi\common.h, comment="Bounce/Hello MDI app", size=848
+9: mfc\samples\speakn\correct.wav, comment="Multimedia/Pen Speech Sample", size=9622
+9: mfc\samples\ctrltest\ctrltest.cpp, comment="Custom Control sample", size=2872
+9: mfc\samples\ctrltest\ctrltest.def, comment="Custom Control sample", size=646
+9: mfc\samples\ctrltest\ctrltest.h, comment="Custom Control sample", size=4874
+9: mfc\samples\ctrltest\ctrltest.ico, comment="Custom Control sample", size=766
+9: mfc\samples\ctrltest\ctrltest.mak, comment="Custom Control sample", size=10148
+9: mfc\samples\ctrltest\ctrltest.rc, comment="Custom Control sample", size=3619
+9: mfc\samples\ctrltest\ctrltest.sts, comment="Custom Control sample", size=6943
+9: mfc\samples\ctrltest\custlist.cpp, comment="Custom Control sample", size=4673
+9: mfc\samples\ctrltest\custlist.dlg, comment="Custom Control sample", size=512
+9: mfc\samples\ctrltest\custmenu.cpp, comment="Custom Control sample", size=4071
+7: mfc\samples\tutorial\database.cpp, comment="tutorial samples applications", size=7327
+7: mfc\samples\tutorial\database.h, comment="tutorial samples applications", size=2925
+7: mfc\samples\testclnt\defs.h, comment="MFC OLE Test Client Sample", size=1260
+7: mfc\samples\testserv\defs.h, comment="MFC OLE Test Server Sample", size=735
+9: mfc\samples\ctrltest\derpen.cpp, comment="Custom Control sample", size=4346
+9: mfc\samples\ctrltest\dertest.cpp, comment="Custom Control sample", size=4363
+9: mfc\samples\ctrltest\dertest.dlg, comment="Custom Control sample", size=324
+7: mfc\samples\showfont\dialogs.cpp, comment="Showfont sample app", size=13733
+9: mfc\samples\ctrltest\dlgpen.cpp, comment="Custom Control sample", size=2611
+9: mfc\samples\ctrltest\dlgpen.dlg, comment="Custom Control sample", size=868
+9: mfc\samples\restool\dlgres.h, comment="Restool app", size=1713
+7: mfc\samples\tutorial\dmtest, comment="tutorial samples applications", size=1365
+7: mfc\samples\tutorial\dmtest.cpp, comment="tutorial samples applications", size=7834
+7: mfc\samples\tutorial\dmtest.mak, comment="tutorial samples applications", size=2155
+7: mfc\samples\tutorial\dmtest.sts, comment="tutorial samples applications", size=6265
+7: mfc\samples\chart\dobject.cpp, comment="Charting sample application", size=2863
+7: mfc\samples\chart\dobject.h, comment="Charting sample application", size=1280
+9: mfc\samples\speakn\dog.dib, comment="Multimedia/Pen Speech Sample", size=4900
+9: mfc\samples\speakn\dog.wav, comment="Multimedia/Pen Speech Sample", size=25144
+7: mfc\src\dosio_.h, comment="MFC source code file", size=1345
+7: mfc\samples\showfont\drawing.cpp, comment="Showfont sample app", size=5054
+7: mfc\src\dumpcont.cpp, comment="MFC source code file", size=5127
+7: mfc\src\dumpinit.cpp, comment="MFC source code file", size=1665
+7: mfc\src\elements.h, comment="MFC source code file", size=2455
+7: mfc\samples\chart\entry.dlg, comment="Charting sample application", size=1583
+7: mfc\samples\testclnt\error.cpp, comment="MFC OLE Test Client Sample", size=4242
+7: mfc\samples\testserv\error.cpp, comment="MFC OLE Test Server Sample", size=4939
+7: mfc\src\except.cpp, comment="MFC source code file", size=3771
+9: mfc\samples\speakn\face01.ico, comment="Multimedia/Pen Speech Sample", size=766
+9: mfc\samples\speakn\face02.ico, comment="Multimedia/Pen Speech Sample", size=766
+9: mfc\samples\speakn\face03.ico, comment="Multimedia/Pen Speech Sample", size=766
+9: mfc\samples\speakn\face04.ico, comment="Multimedia/Pen Speech Sample", size=766
+9: mfc\samples\ctrltest\featpen.cpp, comment="Custom Control sample", size=4764
+9: mfc\samples\ctrltest\featpen.dlg, comment="Custom Control sample", size=2069
+7: mfc\src\file.cpp, comment="MFC source code file", size=12709
+7: mfc\samples\oclient\fileio.cpp, comment="OLE client sample app", size=7668
+7: mfc\src\filemem.cpp, comment="MFC source code file", size=6117
+7: mfc\src\filetxt.cpp, comment="MFC source code file", size=7452
+9: mfc\samples\fileview\fileview.cpp, comment="Text file viewer application", size=9959
+9: mfc\samples\fileview\fileview.def, comment="Text file viewer application", size=758
+9: mfc\samples\fileview\fileview.dlg, comment="Text file viewer application", size=962
+9: mfc\samples\fileview\fileview.h, comment="Text file viewer application", size=2833
+9: mfc\samples\fileview\fileview.ico, comment="Text file viewer application", size=766
+9: mfc\samples\fileview\fileview.mak, comment="Text file viewer application", size=3577
+9: mfc\samples\fileview\fileview.rc, comment="Text file viewer application", size=950
+9: mfc\samples\fileview\fileview.sts, comment="Text file viewer application", size=7062
+7: mfc\src\filex.cpp, comment="MFC source code file", size=5000
+7: mfc\samples\minmdi\frame.ico, comment="World's smallest MDI app", size=766
+9: mfc\samples\speakn\frog.dib, comment="Multimedia/Pen Speech Sample", size=3236
+9: mfc\samples\speakn\frog.wav, comment="Multimedia/Pen Speech Sample", size=5772
+9: mfc\samples\speakn\giveup.wav, comment="Multimedia/Pen Speech Sample", size=18258
+9: mfc\samples\speakn\goodbye.wav, comment="Multimedia/Pen Speech Sample", size=8476
+7: mfc\samples\hello\hello.cpp, comment="Hello/Generic application", size=3477
+7: mfc\samples\mdi\hello.cpp, comment="Bounce/Hello MDI app", size=4541
+7: mfc\samples\hello\hello.def, comment="Hello/Generic application", size=751
+7: mfc\samples\hello\hello.dlg, comment="Hello/Generic application", size=462
+7: mfc\samples\hello\hello.h, comment="Hello/Generic application", size=1442
+7: mfc\samples\mdi\hello.h, comment="Bounce/Hello MDI app", size=1354
+7: mfc\samples\hello\hello.ico, comment="Hello/Generic application", size=766
+7: mfc\samples\mdi\hello.ico, comment="Bounce/Hello MDI app", size=766
+7: mfc\samples\hello\hello.mak, comment="Hello/Generic application", size=2807
+7: mfc\samples\hello\hello.rc, comment="Hello/Generic application", size=794
+7: mfc\samples\hello\hello.sts, comment="Hello/Generic application", size=6985
+7: mfc\samples\dlltrace\hello1.cpp, comment="DLL sample and application", size=3152
+7: mfc\samples\dlltrace\hello1.def, comment="DLL sample and application", size=753
+7: mfc\samples\dlltrace\hello1.ico, comment="DLL sample and application", size=766
+7: mfc\samples\dlltrace\hello1.mak, comment="DLL sample and application", size=2844
+7: mfc\samples\dlltrace\hello1.rc, comment="DLL sample and application", size=1203
+7: mfc\samples\dlltrace\hello1.sts, comment="DLL sample and application", size=7001
+7: mfc\samples\helloapp\helloapp.cpp, comment="World's smallest MFC app", size=1109
+7: mfc\samples\helloapp\helloapp.def, comment="World's smallest MFC app", size=701
+7: mfc\samples\helloapp\helloapp.mak, comment="World's smallest MFC app", size=2582
+7: mfc\samples\helloapp\helloapp.sts, comment="World's smallest MFC app", size=6988
+9: mfc\samples\ctrltest\image1d.bmp, comment="Custom Control sample", size=1398
+9: mfc\samples\ctrltest\image1f.bmp, comment="Custom Control sample", size=1398
+9: mfc\samples\ctrltest\image1u.bmp, comment="Custom Control sample", size=1398
+9: mfc\samples\ctrltest\image2d.bmp, comment="Custom Control sample", size=2038
+9: mfc\samples\ctrltest\image2f.bmp, comment="Custom Control sample", size=2038
+9: mfc\samples\ctrltest\image2u.bmp, comment="Custom Control sample", size=2038
+9: mfc\samples\speakn\incorrec.wav, comment="Multimedia/Pen Speech Sample", size=9996
+9: mfc\samples\speakn\intro.dib, comment="Multimedia/Pen Speech Sample", size=14856
+7: mfc\samples\oserver\item.dlg, comment="OLE server sample app", size=998
+7: mfc\samples\oclient\itemwnd.cpp, comment="OLE client sample app", size=8739
+7: mfc\samples\oclient\itemwnd.h, comment="OLE client sample app", size=2731
+8: mfc\lib\lafxdwd.lib, comment="MFC Large Windows Debug DLL Support", size=582497
+9: mfc\samples\fileview\linefile.cpp, comment="Text file viewer application", size=3334
+7: mfc\samples\templdef\list.ctt, comment="MFC list template", size=15651
+7: mfc\src\list_o.cpp, comment="MFC source code file", size=8693
+7: mfc\src\list_p.cpp, comment="MFC source code file", size=8281
+7: mfc\src\list_s.cpp, comment="MFC source code file", size=9019
+9: mfc\lib\mafxcr.lib, comment="MFC Medium MS-DOS Retail", size=173947
+8: mfc\lib\mafxcrd.lib, comment="MFC Medium MS-DOS Debug", size=306805
+8: mfc\lib\mafxcw.lib, comment="MFC Medium Windows Retail", size=461961
+8: mfc\lib\mafxcwd.lib, comment="MFC Medium Windows Debug", size=689143
+7: mfc\samples\oclient\mainwnd.cpp, comment="OLE client sample app", size=12670
+7: mfc\samples\oserver\mainwnd.cpp, comment="OLE server sample app", size=6263
+7: mfc\samples\showfont\mainwnd.cpp, comment="Showfont sample app", size=10037
+9: mfc\samples\minsvr\mainwnd.cpp, comment="Minimal OLE Server", size=2236
+9: mfc\samples\minsvrmi\mainwnd.cpp, comment="Minimal OLE Server/MI", size=4216
+7: mfc\samples\oclient\mainwnd.h, comment="OLE client sample app", size=2953
+7: mfc\samples\oserver\mainwnd.h, comment="OLE server sample app", size=1473
+7: mfc\samples\showfont\mainwnd.h, comment="Showfont sample app", size=2236
+7: mfc\samples\about2\makefile, comment="About2 sample from Petzold", size=1484
+7: mfc\samples\chart\makefile, comment="Charting sample application", size=1679
+7: mfc\samples\dlltrace\makefile, comment="DLL sample and application", size=1791
+9: mfc\samples\fileview\makefile, comment="Text file viewer application", size=1486
+7: mfc\samples\hello\makefile, comment="Hello/Generic application", size=1216
+7: mfc\samples\helloapp\makefile, comment="World's smallest MFC app", size=756
+7: mfc\samples\mdi\makefile, comment="Bounce/Hello MDI app", size=1470
+7: mfc\samples\minmdi\makefile, comment="World's smallest MDI app", size=1242
+7: mfc\samples\multipad\makefile, comment="Multipad sample app", size=1730
+7: mfc\samples\oclient\makefile, comment="OLE client sample app", size=1621
+7: mfc\samples\oserver\makefile, comment="OLE server sample app", size=1666
+9: mfc\samples\restool\makefile, comment="Restool app", size=1072
+7: mfc\samples\showfont\makefile, comment="Showfont sample app", size=1630
+7: mfc\samples\templdef\makefile, comment="makefile to build template tool", size=1068
+7: mfc\samples\testclnt\makefile, comment="MFC OLE Test Client Sample", size=1972
+7: mfc\samples\testserv\makefile, comment="MFC OLE Test Server Sample", size=1889
+7: mfc\samples\tracer\makefile, comment="MFC Diagnostic Trace Control Sample", size=1167
+9: mfc\samples\ctrltest\makefile, comment="Custom Control sample", size=1649
+9: mfc\samples\minsvr\makefile, comment="Minimal OLE Server", size=1412
+9: mfc\samples\minsvrmi\makefile, comment="Minimal OLE Server/MI", size=1427
+9: mfc\samples\speakn\makefile, comment="Multimedia/Pen Speech Sample", size=1275
+7: mfc\src\makefile, comment="nmake makefile to build all libraries", size=7669
+7: mfc\samples\templdef\map.ctt, comment="MFC map template", size=13340
+7: mfc\src\map_pp.cpp, comment="MFC source code file", size=7127
+7: mfc\src\map_pw.cpp, comment="MFC source code file", size=7147
+7: mfc\samples\templdef\map_s.ctt, comment="MFC string map template", size=13157
+7: mfc\src\map_so.cpp, comment="MFC source code file", size=8372
+7: mfc\src\map_sp.cpp, comment="MFC source code file", size=7682
+7: mfc\src\map_ss.cpp, comment="MFC source code file", size=8597
+7: mfc\src\map_wo.cpp, comment="MFC source code file", size=7820
+7: mfc\src\map_wp.cpp, comment="MFC source code file", size=7144
+7: mfc\samples\mdi\mdi.cpp, comment="Bounce/Hello MDI app", size=3975
+7: mfc\samples\mdi\mdi.def, comment="Bounce/Hello MDI app", size=726
+7: mfc\samples\mdi\mdi.h, comment="Bounce/Hello MDI app", size=1528
+7: mfc\samples\mdi\mdi.ico, comment="Bounce/Hello MDI app", size=766
+7: mfc\samples\mdi\mdi.mak, comment="Bounce/Hello MDI app", size=3908
+7: mfc\samples\mdi\mdi.rc, comment="Bounce/Hello MDI app", size=2899
+7: mfc\samples\mdi\mdi.sts, comment="Bounce/Hello MDI app", size=7050
+7: mfc\src\memory.cpp, comment="MFC source code file", size=17097
+7: mfc\samples\multipad\menu.h, comment="Multipad sample app", size=1821
+9: mfc\samples\minsvr\mindoc.cpp, comment="Minimal OLE Server", size=1071
+9: mfc\samples\minsvr\minitem.cpp, comment="Minimal OLE Server", size=2843
+7: mfc\samples\minmdi\minmdi.cpp, comment="World's smallest MDI app", size=2443
+7: mfc\samples\minmdi\minmdi.def, comment="World's smallest MDI app", size=738
+7: mfc\samples\minmdi\minmdi.h, comment="World's smallest MDI app", size=1360
+7: mfc\samples\minmdi\minmdi.mak, comment="World's smallest MDI app", size=2844
+7: mfc\samples\minmdi\minmdi.rc, comment="World's smallest MDI app", size=908
+7: mfc\samples\minmdi\minmdi.sts, comment="World's smallest MDI app", size=6986
+9: mfc\samples\minsvr\minsvr.cpp, comment="Minimal OLE Server", size=2346
+9: mfc\samples\minsvr\minsvr.def, comment="Minimal OLE Server", size=714
+9: mfc\samples\minsvr\minsvr.h, comment="Minimal OLE Server", size=3352
+9: mfc\samples\minsvr\minsvr.ico, comment="Minimal OLE Server", size=766
+9: mfc\samples\minsvr\minsvr.mak, comment="Minimal OLE Server", size=4624
+9: mfc\samples\minsvr\minsvr.rc, comment="Minimal OLE Server", size=976
+9: mfc\samples\minsvr\minsvr.reg, comment="Minimal OLE Server", size=216
+9: mfc\samples\minsvr\minsvr.sts, comment="Minimal OLE Server", size=7062
+9: mfc\samples\minsvrmi\minsvrmi.cpp, comment="Minimal OLE Server/MI", size=3250
+9: mfc\samples\minsvrmi\minsvrmi.def, comment="Minimal OLE Server/MI", size=732
+9: mfc\samples\minsvrmi\minsvrmi.h, comment="Minimal OLE Server/MI", size=2684
+9: mfc\samples\minsvrmi\minsvrmi.ico, comment="Minimal OLE Server/MI", size=766
+9: mfc\samples\minsvrmi\minsvrmi.mak, comment="Minimal OLE Server/MI", size=3549
+9: mfc\samples\minsvrmi\minsvrmi.rc, comment="Minimal OLE Server/MI", size=982
+9: mfc\samples\minsvrmi\minsvrmi.reg, comment="Minimal OLE Server/MI", size=246
+9: mfc\samples\minsvrmi\minsvrmi.sts, comment="Minimal OLE Server/MI", size=7066
+7: mfc\samples\templdef\mkcoll.bat, comment="batch file to build templates", size=2673
+7: mfc\samples\multipad\mpfile.cpp, comment="Multipad sample app", size=6134
+7: mfc\samples\multipad\mpfind.cpp, comment="Multipad sample app", size=6014
+7: mfc\samples\multipad\mpinit.cpp, comment="Multipad sample app", size=1713
+7: mfc\samples\multipad\mpmain.cpp, comment="Multipad sample app", size=20350
+7: mfc\samples\multipad\mpprint.cpp, comment="Multipad sample app", size=5624
+7: mfc\samples\multipad\multipad.def, comment="Multipad sample app", size=733
+7: mfc\samples\multipad\multipad.dlg, comment="Multipad sample app", size=2080
+7: mfc\samples\multipad\multipad.h, comment="Multipad sample app", size=4710
+7: mfc\samples\multipad\multipad.ico, comment="Multipad sample app", size=766
+7: mfc\samples\multipad\multipad.mak, comment="Multipad sample app", size=5945
+7: mfc\samples\multipad\multipad.rc, comment="Multipad sample app", size=6467
+7: mfc\samples\multipad\multipad.sts, comment="Multipad sample app", size=7057
+9: mfc\samples\ctrltest\muscroll.dll, comment="Custom Control sample", size=11776
+9: mfc\samples\ctrltest\muscroll.h, comment="Custom Control sample", size=2185
+7: mfc\samples\testclnt\newclnt.cpp, comment="MFC OLE Test Client Sample", size=2344
+7: mfc\samples\testclnt\newclnt.h, comment="MFC OLE Test Client Sample", size=897
+7: mfc\samples\testclnt\newdoc.cpp, comment="MFC OLE Test Client Sample", size=1457
+7: mfc\samples\testclnt\newdoc.h, comment="MFC OLE Test Client Sample", size=1063
+7: mfc\samples\testserv\newserv.cpp, comment="MFC OLE Test Server Sample", size=4389
+7: mfc\samples\testserv\newserv.h, comment="MFC OLE Test Server Sample", size=1259
+7: mfc\samples\multipad\notepad.ico, comment="Multipad sample app", size=766
+7: mfc\src\object.cpp, comment="MFC source code file", size=4998
+7: mfc\samples\oclient\oclient.cpp, comment="OLE client sample app", size=1087
+7: mfc\samples\oclient\oclient.def, comment="OLE client sample app", size=722
+7: mfc\samples\oclient\oclient.h, comment="OLE client sample app", size=1191
+7: mfc\samples\oclient\oclient.ico, comment="OLE client sample app", size=766
+7: mfc\samples\oclient\oclient.mak, comment="OLE client sample app", size=4820
+7: mfc\samples\oclient\oclient.rc, comment="OLE client sample app", size=3449
+7: mfc\samples\oclient\oclient.sts, comment="OLE client sample app", size=7079
+9: mfc\samples\ctrltest\okd.bmp, comment="Custom Control sample", size=1366
+9: mfc\samples\ctrltest\okf.bmp, comment="Custom Control sample", size=1366
+9: mfc\samples\ctrltest\oku.bmp, comment="Custom Control sample", size=1366
+7: mfc\src\olecli.cpp, comment="MFC source code file", size=23303
+7: mfc\src\olefile.cpp, comment="MFC source code file", size=2577
+7: mfc\src\olemisc.cpp, comment="MFC source code file", size=6195
+7: mfc\src\oleptr_.h, comment="MFC source code file", size=1177
+7: mfc\src\olesvr.cpp, comment="MFC source code file", size=30988
+7: mfc\src\oleui.cpp, comment="MFC source code file", size=9765
+7: mfc\src\oleui2.cpp, comment="MFC source code file", size=15835
+9: mfc\samples\ctrltest\paredit.cpp, comment="Custom Control sample", size=3681
+9: mfc\samples\ctrltest\paredit.h, comment="Custom Control sample", size=2161
+9: mfc\samples\ctrltest\paredit2.cpp, comment="Custom Control sample", size=4186
+7: mfc\src\penctrl.cpp, comment="MFC source code file", size=1516
+7: mfc\samples\tutorial\person.cpp, comment="tutorial samples applications", size=4582
+7: mfc\samples\tutorial\person.h, comment="tutorial samples applications", size=3843
+7: mfc\samples\tutorial\phbook, comment="tutorial samples applications", size=1765
+7: mfc\samples\tutorial\phbook.def, comment="tutorial samples applications", size=697
+7: mfc\samples\tutorial\phbook.dlg, comment="tutorial samples applications", size=3827
+7: mfc\samples\tutorial\phbook.ico, comment="tutorial samples applications", size=766
+7: mfc\samples\tutorial\phbook.mak, comment="tutorial samples applications", size=4220
+7: mfc\samples\tutorial\phbook.rc, comment="tutorial samples applications", size=1632
+7: mfc\samples\tutorial\phbook.sts, comment="tutorial samples applications", size=7002
+9: mfc\samples\speakn\pig.dib, comment="Multimedia/Pen Speech Sample", size=6112
+9: mfc\samples\speakn\pig.wav, comment="Multimedia/Pen Speech Sample", size=18488
+7: mfc\src\plex.cpp, comment="MFC source code file", size=1225
+7: mfc\src\plex.h, comment="MFC source code file", size=872
+9: mfc\samples\speakn\question.wav, comment="Multimedia/Pen Speech Sample", size=10430
+7: mfc\README.TXT, comment="Introduction to the MFC library", size=10263
+7: mfc\doc\readme.txt, comment="overview of tech notes", size=2415
+8: mfc\lib\readme.txt, comment="Information file for MFC Libraries", size=1493
+7: mfc\samples\readme.txt, comment="explanation of the MFC Samples ", size=33651
+7: mfc\samples\about2\readme.txt, comment="About2 sample from Petzold", size=4029
+7: mfc\samples\hello\readme.txt, comment="Hello/Generic application", size=3703
+7: mfc\samples\templdef\readme.txt, comment="instructions", size=1681
+7: mfc\samples\testclnt\readme.txt, comment="MFC OLE Test Client Sample", size=2375
+7: mfc\samples\testserv\readme.txt, comment="MFC OLE Test Server Sample", size=2200
+7: mfc\samples\tutorial\readme.txt, comment="tutorial samples applications", size=1666
+7: mfc\samples\tutorial\char\readme.txt, comment="tutorial samples applications", size=105
+7: mfc\samples\tutorial\win\readme.txt, comment="tutorial samples applications", size=105
+7: mfc\src\readme.txt, comment="how to build the libraries", size=5983
+9: mfc\samples\speakn\replayd.bmp, comment="Multimedia/Pen Speech Sample", size=1014
+9: mfc\samples\speakn\replayf.bmp, comment="Multimedia/Pen Speech Sample", size=1014
+9: mfc\samples\speakn\replayu.bmp, comment="Multimedia/Pen Speech Sample", size=1014
+7: mfc\samples\about2\resource.h, comment="About2 sample from Petzold", size=1146
+7: mfc\samples\chart\resource.h, comment="Charting sample application", size=1445
+7: mfc\samples\dlltrace\resource.h, comment="DLL sample and application", size=546
+9: mfc\samples\fileview\resource.h, comment="Text file viewer application", size=720
+7: mfc\samples\hello\resource.h, comment="Hello/Generic application", size=669
+7: mfc\samples\mdi\resource.h, comment="Bounce/Hello MDI app", size=1334
+7: mfc\samples\minmdi\resource.h, comment="World's smallest MDI app", size=661
+7: mfc\samples\multipad\resource.h, comment="Multipad sample app", size=1782
+7: mfc\samples\oclient\resource.h, comment="OLE client sample app", size=2151
+7: mfc\samples\oserver\resource.h, comment="OLE server sample app", size=732
+7: mfc\samples\showfont\resource.h, comment="Showfont sample app", size=4425
+7: mfc\samples\testclnt\resource.h, comment="MFC OLE Test Client Sample", size=2105
+7: mfc\samples\testserv\resource.h, comment="MFC OLE Test Server Sample", size=1632
+9: mfc\samples\minsvr\resource.h, comment="Minimal OLE Server", size=660
+9: mfc\samples\minsvrmi\resource.h, comment="Minimal OLE Server/MI", size=660
+7: mfc\samples\tutorial\resource.h, comment="tutorial samples applications", size=1142
+9: mfc\samples\restool\restool.cpp, comment="Restool app", size=14969
+9: mfc\samples\restool\restool.mak, comment="Restool app", size=1758
+9: mfc\samples\restool\restool.sts, comment="Restool app", size=6266
+8: mfc\lib\safxcw.lib, comment="MFC Small Windows Retail", size=441479
+8: mfc\lib\safxcwd.lib, comment="MFC Small Windows Debug", size=656365
+7: mfc\samples\testserv\servdoc.cpp, comment="MFC OLE Test Server Sample", size=2779
+7: mfc\samples\testserv\servdoc.h, comment="MFC OLE Test Server Sample", size=1482
+7: mfc\samples\showfont\showfont.cpp, comment="Showfont sample app", size=1778
+7: mfc\samples\showfont\showfont.def, comment="Showfont sample app", size=711
+7: mfc\samples\showfont\showfont.h, comment="Showfont sample app", size=1685
+7: mfc\samples\showfont\showfont.ico, comment="Showfont sample app", size=766
+7: mfc\samples\showfont\showfont.mak, comment="Showfont sample app", size=5140
+7: mfc\samples\showfont\showfont.rc, comment="Showfont sample app", size=8088
+7: mfc\samples\showfont\showfont.sts, comment="Showfont sample app", size=7047
+9: mfc\samples\speakn\speakn.cpp, comment="Multimedia/Pen Speech Sample", size=7354
+9: mfc\samples\speakn\speakn.def, comment="Multimedia/Pen Speech Sample", size=746
+9: mfc\samples\speakn\speakn.h, comment="Multimedia/Pen Speech Sample", size=3318
+9: mfc\samples\speakn\speakn.ico, comment="Multimedia/Pen Speech Sample", size=766
+9: mfc\samples\speakn\speakn.mak, comment="Multimedia/Pen Speech Sample", size=2887
+9: mfc\samples\speakn\speakn.rc, comment="Multimedia/Pen Speech Sample", size=2890
+9: mfc\samples\speakn\speakn.sts, comment="Multimedia/Pen Speech Sample", size=6850
+9: mfc\samples\ctrltest\spin.cpp, comment="Custom Control sample", size=823
+9: mfc\samples\ctrltest\spin.h, comment="Custom Control sample", size=2332
+9: mfc\samples\ctrltest\spintest.cpp, comment="Custom Control sample", size=2746
+9: mfc\samples\ctrltest\spintest.dlg, comment="Custom Control sample", size=1006
+7: mfc\src\string.cpp, comment="MFC source code file", size=7212
+7: mfc\src\stringex.cpp, comment="MFC source code file", size=5790
+9: mfc\samples\ctrltest\subtest.cpp, comment="Custom Control sample", size=1875
+9: mfc\samples\ctrltest\subtest.dlg, comment="Custom Control sample", size=631
+7: mfc\samples\testclnt\tcfile.cpp, comment="MFC OLE Test Client Sample", size=6973
+7: mfc\samples\testclnt\tcobject.cpp, comment="MFC OLE Test Client Sample", size=6583
+7: mfc\samples\templdef\templdef.cpp, comment="source for template tool", size=13778
+7: mfc\samples\templdef\templdef.mak, comment="source for template tool", size=1759
+7: mfc\samples\templdef\templdef.sts, comment="source for template tool", size=6267
+7: mfc\samples\testclnt\testclnt.cpp, comment="MFC OLE Test Client Sample", size=16217
+7: mfc\samples\testclnt\testclnt.def, comment="MFC OLE Test Client Sample", size=725
+7: mfc\samples\testclnt\testclnt.h, comment="MFC OLE Test Client Sample", size=3406
+7: mfc\samples\testclnt\testclnt.ico, comment="MFC OLE Test Client Sample", size=766
+7: mfc\samples\testclnt\testclnt.mak, comment="MFC OLE Test Client Sample", size=7380
+7: mfc\samples\testclnt\testclnt.rc, comment="MFC OLE Test Client Sample", size=2893
+7: mfc\samples\testclnt\testclnt.sts, comment="MFC OLE Test Client Sample", size=7081
+7: mfc\samples\testclnt\tests.cpp, comment="MFC OLE Test Client Sample", size=3817
+7: mfc\samples\testserv\tests.cpp, comment="MFC OLE Test Server Sample", size=3645
+7: mfc\samples\testserv\testserv.cpp, comment="MFC OLE Test Server Sample", size=15173
+7: mfc\samples\testserv\testserv.def, comment="MFC OLE Test Server Sample", size=735
+7: mfc\samples\testserv\testserv.h, comment="MFC OLE Test Server Sample", size=2750
+7: mfc\samples\testserv\testserv.ico, comment="MFC OLE Test Server Sample", size=766
+7: mfc\samples\testserv\testserv.mak, comment="MFC OLE Test Server Sample", size=7559
+7: mfc\samples\testserv\testserv.rc, comment="MFC OLE Test Server Sample", size=2688
+7: mfc\samples\testserv\testserv.reg, comment="MFC OLE Test Server Sample", size=1191
+7: mfc\samples\testserv\testserv.sts, comment="MFC OLE Test Server Sample", size=7081
+7: mfc\src\time.cpp, comment="MFC source code file", size=5402
+7: mfc\doc\tn001.txt, comment="tech note on class registration", size=5592
+7: mfc\doc\tn002.txt, comment="tech note on persistent objects", size=10231
+7: mfc\doc\tn003.txt, comment="tech note on handle maps", size=2993
+7: mfc\doc\tn004.txt, comment="tech note on templates", size=7017
+7: mfc\doc\tn005.txt, comment="tech note on MDI", size=4529
+7: mfc\doc\tn006.txt, comment="tech note on message maps", size=9003
+7: mfc\doc\tn007.txt, comment="tech note on Windows debugging aids", size=5078
+7: mfc\doc\tn008.txt, comment="tech note on Foundation OLE support", size=17302
+7: mfc\doc\tn009.txt, comment="tech note on writing an OLE client with MFC", size=15081
+7: mfc\doc\tn010.txt, comment="tech note on writing an OLE server with MFC", size=17020
+7: mfc\doc\tn011.txt, comment="tech note on writing a DLL with MFC", size=8800
+7: mfc\doc\tn012.txt, comment="tech note on MFC/Win 3.1 robustness features", size=10544
+7: mfc\doc\tn013.txt, comment="tech note on COMMDLG.DLL", size=26028
+7: mfc\doc\tn014.txt, comment="tech note on MFC custom control features", size=14831
+7: mfc\doc\tn015.txt, comment="tech note on MFC support of Pen for Windows", size=7208
+7: mfc\doc\tn016.txt, comment="tech note on use of multiple inheritance in MFC", size=5868
+7: mfc\src\trace.cpp, comment="MFC source code file", size=4340
+7: mfc\samples\dlltrace\traceapi.h, comment="DLL sample and application", size=819
+7: mfc\src\tracedat.h, comment="MFC source code file", size=2823
+7: mfc\samples\dlltrace\tracer.cpp, comment="DLL sample and application", size=2620
+7: mfc\samples\tracer\tracer.cpp, comment="MFC Diagnostic Trace Control Sample", size=2735
+7: mfc\samples\dlltrace\tracer.def, comment="DLL sample and application", size=697
+7: mfc\samples\tracer\tracer.def, comment="MFC Diagnostic Trace Control Sample", size=654
+7: mfc\samples\tracer\tracer.ico, comment="MFC Diagnostic Trace Control Sample", size=766
+7: mfc\samples\dlltrace\tracer.mak, comment="DLL sample and application", size=2072
+7: mfc\samples\tracer\tracer.mak, comment="MFC Diagnostic Trace Control Sample", size=2774
+7: mfc\samples\dlltrace\tracer.rc, comment="DLL sample and application", size=1365
+7: mfc\samples\tracer\tracer.rc, comment="MFC Diagnostic Trace Control Sample", size=1309
+7: mfc\samples\dlltrace\tracer.sts, comment="DLL sample and application", size=6506
+7: mfc\samples\tracer\tracer.sts, comment="MFC Diagnostic Trace Control Sample", size=6986
+7: mfc\src\trace_.h, comment="MFC source code file", size=522
+9: mfc\samples\speakn\train.dib, comment="Multimedia/Pen Speech Sample", size=8492
+9: mfc\samples\speakn\train.wav, comment="Multimedia/Pen Speech Sample", size=21054
+7: mfc\samples\testserv\tsfile.cpp, comment="MFC OLE Test Server Sample", size=6569
+7: mfc\samples\testserv\tsobject.cpp, comment="MFC OLE Test Server Sample", size=6896
+7: mfc\samples\testserv\tsobject.h, comment="MFC OLE Test Server Sample", size=2187
+7: mfc\src\validadd.cpp, comment="MFC source code file", size=3750
+7: mfc\src\version.cpp, comment="MFC source code file", size=949
+7: mfc\samples\tutorial\view.cpp, comment="tutorial samples applications", size=29663
+7: mfc\samples\tutorial\view.h, comment="tutorial samples applications", size=3997
+9: mfc\samples\ctrltest\wclstest.cpp, comment="Custom Control sample", size=2670
+9: mfc\samples\ctrltest\wclstest.dlg, comment="Custom Control sample", size=920
+9: mfc\samples\speakn\welcome.wav, comment="Multimedia/Pen Speech Sample", size=18664
+7: mfc\src\winapp.cpp, comment="MFC source code file", size=9493
+7: mfc\src\winbtn.cpp, comment="MFC source code file", size=3697
+7: mfc\src\winctrl.cpp, comment="MFC source code file", size=5290
+7: mfc\src\windlgs.cpp, comment="MFC source code file", size=20718
+7: mfc\src\window.cpp, comment="MFC source code file", size=38149
+7: mfc\src\window_.h, comment="MFC source code file", size=1111
+7: mfc\src\wingdi.cpp, comment="MFC source code file", size=8075
+7: mfc\src\winhand_.h, comment="MFC source code file", size=3402
+7: mfc\src\winmain.cpp, comment="MFC source code file", size=1875
+7: mfc\src\winmdi.cpp, comment="MFC source code file", size=6782
+7: mfc\src\winmenu.cpp, comment="MFC source code file", size=2704
+7: mfc\src\winstr.cpp, comment="MFC source code file", size=1257
+
+[list if_pcode_dll_lib 1]
+5: lib\PCDM.LIB, comment="Pcode DLL support library", size=21559
+
+[list if_pcode_help 1]
+6: help\PCODE.HLP, comment="Help for PCode", size=77337
+
+[list if_pcode_lib 1]
+5: lib\PCD.LIB, comment="Pcode interpreter", size=21559
+
+[list if_pwb_help 1]
+2: help\PWB.HLP, comment="Help for PWB", size=576442
+
+[list if_pwb 1]
+9: include\EXT.H, comment="PWB Extension header file", size=31004
+5: lib\EXTHDR.OBJ, comment="PWB Extension object module", size=279
+5: lib\EXTSUP.LIB, comment="PWB Extension supplemental library", size=29696
+1: bin\PWB.EXE, comment="MS-DOS Programmer's Workbench", size=555874
+1: bin\PWB.ICO, comment="Icon for PWB", size=1086
+1: bin\PWB.PIF, comment="PIF file for PWB", size=545
+2: bin\PWBBASIC.MXT, comment="BASIC Extension for PWB", "bin\PWBBASIC.XXT", RENAME, size=19200
+1: bin\PWBC.MXT, comment="C Extension for PWB", size=44227
+2: bin\PWBFORT.MXT, comment="FORTRAN Extension for PWB", "bin\PWBFORT.XXT", RENAME, size=25150
+1: bin\PWBHELP.MXT, comment="Help Extension for PWB", size=47656
+2: bin\PWBMASM.MXT, comment="MASM Extension for PWB", "bin\PWBMASM.XXT", RENAME, size=20530
+2: bin\PWBROWSE.MXT, comment="Browser Extension for PWB", size=113856
+1: bin\PWBUTILS.MXT, comment="Utilities for MS-DOS PWB", size=31524
+9: init\SAMPLE.INI, comment="PWB TOOLS.INI Samples", size=22477
+9: init\TOOLS.PRE, comment="Sample TOOLS.INI file", "init\TOOLS.C70", RENAME, size=8433
+
+[list if_quick_win_lib 1]
+3: lib\QWIN.LIB, comment="Windows 3.x quickwin library", size=53501
+
+[list if_quickwin_help 1]
+6: bin\QWIN.HLP, comment="Windows QuickWin Help", size=24412
+
+[list if_real_compiler 1]
+2: bin\BSCMAKE.EXE, comment="Browser Database Maintenance Utility", size=123296
+2: bin\BSCMAKEV.EXE, comment="Browser Database Maintenance Utility (for VM)", size=127520
+3: bin\C1.ERR, comment="Error messages for MS-DOS compiler pass 1", size=48637
+3: bin\C13216.EXE, comment="MS-DOS compiler - pass 1", size=258048
+3: bin\C1XX3216.EXE, comment="MS-DOS C++ compiler - pass 1", size=423936
+3: bin\C23.ERR, comment="Error messages for MS-DOS compiler passes 2 and 3", size=4401
+3: bin\C23216.EXE, comment="MS-DOS compiler - pass 2", size=434176
+3: bin\C23PCD.EXE, comment="PCode pass 2", size=241974
+3: bin\C33216.EXE, comment="MS-DOS compiler - pass 3", size=179200
+3: bin\CL.DEF, comment="Default .DEF file used by Linker", size=1761
+3: bin\CL.ERR, comment="Error messages for MS-DOS CL.EXE", size=1844
+2: bin\CL.EXE, comment="MS-DOS compiler driver", size=71680
+3: bin\CL.MSG, comment="Message file for MS-DOS CL.EXE", size=3869
+6: bin\CVPACK.EXE, comment="Debugging Information Compactor", size=127376
+2: bin\EXEHDR.EXE, comment="File Header Utility", size=39377
+2: bin\EXP.EXE, comment="File Expunge Utility", size=18757
+7: bin\HELPMAKE.EXE, comment="Help File Maintenance Utility", size=55585
+7: bin\ILINK.EXE, comment="Incremental Linker", size=26202
+2: bin\IMPLIB.EXE, comment="Import Library Manager", size=36589
+2: bin\LINK.EXE, comment="Segmented Executable Linker", size=199552
+1: bin\MPC.EXE, comment="Make P-code utility ", size=175840
+7: bin\MS32EM87.DLL, comment="MS-DOSX32 FP emulator dll", size=69627
+7: bin\MS32KRNL.DLL, comment="MS-DOSX32 kernel", size=68608
+7: bin\NMAKE.EXE, comment="Program Maintenance Utility ", size=86809
+2: bin\PWBRMAKE.EXE, comment="Browser Database Maintenance Utility (calls BSCMAKE)", size=7983
+3: bin\Q23.EXE, comment="MS-DOS Quick compiler", size=139076
+2: bin\RM.EXE, comment="File Removal Utility", size=14799
+2: bin\SBRPACK.EXE, comment="Browser Information Compactor", size=17869
+7: bin\TRACE.EXE, comment="MOVE Trace Utility", size=23728
+2: bin\UNDEL.EXE, comment="File Undelete Utility", size=19519
+
+[list if_runtime_misc 1]
+5: lib\BINMODE.OBJ, comment="Changes default I/O from text to binary", size=127
+5: lib\COMMODE.OBJ, comment="Sets global files commit mode to commit", size=116
+5: lib\COURB.FON, comment="Font for Graphics Library", size=19088
+5: lib\CRTCOM.LIB, comment="MS-DOS run-time  Library ", size=4633
+5: lib\FILEINFO.OBJ, comment="Allows child programs to inherit files", size=119
+5: lib\HELVB.FON, comment="Font for Graphics Library", size=50880
+5: lib\LSEEKCHK.OBJ, comment="Error checking lseek()", size=119
+5: lib\MODERN.FON, comment="Font for Graphics Library", size=7584
+5: lib\MOVETR.LIB, comment="MOVE library (with TRACE.EXE support)", size=9251
+5: lib\OLDNAMES.LIB, comment="Allows pre-ANSI names for source compatibility", size=5647
+5: lib\ROMAN.FON, comment="Font for Graphics Library", size=11120
+5: lib\SCRIPT.FON, comment="Font for Graphics Library", size=10304
+5: lib\SETARGV.OBJ, comment="Expands wildcards in command-line arguments", size=142
+5: lib\TMSRB.FON, comment="Font for Graphics Library", size=45936
+5: lib\VARSTCK.OBJ, comment="Allows heap and stack to compete for space", size=170
+
+[list if_samples 1]
+9: samples\pwbtutor\ANNUITY1.C, comment="PWB Tutorial single-module example (w/errors)", size=1997
+9: samples\pwbtutor\ANNUITY2.C, comment="PWB Tutorial single-module example", size=1946
+9: samples\pwbexten\BASE.C, comment="PWB extension outline (uncommented)", size=1084
+9: samples\pwbtutor\CNT.MAK, comment="Sample non-PWB makefile", size=1141
+9: samples\cpptutor\CONST.CPP, comment="Tutorial Sample", size=276
+9: samples\pwbtutor\COUNT.C, comment="PWB Tutorial multimodule example", size=2805
+9: samples\pwbtutor\COUNT.H, comment="PWB Tutorial multimodule example", size=471
+9: samples\pwbtutor\COUNTBUF.C, comment="PWB Tutorial multimodule example", size=1088
+9: samples\pwbtutor\COUNTCH.C, comment="PWB Tutorial multimodule example", size=572
+9: samples\cpptutor\DATE.CPP, comment="Tutorial Sample", size=1022
+9: samples\cpptutor\DATE.H, comment="Tutorial Sample", size=1392
+9: samples\cpptutor\DEFARG.CPP, comment="Tutorial Sample", size=639
+9: samples\cpptutor\DEMO.CPP, comment="Tutorial Sample", size=951
+9: samples\pwbexten\DISKMENU.C, comment="Sample PWB extension", size=22761
+9: samples\cpptutor\EMPLIST.CPP, comment="Tutorial Sample", size=3532
+9: samples\cpptutor\EMPLOYEE.CPP, comment="Tutorial Sample", size=1359
+9: samples\cpptutor\EMPLOYEE.H, comment="Tutorial Sample", size=1322
+9: samples\cpptutor\ENUM.CPP, comment="Tutorial Sample", size=496
+9: samples\cpptutor\ood\EVENT.CPP, comment="Tutorial Sample", size=2239
+9: samples\cpptutor\ood\EVENT.H, comment="Tutorial Sample", size=10118
+9: samples\iostutor\EXIOS101.CPP, comment="Iostream Demo", size=217
+9: samples\iostutor\EXIOS102.CPP, comment="Iostream Demo", size=248
+9: samples\iostutor\EXIOS103.CPP, comment="Iostream Demo", size=342
+9: samples\iostutor\EXIOS104.CPP, comment="Iostream Demo", size=274
+9: samples\iostutor\EXIOS105.CPP, comment="Iostream Demo", size=446
+9: samples\iostutor\EXIOS106.CPP, comment="Iostream Demo", size=500
+9: samples\iostutor\EXIOS107.CPP, comment="Iostream Demo", size=526
+9: samples\iostutor\EXIOS108.CPP, comment="Iostream Demo", size=253
+9: samples\iostutor\EXIOS109.CPP, comment="Iostream Demo", size=248
+9: samples\iostutor\EXIOS110.CPP, comment="Iostream Demo", size=171
+9: samples\iostutor\EXIOS111.CPP, comment="Iostream Demo", size=254
+9: samples\iostutor\EXIOS112.CPP, comment="Iostream Demo", size=244
+9: samples\iostutor\EXIOS113.CPP, comment="Iostream Demo", size=309
+9: samples\iostutor\EXIOS114.CPP, comment="Iostream Demo", size=436
+9: samples\iostutor\EXIOS115.CPP, comment="Iostream Demo", size=610
+9: samples\iostutor\EXIOS116.CPP, comment="Iostream Demo", size=670
+9: samples\iostutor\EXIOS117.CPP, comment="Iostream Demo", size=230
+9: samples\iostutor\EXIOS118.CPP, comment="Iostream Demo", size=228
+9: samples\iostutor\EXIOS119.CPP, comment="Iostream Demo", size=512
+9: samples\iostutor\EXIOS120.CPP, comment="Iostream Demo", size=505
+9: samples\iostutor\EXIOS121.CPP, comment="Iostream Demo", size=466
+9: samples\iostutor\EXIOS122.CPP, comment="Iostream Demo", size=441
+9: samples\iostutor\EXIOS201.CPP, comment="Iostream Demo", size=378
+9: samples\iostutor\EXIOS202.CPP, comment="Iostream Demo", size=1069
+9: samples\iostutor\EXIOS203.CPP, comment="Iostream Demo", size=578
+9: samples\iostutor\EXIOS204.CPP, comment="Iostream Demo", size=373
+9: samples\iostutor\EXIOS204.MAK, comment="Iostream Demo Makefile", size=2744
+9: samples\iostutor\EXIOS204.STS, comment="Iostream Demo Status File", size=6485
+9: samples\pwbtutor\EXTRA.TXT, comment="PWB Tutorial multimodule example", size=1029
+9: samples\pwbexten\FILTER.C, comment="Sample PWB extension", size=10764
+9: samples\cpptutor\FRAC1.CPP, comment="Tutorial Sample", size=1842
+9: samples\cpptutor\FRAC1.H, comment="Tutorial Sample", size=1028
+9: samples\cpptutor\FRAC2.CPP, comment="Tutorial Sample", size=2198
+9: samples\cpptutor\FRAC2.H, comment="Tutorial Sample", size=1267
+9: samples\cpptutor\HANDLER.CPP, comment="Tutorial Sample", size=581
+9: samples\iostutor\HSTREAM.CPP, comment="Iostream Demo", size=5208
+9: samples\iostutor\HSTREAM.H, comment="Iostream Demo", size=601
+9: samples\pwbexten\INDENT.C, comment="Sample PWB extension", size=9997
+9: samples\cpptutor\INLINE.CPP, comment="Tutorial Sample", size=669
+9: samples\cpptutor\INTARRAY.CPP, comment="Tutorial Sample", size=917
+9: samples\cpptutor\INTARRAY.H, comment="Tutorial Sample", size=428
+9: samples\cpptutor\ood\INTERACT.CPP, comment="Tutorial Sample", size=13046
+9: samples\cpptutor\ood\INTERACT.H, comment="Tutorial Sample", size=10470
+9: samples\pwbexten\ISEARCH.C, comment="Sample PWB extension", size=10738
+9: samples\cpptutor\ood\LIFEWIN.CPP, comment="Tutorial Sample", size=20878
+9: samples\cpptutor\ood\LIFEWIN.H, comment="Tutorial Sample", size=3078
+9: samples\cpptutor\LINKAGE.CPP, comment="Tutorial Sample", size=957
+9: samples\cpptutor\ood\LIST.CPP, comment="Tutorial Sample", size=7975
+9: samples\cpptutor\ood\LIST.H, comment="Tutorial Sample", size=4184
+9: samples\cpptutor\ood\MISC.CPP, comment="Tutorial Sample", size=5101
+9: samples\cpptutor\ood\MISC.H, comment="Tutorial Sample", size=4996
+9: samples\cpptutor\NEWDEL.CPP, comment="Tutorial Sample", size=666
+9: samples\cpptutor\NEWDEL2.CPP, comment="Tutorial Sample", size=803
+9: samples\cpptutor\NEWDEL3.CPP, comment="Tutorial Sample", size=1462
+9: samples\cpptutor\NEWDEL4.CPP, comment="Tutorial Sample", size=1083
+9: samples\cpptutor\ood\OODEMO.CPP, comment="Tutorial Sample", size=2440
+9: samples\cpptutor\ood\OODEMO.MAK, comment="Tutorial Sample", size=6889
+9: samples\cpptutor\ood\OODEMO.STS, comment="Tutorial Sample", size=6632
+9: samples\cpptutor\ood\OODEMO.TXT, comment="Tutorial Sample", size=2120
+9: samples\cpptutor\OVERLOAD.CPP, comment="Tutorial Sample", size=524
+9: samples\iostutor\PAYROLL, comment="Iostream Demo", size=32
+9: samples\cpptutor\PERSINFO.CPP, comment="Tutorial Sample", size=318
+9: samples\cpptutor\PERSINFO.H, comment="Tutorial Sample", size=539
+9: samples\cpptutor\PHONLIST.CPP, comment="Tutorial Sample", size=1202
+9: samples\cpptutor\PHONLIST.H, comment="Tutorial Sample", size=1021
+9: samples\cpptutor\ood\PRIM.CPP, comment="Tutorial Sample", size=1784
+9: samples\cpptutor\ood\PRIM.H, comment="Tutorial Sample", size=5020
+9: include\READCHAR.H, comment="PWB extension include file for ReadChar", size=5569
+9: samples\iostutor\README.TXT, comment="Iostream Demo", size=347
+9: samples\cpptutor\REFADDR.CPP, comment="Tutorial Sample", size=361
+9: samples\cpptutor\REFDEMO.CPP, comment="Tutorial Sample", size=460
+9: samples\cpptutor\REFPARM.CPP, comment="Tutorial Sample", size=1236
+9: samples\SAMPLES.TXT, comment="Samples Document", size=7858
+9: samples\cpptutor\SAVINGS.CPP, comment="Tutorial Sample", size=294
+9: samples\cpptutor\SAVINGS.H, comment="Tutorial Sample", size=763
+9: samples\cpptutor\SCOPERES.CPP, comment="Tutorial Sample", size=406
+9: samples\pwbexten\SKEL.C, comment="PWB extension outline (uncommented)", size=3498
+9: samples\cpptutor\STRNG.CPP, comment="Tutorial Sample", size=1797
+9: samples\cpptutor\STRNG.H, comment="Tutorial Sample", size=1007
+9: samples\pwbexten\TEXT.C, comment="Sample PWB extension", size=42751
+9: samples\cpptutor\ood\TEXTWIN.CPP, comment="Tutorial Sample", size=20142
+9: samples\cpptutor\ood\TEXTWIN.H, comment="Tutorial Sample", size=5195
+9: samples\pwbexten\TWOKEY.C, comment="Sample PWB extension", size=4250
+9: samples\pwbexten\UREPEAT.C, comment="Sample PWB extension", size=4723
+9: samples\cpptutor\VARDECL.CPP, comment="Tutorial Sample", size=489
+9: samples\cpptutor\ood\WINMGR.CPP, comment="Tutorial Sample", size=10025
+9: samples\cpptutor\ood\WINMGR.H, comment="Tutorial Sample", size=895
+
+[list if_small_alt 1]
+5: lib\SLIBFA.LIB, comment="Alternate math library (small model)", size=59549
+
+[list if_small_graph_alt 1]
+5: lib\SGRAPHFA.LIB, comment="Graphics alternate fp - small/compact", size=4131
+
+[list if_small_graph_noalt 1]
+5: lib\SGRAPHFP.LIB, comment="Graphics emulator fp - small/compact", size=4131
+
+[list if_small_noalt 1]
+5: lib\SLIBFP.LIB, comment="Floating-point library (small model)", size=72107
+
+[list if_small_quick_win 1]
+3: lib\SLIBCQ.LIB, comment="Windows 3.x qwin C library - small model", size=8353
+
+[list if_small_real 1]
+5: lib\SLIBCR.LIB, comment="MS-DOS run-time library (small model)", size=151525
+
+[list if_small_win_alt 1]
+3: lib\SLIBFAW.LIB, comment="Windows 3.x alternate math library- small model", size=60061
+
+[list if_small_win_dll 1]
+7: lib\SDLLCW.LIB, comment="Windows 3.x dll libs- small model", size=117561
+5: lib\SDLLCXXW.LIB, comment="Windows 3.x C++ DLL libs- small model", size=56735
+
+[list if_small_win_noalt 1]
+5: lib\SLIBFPW.LIB, comment="Windows 3.x em/87 math library- small model", size=74171
+
+[list if_small_win_nocrt 1]
+3: lib\SNOCRTDW.LIB, comment="Windows 3.x DLL nocrt library- small model", size=2071
+3: lib\SNOCRTW.LIB, comment="Windows 3.x exe nocrt library-small model", size=2583
+
+[list if_small_win 1]
+3: lib\SLIBCW.LIB, comment="Windows 3.x exe libs - small model", size=128383
+
+[list if_small 1]
+5: lib\SLIBCXX.LIB, comment="C++ IOStream Library--small model", size=61403
+
+[list if_startup_real 1]
+7: source\startup\dos\CRT0.ASM, comment="MS-DOS specific startup source file", size=14150
+7: source\startup\dos\CRT0DAT.ASM, comment="MS-DOS specific startup source file", size=22091
+7: source\startup\dos\CRT0MSG.ASM, comment="MS-DOS specific startup source file", size=3205
+7: source\startup\dos\EXECMSG.ASM, comment="MS-DOS specific startup source file", size=1171
+7: source\startup\dos\NMSGHDR.ASM, comment="MS-DOS specific startup source file", size=4775
+7: source\startup\dos\NULBODY.LNK, comment="MS-DOS specific startup source file", size=101
+7: source\startup\dos\STDALLOC.ASM, comment="MS-DOS specific startup source file", size=2634
+7: source\startup\dos\STDARGV.ASM, comment="MS-DOS specific startup source file", size=16566
+7: source\startup\dos\STDENVP.ASM, comment="MS-DOS specific startup source file", size=8193
+
+[list if_startup_win 1]
+7: source\startup\win\CRT0.ASM, comment="Windows specific startup source file", size=12837
+7: source\startup\win\FATAL.ASM, comment="Windows specific startup source file", size=3560
+7: source\startup\win\NOQWIN.ASM, comment="Windows specific startup source file", size=3230
+7: source\startup\win\NULBODY.DEF, comment="Windows specific startup source file", size=175
+7: source\startup\win\NULBODY.LNK, comment="Windows specific startup source file", size=123
+7: source\startup\win\QWCINIT.ASM, comment="Windows specific startup source file", size=5211
+7: source\startup\win\STUBMAIN.ASM, comment="Windows specific startup source file", size=2597
+7: source\startup\win\STUBWEP.ASM, comment="Windows specific startup source file", size=1369
+7: source\startup\win\WCHKSTK.ASM, comment="Windows specific startup source file", size=2850
+7: source\startup\win\WEP.ASM, comment="Windows specific startup source file", size=3985
+7: source\startup\win\WFILE.ASM, comment="Windows specific startup source file", size=1629
+7: source\startup\win\WINDGRP.ASM, comment="Windows specific startup source file", size=1167
+7: source\startup\win\WINDGRPX.C, comment="Windows specific startup source file", size=519
+7: source\startup\win\WNULL.ASM, comment="Windows specific startup source file", size=822
+
+[list if_startup 1]
+7: source\startup\CHKSTK.ASM, comment="OS Independent startup source file", size=3793
+7: source\startup\CHKSUM.ASM, comment="OS Independent startup source file", size=3257
+7: source\startup\CMACROS.INC, comment="OS Independent startup source file", size=12035
+7: source\startup\CMSGS.INC, comment="OS Independent startup source file", size=3701
+7: source\startup\CRT0FP.ASM, comment="OS Independent startup source file", size=2007
+7: source\startup\CSTARTUP.BAT, comment="Build batchfile for startup sources", size=3840
+7: source\startup\CSUB.BAT, comment="Subroutine file for cstartup.bat", size=1322
+7: source\startup\DEFSEGS.INC, comment="OS Independent startup source file", size=6058
+7: source\startup\FCNTL.INC, comment="OS Independent startup source file", size=1562
+7: source\startup\FILE.ASM, comment="OS Independent startup source file", size=2648
+7: source\startup\FILE2.H, comment="OS Independent startup source file", size=1792
+7: source\startup\FMSGHDR.ASM, comment="OS Independent startup source file", size=2100
+7: source\startup\HEAP.INC, comment="OS Independent startup source file", size=3612
+7: source\startup\INTERNAL.H, comment="OS Independent startup source file", size=3956
+7: source\startup\MAKEFILE.DOS, comment="Makefile for MS-DOS Startup", size=4537
+7: source\startup\MAKEFILE.WIN, comment="Makefile for Windows Startup", size=5168
+7: source\startup\MSDOS.H, comment="OS Independent startup source file", size=6064
+7: source\startup\MSDOS.INC, comment="OS Independent startup source file", size=7360
+7: source\startup\NULBODY.C, comment="OS Independent startup source file", size=30
+7: source\startup\RCHKSTK.ASM, comment="OS Independent startup source file", size=3572
+7: source\startup\README.TXT, comment="Startup build instructions", size=6257
+7: source\startup\REGISTER.H, comment="OS Independent startup source file", size=396
+7: source\startup\RTERR.INC, comment="OS Independent startup source file", size=4571
+7: source\startup\SETARGV.ASM, comment="OS Independent startup source file", size=971
+7: source\startup\STDIO.INC, comment="OS Independent startup source file", size=1581
+7: source\startup\STDLIB.INC, comment="OS Independent startup source file", size=1054
+7: source\startup\VERSION.INC, comment="OS Independent startup source file", size=575
+7: source\startup\WILD.C, comment="OS Independent startup source file", size=6574
+7: source\startup\WINDLL.MKF, comment="Makefile for Windows DLL startup", size=830
+7: source\startup\WINEXE.MKF, comment="Makefile for Windows EXE startup", size=810
+7: source\startup\_FILE.C, comment="OS Independent startup source file", size=1302
+
+[list if_win_lib 1]
+3: lib\NOQWIN.LIB, comment="Windows 3.x non-quickwin library", size=2063
+
+[list if_wx 1]
+1: bin\WX.EXE, comment="Windows Spawner", size=14215
+1: bin\WXSRVR.EXE, comment="Windows Spawn Server", size=17920
+
+[list release_info 1]
+1: .\ANSWERS.TXT, comment="Questions and Answers for Microsoft C/C++ 7.0", size=13125
+1: .\DETAILS.TXT, comment="Detailed information about topics in README.TXT", size=32900
+1: .\ERRATA1.TXT, comment="Documentation Changes for Microsoft C/C++ 7.0", size=40675
+1: .\ERRATA2.TXT, comment="Documentation Changes for Microsoft C/C++ 7.0", size=52557
+1: .\PACKING.TXT, comment="This listing of files for Microsoft C/C++ 7.0 ", size=46230
+1: .\README.TXT, comment="New Information for Microsoft C/C++ 7.0", size=25774
+
+[list setup 1]
+1: .\CSETUP.EXE, comment="MS-DOS Setup Component", NOCOPY, size=160778
+1: .\CSETUP.INF, comment="MS-DOS Setup program information file", NOCOPY, size=47742
+1: .\DETCMD.DLL, comment="Windows Setup DLL", size=24096
+1: .\SETUP.EXE, comment="Boot Setup program -- installs Microsoft C/C++ 7.0", NOCOPY, size=51456
+1: .\VER.DLL, comment="Windows Setup DLL", size=18414
+1: .\WSETUP.EXE, comment="Windows Setup Component", size=383152
+1: .\WSETUP.HLP, comment="WinHelp for Windows Setup Component", size=21110
+1: .\WSETUP.INF, comment="Windows Setup program information file", size=63707
+
+; list of files to remove if user wants components of libraries deleted
+[list if_del_comps]
+{include list copy_always_lib}
+{include list copy_always_real_lib}
+{include list if_chipmath}
+{include list if_compact_alt}
+{include list if_compact_noalt}
+{include list if_compact_real}
+{include list if_compact}
+{include list if_emulator}
+{include list if_large_alt}
+{include list if_large_noalt}
+{include list if_large_real}
+{include list if_large}
+{include list if_medium_alt}
+{include list if_medium_graph_alt}
+{include list if_medium_graph_noalt}
+{include list if_medium_noalt}
+{include list if_medium_or_large_real_lib}
+{include list if_medium_real}
+{include list if_medium}
+{include list if_pcode_lib}
+{include list if_small_alt}
+{include list if_small_graph_alt}
+{include list if_small_graph_noalt}
+{include list if_small_noalt}
+{include list if_small_real}
+{include list if_small}
+
+; list of files to search for single-file copy command
+[list search_files]
+{include list copy_always_lib}
+{include list copy_always_real_lib}
+{include list copy_always}
+{include list if_chipmath}
+{include list if_codeview_real}
+{include list if_codeview_win}
+{include list if_compact_alt}
+{include list if_compact_noalt}
+{include list if_compact_quick_win}
+{include list if_compact_real}
+{include list if_compact_win_alt}
+{include list if_compact_win_dll}
+{include list if_compact_win_noalt}
+{include list if_compact_win_nocrt}
+{include list if_compact_win}
+{include list if_compact}
+{include list if_config_cv}
+{include list if_config_win}
+{include list if_config}
+{include list if_emulator}
+{include list if_graphics_samples}
+{include list if_graphics}
+{include list if_help}
+{include list if_include}
+{include list if_large_alt}
+{include list if_large_noalt}
+{include list if_large_quick_win}
+{include list if_large_real}
+{include list if_large_win_alt}
+{include list if_large_win_dll}
+{include list if_large_win_noalt}
+{include list if_large_win_nocrt}
+{include list if_large_win}
+{include list if_large}
+{include list if_libw}
+{include list if_lib}
+{include list if_medium_alt}
+{include list if_medium_graph_alt}
+{include list if_medium_graph_noalt}
+{include list if_medium_noalt}
+{include list if_medium_or_large_real_lib}
+{include list if_medium_quick_win}
+{include list if_medium_real}
+{include list if_medium_win_alt}
+{include list if_medium_win_dll}
+{include list if_medium_win_noalt}
+{include list if_medium_win_nocrt}
+{include list if_medium_win}
+{include list if_medium}
+{include list if_mfc_help}
+{include list if_mfc}
+{include list if_pcode_dll_lib}
+{include list if_pcode_help}
+{include list if_pcode_lib}
+{include list if_pwb_help}
+{include list if_pwb}
+{include list if_quick_win_lib}
+{include list if_quickwin_help}
+{include list if_real_compiler}
+{include list if_runtime_misc}
+{include list if_samples}
+{include list if_small_alt}
+{include list if_small_graph_alt}
+{include list if_small_graph_noalt}
+{include list if_small_noalt}
+{include list if_small_quick_win}
+{include list if_small_real}
+{include list if_small_win_alt}
+{include list if_small_win_dll}
+{include list if_small_win_noalt}
+{include list if_small_win_nocrt}
+{include list if_small_win}
+{include list if_small}
+{include list if_startup_real}
+{include list if_startup_win}
+{include list if_startup}
+{include list if_win_lib}
+{include list if_wx}
+{include list release_info}
+{include list setup}
+
+;INSERT HERE    ^^^^^^^^^^^
+
+[list remove]
+; required by toolkit, not used by C7
+
+
+;*********** more macros ***************
+[macro]
+;required macros:
+LISTMORE  = " MORE "
+LISTEND   = " END "
+HARDHDR   = "Hard Drive "
+FLOPPYHDR = "Floppy Drive "
+NETWORKHDR = "Network Drive "
+; CHKD is 2-char string used as checkmark in listboxes
+CHKD = "û "
+
+; other macros
+TOGGLEHLP1  = "The TAB key toggles between ^1OK^0 and menu. The ARROW keys move"
+TOGGLEHLP2  = "you in the menu. Mark entries using ENTER. Select OK to continue."
+
+; macros for Packing list generator (not used in Setup)
+DISK        = "DISK"
+DESC_HEADER = "Files                        Description"
+DESC_ULINES = "-----                        -----------"
+PLHEADER    = "Packing List for Microsoft C/C++ Version 7.0 "
+
+; macro used by wrong_dest_drive
+WRONG_DIR = ""
+
+KB_NEEDED = "0"
+KB_FREE   = "0"
+
+;*********** menus ***************
+
+[menu mainc]
+; leave 2 spaces at front for checkmark
+"  Custom installation of MS C/C++ compiler"
+"  Install the MS C/C++ compiler using defaults"
+"  Run Setup without installing any files"
+"  View important documentation notes (README.TXT)"
+"  View the packing list (PACKING.TXT)"
+"  Copy a file from the distribution disks"
+"  Load or build additional libraries"
+"  Exit Setup"
+
+[menu yesno]
+"Yes"
+"No"
+
+[menu choose_mode]
+"MS-DOS"
+"Windows 3.0"
+
+[menu math_menu]
+"Emulator math"
+"80x87 chip math"
+"Alternate math"
+
+[menu models_menu]
+"Small memory model"
+"Medium memory model"
+"Compact memory model"
+"Large memory model"
+
+[menu copyanotherm]
+"Return to Setup main menu"
+"Copy another file"
+"Exit Setup"
+
+[menu anotherhd]
+"Install on a different hard disk"
+"Change my answers to Setup questions"
+"Continue with installation on this disk"
+"Exit Setup"
+
+[menu smallhd]
+"Change my answers to Setup questions"
+"Continue with installation on this disk"
+"Exit Setup"
+
+
+; required menus below this point
+[menu timestampm]
+"Continue without overwriting my file"
+"Replace my copy of the file"
+"Exit Setup"
+
+[menu contorexit]
+"Continue"
+"Exit Setup"
+
+[menu retry]
+"Try again"
+"Exit Setup"
+
+[menu formatorretry]
+"Format the disk"
+"Try again (do not format)"
+
+[menu retryorignore]
+"Try again"
+"Ignore the error and continue"
+"Exit Setup"
+
+[menu readonlyerrm]
+"Try to overwrite"
+"Continue without copying"
+"Exit Setup"
+
+[menu build_err_m]
+"Return to Setup main menu"
+"Continue building libraries"
+"Exit Setup"
+
+[menu view_modify_opts]
+"Let Setup update your system files for you"
+"View the changes now"
+"Save the changes to edit later"
+
+
+;***** colors *****
+[color]
+1=high white
+2=blue,white
+3=white,blue
+4=white,black
+
+
+;********** header and footer screens ************
+
+[screen header]
+{color white,blue}
+{at 2,1}
+Microsoft C/C++ %VERS Setup
+{at 0,2}
+{line 60,205}
+;
+;
+[screen error_header]
+{include screen header}
+{at 35,1}
+^1Setup Error^0
+;
+; footer screens
+;
+[screen exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 67,24}
+CTRL+C=Exit
+;
+;
+[screen ent_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=Continue
+{at 67,24}
+CTRL+C=Exit
+;
+;
+[screen ent_sel_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=Continue
+{at 19,24}
+=Make Selection
+{at 67,24}
+CTRL+C=Exit
+;
+;
+[screen ent_sel_esc_f3_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=Continue
+{at 19,24}
+=Make Selection
+{at 39,24}
+ESC=Cancel
+{at 51,24}
+F3=Select All
+{at 67,24}
+CTRL+C=Exit
+;
+;
+[screen ent_f1_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=Continue
+{at 39,24}
+F1=Additional Information
+{at 67,24}
+CTRL+C=Exit
+;
+;
+[screen ent_sel_f1_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=Continue
+{at 19,24}
+=Make Selection
+{at 39,24}
+F1=Additional Information
+{at 67,24}
+CTRL+C=Exit
+;
+;
+[screen help_footer]
+{clear 0,24,79,24}
+{color white, blue}
+{at 2,24}
+ESC=Return to Setup
+{at 30,24}
+PgDn=Next Screen
+{at 55,24}
+PgUp=Previous Screen
+;
+;
+[screen typedir]
+If the directory does not exist, Setup will create it.
+
+Setup proposes the following directory:
+
+{input 5,55,1}
+
+If you want to install these files in a different directory:
+     Use the BACKSPACE key to erase the current selection.
+     Type the directory name.
+When the correct directory is displayed, press ENTER.
+{include screen ent_exit}
+;
+;
+;**********    required screens ************
+;
+[screen helpframe]
+{color black, white}
+{at 2,1}
+^2Additional Information^0
+{at 0,2}
+{line 60,205,blue,white}
+{include screen help_footer}
+;
+;
+[screen installing]
+{include screen header}
+{at 35,1}
+^1Installing^0
+{at 0,4}
+{center on}
+Installing Microsoft C/C++ compiler %VERS...
+{center off}
+{include screen exit}
+;
+;
+[screen mcopying]
+{clear 0,10,79,13}
+{At 8,10}
+Setup is copying %SPATH%SFILE
+              to %DPATH%DFILE.
+
+There are %NUM files left to copy.
+;
+;
+[screen badmacro]
+{include screen error_header}
+{at 5,10}
+Predefined macro "%SECTION" is missing in SETUP.INF
+;
+;
+[screen insdiskpath]
+{include screen header}
+{at 35,1}
+^1File Not Found^0
+{At 5,8}
+Setup can't find the file %SFILE.
+
+Please type the drive and directory where this file can be found.
+Then press ENTER.
+
+You can specify a floppy-disk drive or a hard-disk drive.
+
+{input 10,60,1}
+{include screen ent_exit}
+;
+;
+[screen insdiskpath2]
+{include screen header}
+{at 35,1}
+^1Cannot Find File^0
+{At 5,8}
+Setup can't find the file %SFILE in the directory you specified.
+Please try again now, or exit, find a copy of the file, and run
+Setup later.
+
+Please type the drive and directory where this file is located and
+press ENTER. You can specify a floppy-disk drive or a hard-disk drive.
+
+{input 10,60,1}
+{include screen ent_exit}
+;
+;
+[screen insdisknopath]
+{include screen header}
+{at 35,1}
+^1Insert Requested Disk^0
+{At 5,8}
+Please insert the disk labeled '%DISKNAME'
+in drive %DRIVE and press ENTER.
+
+{input 15,35,5}
+{include menu contorexit}
+{include screen ent_sel_exit}
+;
+;
+[screen badsdisk]
+{include screen header}
+{at 35,1}
+^1Can't read disk^0
+{At 5,8}
+Setup can't read the disk in drive %DRIVE. Please be sure the
+correct disk is inserted and the drive door is closed.
+
+{input 15,35,5}
+{include menu contorexit}
+{include screen ent_sel_exit}
+;
+;
+[screen wrongdisk]
+{include screen header}
+{at 35,1}
+^1Wrong disk^0
+{At 5,8}
+This does not appear to be %DISKNAME.
+Please insert the disk labeled '%DISKNAME'
+in drive %DRIVE and press ENTER.
+
+{input 15,35,5}
+{include menu contorexit}
+{include screen ent_sel_exit}
+;
+;
+[screen badddisk]
+{include screen header}
+{at 35,1}
+^1Error reading disk^0
+{At 5,8}
+Setup can't read the disk in drive %DRIVE.
+
+{input 15,35,4}
+{include menu formatorretry}
+{include screen ent_sel_exit}
+;
+;
+[screen readerr]
+{include screen error_header}
+{At 5,8}
+An error occurred while reading the file %SFILE.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+;
+;
+[screen writeerr]
+{include screen error_header}
+{At 5,8}
+An error occurred while writing the file
+%DPATH%DFILE.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+;
+;
+[screen createerr]
+{include screen error_header}
+{At 5,8}
+An error occurred while creating the file
+%DPATH%DFILE.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+;
+;
+[screen renameerr]
+{include screen error_header}
+{At 5,8}
+An error occurred while renaming the file
+%SPATH%SFILE to %DFILE.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+;
+;
+[screen createdirerr]
+{include screen error_header}
+{At 5,8}
+An error occurred while creating the directory
+%DPATH.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+;
+;
+[screen timestamperr]
+{include screen error_header}
+{At 5,8}
+The version of the file %SFILE on your disk is newer than the
+one supplied with Microsoft C/C++.
+
+You can continue the installation process without copying this
+file, or you can overwrite your copy of the file.
+
+Setup suggests that you do not overwrite this file. If you decide
+later that you want the version supplied with C/C++ %VERS, rename
+your existing file and use Setup to copy the new version.
+
+{input 15,45,5}
+{include menu timestampm}
+{include screen ent_sel_exit}
+;
+;
+; required screens not used by C
+[screen nonvital]
+{clear 0,0,0,0}
+;
+[screen pathtoolong]
+; screen used by floppy-to-floppy setup only
+[screen insnewdisk]
+;
+;
+[screen readonlyerr]
+{include screen error_header}
+{at 5,8}
+Setup is trying to copy to the read-only file
+%DPATH%DFILE on your hard disk.
+
+You can try to overwrite the file, skip the copy if you are sure
+your file is correct, or you can exit Setup and delete your file.
+
+{input 15,35,5}
+{include menu readonlyerrm}
+{include screen ent_sel_f1_exit}
+;
+;
+[screen readme_beg_frame]
+{help nohelp}
+{at 0,23}
+{line 80,220}
+{clear 0,24,79,24}
+   PgDn=Next screen           ** First Screen **             ESC=Exit README.TXT
+;
+;
+[screen readme_middle_frame]
+{help nohelp}
+{at 0,23}
+{line 80,220}
+{clear 0,24,79,24}
+   PgDn=Next screen          PgUp=Previous screen            ESC=Exit README.TXT
+;
+;
+[screen readme_end_frame]
+{help nohelp}
+{at 0,23}
+{line 80,220}
+{clear 0,24,79,24}
+   ** End of File **         PgUp=Previous screen            ESC=Exit README.TXT
+;
+;
+[screen packing_beg_frame]
+{help nohelp}
+{at 0,23}
+{line 80,220}
+{clear 0,24,79,24}
+   PgDn=Next screen           ** First Screen **            ESC=Exit PACKING.TXT
+;
+;
+[screen packing_middle_frame]
+{help nohelp}
+{at 0,23}
+{line 80,220}
+{clear 0,24,79,24}
+   PgDn=Next screen          PgUp=Previous screen           ESC=Exit PACKING.TXT
+;
+;
+[screen packing_end_frame]
+{help nohelp}
+{at 0,23}
+{line 80,220}
+{clear 0,24,79,24}
+   ** End of File **         PgUp=Previous screen           ESC=Exit PACKING.TXT
+;
+;
+; ********* C SCREENS **********************
+;
+[screen nohelp]
+{color black, white}
+{at 10,10}
+If you get this screen, please report it as a bug.
+
+Setup has no additional information on this topic.
+
+Press ESC to return to Setup.
+;
+;
+[screen welcome]
+{include screen header}
+{at 4,3}
+%MS_Setup %Setup_VER
+%COPYRIGHT
+Welcome to the Setup program for Microsoft C/C++.
+
+     ^1This Setup program installs Microsoft C/C++ %VERS
+         for the MS-DOS(R) operating system only.^0
+
+If you want to develop software for Microsoft Windows(R), you must:
+     1. Exit Setup now using CTRL+C
+     2. Install Windows 3.1
+     3. Run Setup from the Windows Program Manager.
+
+The files on the distribution disks are compressed, so you must
+use Setup to install them. You can also use Setup to decompress
+and copy a single file, view the README.TXT file, or view
+the packing list.
+
+If you make a mistake, you can type CTRL+C at any time to quit and
+start over. Setup never erases files from the distribution disks.
+
+Press ENTER to continue or CTRL+C to exit.
+{include screen ent_exit}
+;
+;
+[screen mainmenu]
+{help mainmenu_h}
+{include screen header}
+{at 35,1}
+^1Main Menu^0
+{at 5,4}
+Press F1 for information on how to use Setup,
+or make a selection and press ENTER to continue.
+
+{input 10,55,10}
+{include menu mainc}
+{at 5}
+
+Use the ARROW (,) keys to make the selection, then press ENTER.
+{include screen ent_sel_f1_exit}
+;
+;
+[screen mainmenu_h]
+{help mainmenu_h2}
+{color black, white}
+{at 5,4}
+This Setup program prompts you for information it needs.
+If in doubt about any option, select the default option.
+
+Before Setup installs any files, you can change your answers.
+You can also run Setup again at any time.
+
+To see all of Setup's options before installing 
+Microsoft C/C++, select
+    ^2Run Setup without installing any files^0
+from the main menu. Setup will prompt you for information
+but will not copy any files.
+
+To install Microsoft C/C++ using defaults
+for all of Setup's options, choose
+    ^2Install the Microsoft C/C++ compiler using defaults^0
+from the main menu. Before Setup installs any files, it will give
+you the opportunity to change any of your answers.
+
+For more information on using Setup, press the PgDn key.
+;
+;
+[screen mainmenu_h2]
+{color black, white}
+{at 5,3}
+Setup asks for information in two ways.  For some questions, you
+will be given a list of choices, which will look like:
+{at 20}
+{box 15,4,3,white,blue}
+{at 21}
+^2  Choice One ^0
+^3  Choice Two ^0
+
+{at 5}
+To move the highlighted bar on a screen, use the ARROW keys (,)
+When the choice you want is highlighted, press ENTER to continue.
+
+If the word MORE appears at the bottom of the box, press the DOWN
+ARROW key until you've seen all the options.
+
+To specify a directory or file name, Setup gives you a field
+that looks like:
+                   ^4C:\C700\BIN                       ^0
+Use the BACKSPACE key to erase characters,
+    the ARROW keys to move the highlight around in text
+    the HOME key to move to the beginning of the text
+    the END key to move to the end of the text
+
+;
+;
+[screen needhd]
+{include screen header}
+{at 35,1}
+^1Hard Disk Needed^0
+{at 5,6}
+Setup cannot find a hard disk attached to your system. You need a
+hard disk to install Microsoft C/C++ version %VERS.
+
+Some removable hard disk systems look like floppy drives to Setup,
+but you can still install C/C++ %VERS on them. If you have a
+removable hard disk or believe Setup made an error, press ENTER to
+continue with Setup.
+
+If you do not have a hard disk, press CTRL+C now to exit Setup, and
+run Setup again after you have installed a hard disk.
+
+
+Press ENTER to continue or CTRL+C to exit.
+{include screen ent_exit}
+;
+;
+[screen dirtmp]
+{include screen header}
+{at 35,1}
+^1TMP Environment Variable^0
+{at 5,5}
+Setup has determined that the TMP environment variable is not set or
+that the TMP environment points to a directory that does not exist.
+
+The LIB utility requires that TMP be set to a valid path on your
+hard drive. Since you have specified combined libraries, the TMP
+environment variable needs to be defined.
+
+{include screen typedir relative}
+;
+;
+[screen comblibs]
+{include screen header}
+{at 35,1}
+^1Combined Libraries^0
+{At 5,3}
+In order to reduce the time spent linking programs, the C/C++
+compiler uses "combined libraries."  A combined library is a file
+containing two or more individual libraries (called component
+libraries).  We recommend converting to combined libraries as the
+compiler uses them by default.  You can leave the libraries in 
+their component forms if you have MAKEFILEs that rely on this.
+
+Setup automatically creates the combined libraries for the memory
+model, math options, and the operating modes you specify.  Because
+combined libraries require a considerable amount of disk space
+(approximately 200-250K per library), you should build only those
+libraries you need.  From Setup's main menu, you can build other
+combined libraries later.
+
+Build combined libraries?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+;
+[screen math_opts]
+{include screen header}
+{at 35,1}
+^1Math Options^0
+{At 5,3}
+There are three options for floating-point math support:
+
+1. The emulator uses a math coprocessor if one is present; otherwise
+   it emulates the coprocessor in software.  This is the default
+   option for the compiler.
+2. The 80x87 library uses the math coprocessor if one is present, but
+   it generates an error if the chip is not present at run time.
+3. The alternate-math library never uses the coprocessor, even if it
+   is present.  It uses an alternative representation of numbers (thus
+   the name) that is faster than the emulator if a coprocessor is not
+   present.  However, this option sacrifices some accuracy in exchange
+   for speed and size.
+
+Install which Math options?
+{input 15,30,5}
+{include menu math_menu}
+{at 12}
+%TOGGLEHLP1
+%TOGGLEHLP2
+{include screen ent_sel_exit}
+;
+;
+[screen math_reqd]
+{help math_reqd_help}
+{include screen header}
+{at 35,1}
+^1Math Options Required^0
+{At 5,6}
+You must specify at least one floating-point math option.
+
+Which Math options would you like
+installed?
+{input 15,30,5}
+{include menu math_menu}
+{at 12}
+%TOGGLEHLP1
+%TOGGLEHLP2
+{include screen ent_sel_f1_exit}
+;
+;
+[screen math_reqd_help]
+{color black, white}
+{at 5,4}
+You must specify ^2at least one math option^0 since combined
+libraries are composed of a C run-time component, a model-independent
+component, a model-dependent math component, a C++ run-time
+component, and a coprocessor chip or emulator support component.
+
+There are three options for floating-point math support:
+
+1. The emulator uses a math coprocessor if one is present; otherwise
+   it emulates the coprocessor in software.  This is the default
+   option for the compiler.
+2. The 80x87 library uses the math coprocessor if one is present, but
+   it generates an error if the chip is not present at run time.
+3. The alternate-math library never uses the coprocessor, even if it
+   is present.  It uses an alternative representation of numbers (thus
+   the name) that is faster than the emulator if a coprocessor is not
+   present.  However, this option sacrifices some accuracy in exchange
+   for speed and size.
+
+You can choose any or all of the math options. However, ^2at least
+one must be specified.^0
+;
+;
+[screen mem_models]
+{include screen header}
+{at 35,1}
+^1Memory Models^0
+{At 5,3}
+The C/C++ compiler supports libraries for six memory models:
+    tiny, small, medium, compact, large, and huge.
+You can choose any or all of the memory models.
+
+Since the libraries take up a lot of disk space, Setup
+recommends you select only the memory models you use most often.
+
+(Note that the large model libraries are also used for huge model
+programs, and the small model libraries are also used for tiny model
+programs).
+
+You must specify at least one memory model.
+Install which memory models?
+{input 15,30,6}
+{include menu models_menu}
+{at 12}
+%TOGGLEHLP1
+%TOGGLEHLP2
+{include screen ent_sel_exit}
+;
+;
+[screen mem_models_lib]
+{include screen header}
+{at 35,1}
+^1Memory Models^0
+{At 5,5}
+The C/C++ compiler supports libraries for six memory models:
+    tiny, small, medium, compact, large, and huge.
+You can choose any or all of the memory models.
+
+Since the libraries take up a lot of disk space, Setup
+recommends you select only the memory models you use most often.
+
+(Note that the large model libraries are also used for huge model
+programs, and the small model libraries are also used for tiny
+model programs).
+
+Install which memory models?
+{input 15,30,6}
+{include menu models_menu}
+{at 12}
+%TOGGLEHLP1
+%TOGGLEHLP2
+{include screen ent_sel_exit}
+;
+;
+[screen pwb]
+{include screen header}
+{at 35,1}
+^1Programmer's WorkBench^0
+{At 5,6}
+The Programmer's WorkBench (PWB) is a character-mode
+development environment based on a full-screen editor.
+PWB supports character-mode windows and the mouse.
+
+You can edit, browse, build, run, debug your program, and
+access Help without leaving the Programmer's WorkBench.
+
+Install Microsoft Programmer's WorkBench?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+;
+[screen helpfiles]
+{include screen header}
+{at 35,1}
+^1Help Files^0
+{At 5,5}
+
+Microsoft C/C++ %VERS has an online help database that can be
+accessed from within PWB or from the command line with QuickHelp.
+
+The Help files provide extensive information about PWB, C,
+C++, the CodeView debugger, run-time library functions, Windows 
+library functions, and utilities that come with MS C/C++. The 
+Help system is fully indexed to help you find the information
+you need quickly.
+
+These files take about 2.7 MB of disk space. Install the Help
+files if you have sufficient space on your machine.
+
+Install Help files?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+[screen samples]
+{include screen header}
+{at 35,1}
+^1Sample Programs^0
+{At 5,5}
+There are many sample C and C++ programs included with MS C/C++.
+They include programs demonstrating the use of PWB and the
+Microsoft Foundation Class Library.
+
+If you choose not to copy the sample files now, you can install
+them later using the file copying option in Setup's main menu.
+
+Copy the sample programs?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+;
+[screen destdrive]
+{include screen header}
+{at 35,1}
+^1Destination Drive^0
+{At 5,5}
+Setup has found more than one hard drive attached to your system.
+Select the drive on which you want to install MS C/C++.
+
+This drive will be the default when Setup asks you to specify
+directory names. If you want to divide this product's components
+among different hard drives, specify that drive when Setup asks
+for the directory paths.
+
+Please select the destination drive:
+{input 15,20,5}
+; list of drives (built on the fly) goes here
+{include screen ent_sel_exit}
+;
+;
+[screen wrong_dest_drive]
+{include screen header}
+{at 35,1}
+^1Wrong Destination Drive^0
+{At 5,5}
+The destination path you have supplied ^1%WRONG_DIR^0 is
+incorrect because the drive you have specified does not exist.
+Setup has found the following hard disk(s) attached to your
+system. You should select the drive on which you want the above
+directory to be created.
+
+This drive will become the drive for the directory path specified.
+
+Please select the destination drive:
+{input 15,20,5}
+; list of drives (built on the fly) goes here
+{include screen ent_sel_exit}
+;
+;
+[screen dirbase]
+{include screen header}
+{at 35,1}
+^1Installation Base Directory^0
+{at 5,5}
+Please specify the base directory for MS C/C++ installation.
+
+Changing this directory changes the base path name used to create
+pathnames for all of the directories that Setup creates.
+
+{include screen typedir relative}
+;
+;
+[screen dirbin]
+{include screen header}
+{at 35,1}
+^1Windows Executable Files^0
+{at 5,4}
+Please specify the directory in which to place the Windows executable
+files and Windows DLLs.
+
+{include screen typedir relative}
+;
+;
+[screen dirlib]
+{include screen header}
+{at 35,1}
+^1Library Files^0
+{at 5,5}
+Please specify the directory for your C/C++ libraries.
+
+This directory will contain the combined libraries created
+by Setup as well as other libraries that Setup copies from the
+source disks.
+
+{include screen typedir relative}
+;
+;
+; source of component directories for library-building
+[screen dirlib_src]
+{include screen header}
+{at 35,1}
+^1Source of Component Libraries^0
+{At 5,5}
+Please specify the source of the files for creating the
+combined libraries. This can be a disk drive (such as A:),
+or it can be a directory (such as C:\LIB\C) that contains
+the libraries that were copied after running Setup earlier.
+
+{input 10, 56, 1}
+
+If you want to change the source of these files, use the
+BACKSPACE key to erase the current selection, then type
+the disk or directory name.
+
+When the source shown above is correct, press ENTER to continue.
+{include screen ent_exit}
+;
+;
+[screen dirincl]
+{include screen header}
+{at 35,1}
+^1Include Files^0
+{at 5,5}
+Please specify the directory for your C/C++ include files.
+
+Some files will also be placed in the \SYS subdirectory
+of this directory.
+
+{include screen typedir relative}
+;
+;
+[screen dirinit]
+{include screen header}
+{at 35,1}
+^1Initialization Files^0
+{at 5,5}
+Please specify the directory for your C/C++ initialization
+files for PWB and CodeView. A sample TOOLS.INI file (named
+TOOLS.C70) is also copied to this directory.
+
+{include screen typedir relative}
+;
+;
+[screen dirhelp]
+{include screen header}
+{at 35,1}
+^1Help Files^0
+{at 5,5}
+Please specify the directory for your C/C++ Help files.
+
+Help files for the MS C/C++ compiler and associated
+tools are copied to this directory.
+
+{include screen typedir relative}
+;
+;
+[macro]
+; strings used to init the confirm listbox
+INSTALL    = "Install "
+NOINSTALL  = "Do not install "
+COPY       = "Copy "
+NOCOPY     = "Do not copy "
+INCLUDE    = "Include "
+NOINCLUDE  = "Do not include "
+
+HELP_FILES    = "Online Help Files"
+MFC_LIBRARY   = "Microsoft Foundation Class Library"
+HOSTTEMP      = ""
+TARGETTEMP    = ""
+
+; Used to separate lists like math and memory model lists
+LIST_SEPARATOR = ", "
+
+MATHTEMP      = ""
+MATHOPTS      = "Math options:  "
+EMULATOR      = "Emulator math"
+CHIPMATH      = "80x87 chip math"
+ALTMATH       = "Alternate math"
+NOMATH        = "No math libraries"
+
+MEMTEMP       = ""
+MEMMODELS     = "Memory models:  "
+SMALL         = "Small"
+MEDIUM        = "Medium"
+COMPACT       = "Compact"
+LARGE         = "Large"
+NOMODELS      = "No memory models"
+
+BUILDCOMBLIBS = "Build combined libraries"
+NOCOMBLIBS    = "Do not build combined libraries"
+
+INSTALLPWB    = "Microsoft Programmer's WorkBench"
+INSTALLSAMPLES= "Sample programs"
+
+INSTALL_COMPILER = "Microsoft C/C++ compiler components"
+INSTALL_RUNTIME  = "C/C++ run-time library components"
+INSTALL_CODEVIEW = "CodeView debugger files"
+
+DIRFORBASE    = "Installation Base Directory:  "
+DIRFORREAL    = "Path for MS-DOS & Windows executables:  "
+DIRFORLIB     = "Path for library files:  "
+DIRFORLIBEXE  = "Path for LIB.EXE (MS-DOS executables):  "
+DIRFORINCL    = "Path for include files:  "
+DIRFORINIT    = "Path for initialization files:  "
+DIRFORHELP    = "Path for help files:  "
+DIRFORSOURCE  = "Path for source files:  "
+DIRFORSTARTUP = "Path for C run-time startup files:  "
+DIRFORMFC     = "Path for Microsoft Foundation Classes:  "
+SRCFORLIB     = "Source for component library files:  "
+
+
+[screen confirm]
+{include screen header}
+{at 35,1}
+^1Confirm Your Choices^0
+{at 5,3}
+To move between ^1OK^0 and list of items, use TAB.
+To choose an option from the list, use ARROW (,) keys.
+When the correct options are highlighted,
+    TAB to ^1OK^0 and press ENTER.
+
+{input 2,70,13}
+; menu is built on the fly
+{at 5,22}
+^1Approximate Space Needed (in Kilobytes)  : %KB_NEEDED^0
+^1Approximate Space Free (in Kilobytes)    : %KB_FREE^0
+{include screen ent_sel_exit}
+;
+;
+[screen diskchk]
+{include screen header}
+{at 8, 5}
+{center on}
+Checking disk space requirements. Please wait...
+{center off}
+{include screen exit}
+;
+;
+[screen freespace]
+{include screen header}
+{at 35,1}
+^1Not Enough Disk Space^0
+{at 5,3}
+There isn't enough free disk space on drive %DRIVE to install
+C/C++ %VERS with the options you chose.
+
+^1You need another %KB_NEEDED K of disk space.^0
+
+If Setup runs out of disk space, the compiler may not be installed
+properly.
+
+You can install fewer optional files, or you can delete existing
+files and run Setup again.
+
+If you believe Setup incorrectly determined the free space on your
+hard disk, you can continue.
+
+Please select one of the following:
+{input 15,46,6}
+; menu 'anotherhd' is used if > 1 hard disk, else menu 'smallhd' goes here
+{include screen ent_sel_exit}
+;
+;
+; user only sees this screen if running off hard disk and > 1 floppy drive found
+[screen single_src_drive]
+{include screen header}
+{at 35,1}
+^1Copy Files^0
+{At 5,5}
+In order to copy files from the distribution disks, Setup needs
+to know in which drive you will insert the disks.
+
+Setup will prompt you to insert the correct disks as needed.
+
+Please select the source of the distribution disks:
+{input 15,20,5}
+; list of floppy drives (built on the fly) goes here
+{include screen ent_sel_exit}
+;
+;
+[screen single_copy_fname]
+{include screen header}
+{at 35,1}
+^1Enter File Name^0
+{at 5,5}
+Enter the base name, without drive or path designation,
+of the file you want to copy.
+
+You can use wildcards (*, ?) to specify more than one file.
+
+From Setup's main menu, you can view the packing list.
+The list includes a short description of each file on the
+distribution disks.
+
+To return to Setup's main menu, press ENTER without typing a name.
+
+Please type the name of the file to copy:
+
+{input 25,20,1}
+
+{at 5}
+Do not give a drive or directory name with the filename.
+Use the BACKSPACE key to erase characters.
+Use wildcards to specify more than one file.
+
+When the filename is correct, press ENTER.
+{include screen ent_exit}
+;
+;
+[screen single_no_match]
+{include screen header}
+{at 35,1}
+^1Enter File Name^0
+{at 5,4}
+^1The filename you gave does not match any file on the
+distribution disks.^0
+
+The packing list contains a complete list of files on the
+distribution disks. The packing list can be viewed from Setup's
+main menu. Refer to this list to determine the correct name of
+the file you want to copy.
+
+To return to Setup's main menu, press ENTER without typing a name.
+
+Please type the name of the file to copy:
+
+{input 25,20,1}
+
+{at 5}
+Do not give a drive or directory name with the filename. Use
+the BACKSPACE key to erase characters. You can use wildcards to
+specify more than one file.
+
+When the filename is correct, press ENTER.
+{include screen ent_exit}
+;
+;
+[screen multiple_files]
+{include screen header}
+{at 35,1}
+^1Choose Files^0
+{at 5,4}
+There is more than one file on the C/C++ distribution disks 
+with the name you gave. You can copy any of the files.
+Below are the packing list descriptions of each file.
+
+Use the ARROW (,) keys to select a file, then press SPACEBAR
+to mark it. Repeat until you have marked all the files you want to
+copy. When you are ready to copy the files, press ENTER.
+
+{input 5,70,11}
+; listbox is built on the fly
+{include screen ent_sel_esc_f3_exit}
+;
+;
+[screen single_copy_dest]
+{include screen header}
+{at 35,1}
+^1Enter Path^0
+{at 5,5}
+The packing list description of this file is:
+    %SFILE -- %SECTION
+
+Type the full path (drive and directory) to show where you
+want the selected file to be copied. Do not type the name of
+the file, just the name of the directory.
+
+Please type a drive and directory to which %SFILE should
+be copied:
+
+{input 10,60,1}
+
+{at 5}
+Use the BACKSPACE key to erase characters.
+
+When the drive and directory are correct, press ENTER.
+{include screen ent_exit}
+;
+;
+[screen mult_copy_dest]
+{include screen header}
+{at 35,1}
+^1Enter Path^0
+{at 5,5}
+Type the full path (drive and directory) to show where you
+want the selected files to be copied. Do not type the name of
+the files, just the name of the directory.
+
+Please type a drive and directory to show where the files should
+be copied:
+
+{input 10,60,1}
+
+{at 5}
+You can use the BACKSPACE key to erase characters.
+
+When the correct drive and directory is displayed,
+press ENTER.
+{include screen ent_exit}
+;
+;
+[screen single_copying]
+{include screen header}
+{at 5,5}
+Copying...
+
+{include screen exit}
+;
+;
+; notice that this screen is designed to overlay screen single_copying
+[screen single_copy_another]
+{include screen header}
+{at 5,5}
+Copying... finished.
+
+Do you want to copy another file from the distribution disk?
+{input 15,35,5}
+{include menu copyanotherm}
+{include screen ent_sel_exit}
+;
+;
+[screen installworked]
+{include screen header}
+{at 35,1}
+^1Installation Complete^0
+{At 5,6}
+Setup has successfully installed Microsoft C/C++ %VERS.
+
+
+Press ENTER to continue, or press CTRL+C to exit Setup.
+{include screen ent_exit}
+;
+;
+[macro]
+NUMERRORS = "0"
+NUMFILES  = "0"
+
+[screen installerrs]
+{include screen header}
+{at 35,1}
+^1Installation Errors^0
+{At 5,6}
+Setup was not successful installing the Microsoft C/C++ compiler
+Version %VERS. There were %NUMERRORS errors detected while copying
+files, and %NUMFILES files were not installed because of those errors.
+
+Microsoft C/C++ may not work correctly if it is not properly
+installed. Please run Setup again after correcting the problems.
+
+
+Press ENTER to continue, or press CTRL+C to exit Setup.
+{include screen ent_exit}
+;
+;
+[screen mult_linkers]
+{include screen header}
+{at 35,1}
+^1Multiple Linkers^0
+{At 5,6}
+WARNING:
+
+Setup has found multiple linkers in your system's PATH.
+You must use the LINK.EXE that comes with C/C++ %VERS for
+linking programs assembled with C/C++ %VERS.
+
+Please press ENTER to continue with Setup.
+{include screen ent_exit}
+;
+;
+[macro]
+UNKNOWN = "of unknown type and version"
+ISVERSION   = "version"
+FOR         = " for "
+LINKDOS     = "MS-DOS"
+LINKOS2     = "OS2"
+AND         = " and "
+
+OLDLINKVERS = ""
+NEWLINKVERS = ""
+
+[screen which_linker]
+{include screen header}
+{at 35,1}
+^1Overwrite Linker^0
+{At 5,5}
+The version of LINK.EXE that you have in your AUTOEXEC.BAT %SPATH
+statement is not the version supplied with the Microsoft C/C++.
+
+  Your existing linker is %OLDLINKVERS.
+
+  The new linker is %NEWLINKVERS.
+
+Do you want to overwrite your copy of LINK.EXE?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+;
+[macro]
+MDIRBIN = ""
+MDIRINIT = ""
+NEWAUTOEXEC = "AUTOEXEC.C70"
+NEWCONFIG = "CONFIG.C70"
+TOOLSC7 = "TOOLS.C70"
+
+[screen newfiles_real]
+{include screen header}
+{at 35,1}
+^1Environment Settings for MS-DOS^0
+{At 5,5}
+Setup has created the following files to help you configure
+your system for using Microsoft C/C++ %VERS:
+
+^1%MDIRBIN%NEWAUTOEXEC^0 is a batch file
+that sets environment variables for use by the C/C++ compiler.
+The file should be run from the command line to set the environment
+before running the C/C++ compiler and before starting Windows, or it
+can be merged with an existing AUTOEXEC.BAT file.
+
+^1%MDIRINIT%NEWCONFIG^0 is a sample CONFIG.SYS
+that sets up for use by the C/C++ compiler.
+This file should be merged with your existing CONFIG.SYS and you
+should ^1reboot if your current options are different from this.^0
+{include screen ent_exit}
+;
+;
+[screen tools_pre]
+{include screen header}
+{at 35,1}
+^1Sample PWB & CV Settings^0
+{At 5,5}
+Setup has created the following file to help you configure
+your system for Microsoft C/C++:
+
+^1%MDIRINIT%TOOLSC7^0 is a sample file that contains various
+settings used to initialize the CodeView debugger (CV) utility.
+This file can be renamed as TOOLS.INI or be merged with an
+existing file of that name.
+
+This file also contains various settings used to initialize the
+Programmer's WorkBench (PWB) utility. It also contains special
+configuration information about the run-time libraries Setup
+has installed. If you do not have a TOOLS.INI file, you should
+copy this file to TOOLS.INI.
+
+{include screen ent_exit}
+;
+;
+;******** Library-building screens **********
+[macro]
+SLIBLIST = ""
+MLIBLIST = ""
+CLIBLIST = ""
+LLIBLIST = ""
+;
+[screen start_libs]
+{include screen header}
+{at 35,1}
+^1Build Libraries^0
+{At 5,5}
+Setup will now begin building combined libraries ...
+;
+;
+[screen creating_libs]
+{include screen header}
+{at 35,1}
+^1Building Library^0
+{At 5,5}
+Creating Library %DFILE
+{at 8,15}
+Libraries built:
+{at 5,17}
+%SLIBLIST
+%MLIBLIST
+%CLIBLIST
+%LLIBLIST
+{include screen exit}
+;
+;
+[screen build_err]
+{include screen header}
+{at 35,1}
+^1Error Building Library^0
+{At 5,5}
+There was an error creating the library %DFILE
+
+You can continue building other libraries that
+you have requested, you can continue the rest
+of Setup without building the libraries, or you can
+exit Setup.
+
+{input 15,32,5}
+{include menu build_err_m}
+{include screen ent_sel_exit}
+;
+;
+[screen libs_built]
+{include screen header}
+{at 35,1}
+^1Libraries Built^0
+{At 5,5}
+Setup has successfully installed the libraries for
+Microsoft C/C++ %VERS.
+
+
+Press ENTER to return to the main Setup menu,
+or press CTRL+C to exit Setup.
+{include screen ent_exit}
+;
+;
+[screen mfc]
+{include screen header}
+{at 35,1}
+^1Microsoft Foundation Classes^0
+{At 5,5}
+
+Microsoft C/C++ %VERS Setup installs the Microsoft Foundation
+Class libraries. The Microsoft Foundation Classes are 
+designed for programming applications for Windows in
+C++.  They also include general purpose classes for
+writing the non-graphical portions of your applications in C++.
+The installation includes library source code and debugging
+versions of the libraries for use with CodeView.  These
+take approximately 7 MB of disk space.
+
+Install Microsoft Foundation Classes?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+[screen compiler]
+{include screen header}
+{at 35,1}
+^1C/C++ compiler components^0
+{At 5,6}
+Some compiler components run as 32-bit applications. These
+components need a 32-bit Protected-Mode Interface server (DPMI) to
+run. Windows 3.1 provides full DPMI support. To run the compiler in
+MS-DOS, not Windows, you need to install 386-Max or some other DPMI
+server.
+
+Install C/C++ compiler components?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+;
+[screen runtime]
+{include screen header}
+{at 35,1}
+^1Run-time Library components^0
+{At 5,6}
+The run-time library provides a run-time environment for the code
+created with the Microsoft C/C++ compiler. You need to select this
+component if you plan to call a Microsoft C run-time library
+function. The C run-time component contains the include files and
+the sources for the new dynamic overlay manager.
+
+Install Run-time library components?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+;
+[screen codeview]
+{include screen header}
+{at 35,1}
+^1Microsoft CodeView Debugger^0
+{At 5,6}
+In order to  debug the code generated by the Microsoft C/C++
+compiler %VERS you need the CodeView source debugger. This
+debugger uses the source information that the compiler generates
+for you when you specify the /Zi command-line option.
+
+Earlier versions of CodeView cannot be used with the code
+created by the Microsoft C/C++ compiler because the debug
+information generated by the compiler is not compatible.
+
+Install the CodeView debugger?
+{input 15,10,4}
+{include menu yesno}
+{include screen ent_sel_exit}
+;
+;
+[screen run_gui]
+{include screen header}
+{at 35,1}
+^1Running under Windows^0
+{At 5,6}
+^1Setup has detected that you are running under Microsoft Windows. If
+you want to install Microsoft C/C++ %VERS for MS-DOS, exit
+Setup and run from outside Windows. If you want to install Microsoft
+C/C++ under Windows, then run Setup with the Run option on the File 
+menu of the Program Manager.^0
+
+Press ENTER to exit Setup ...
+
+{include screen ent_exit}
+;
+;
+[screen need_386]
+{include screen header}
+{at 35,1}
+^1C/C++ Compiler needs 80386^0
+{At 5,6}
+^1Setup has detected that your machine does not have a 80386 or
+higher processor in your machine. Microsoft C/C++ %VERS for
+MS-DOS requires an 80386 processor.^0
+
+Press ENTER to exit Setup ...
+
+{include screen ent_exit}
+;
+;
+[screen view_modify]
+{help view_modify_help}
+{include screen header}
+{at 35,1}
+^1System Files^0
+{At 5,6}
+Setup needs to make changes to your AUTOEXEC.BAT and CONFIG.SYS
+files.
+
+Choose the appropriate option --
+
+{input 15,50,5}
+{include menu view_modify_opts}
+
+{at 5}
+Use the ARROW (,) keys to make the selection, then press ENTER.
+{include screen ent_sel_f1_exit}
+;
+;
+[screen view_modify_help]
+{color black, white}
+{at 5,4}
+
+Setup will display your current file and a copy of your
+current file with additions and changes clearly marked with
+comments. If you approve the suggested changes, Setup will
+save the updated file.
+
+For additional information on configuring your computer for
+C/C++ 7.0, see Chapter 3, Configuring Your System, in the
+Getting Started manual.
+;
+;
+[screen viewfile_help]
+{color black, white}
+{at 5,4}
+The split screen editor allows you to view both the new and the old
+versions of your system files. When Setup modifies a system file, it
+gives you an option to view the original file and the changed version
+of the file.
+    For example, the Viewer will display your CONFIG.SYS file with 
+    the changes Setup recommends adding to it, and the other window 
+    will display your original file, CONFIG.OLD.
+
+The Viewer has two modes:
+    The default mode, in which the status bars on both windows are 
+    highlighted. In this mode, both screens scroll at the same time.
+
+    Another mode, which you access by pressing F3.
+    In this mode, only one status bar is highlighted, and that file can
+    be scrolled independently of the other file. In this mode you can:
+        Move between files using TAB or F6
+        Scroll using PgUp and PgDn
+After viewing the two versions of the CONFIG.SYS file, you have two
+options: Accept the changes by pressing ENTER
+         Cancel the changes by pressing ESC
+;
+;
+[screen upgrade_386max]
+{include screen header}
+{at 35,1}
+^1Upgrade 386MAX software^0
+{At 5,6}
+^1Setup has detected that your machine has an older version of
+386-Max or Blue-Max. Microsoft C/C++ requires version 6.0 or later.^0
+
+{include screen ent_exit}
+;
+;
+[screen no_dpmi]
+{include screen header}
+{at 35,1}
+^1No DPMI Server^0
+{At 5,6}
+^1Setup has not detected DPMI Services on your machine. 
+Microsoft C/C++ %VERS requires Windows 3.1 or an
+alternate DPMI server to run.^0
+
+{include screen ent_exit}
+;
+;
+[screen ctrl_alt_del]
+{include screen header}
+{at 35,1}
+^1Serious Setup Error^0
+{At 5,6}
+^1Setup has encountered a serious problem while identifying
+the type of hard disk on your machine. To correct this problem,
+you need to restart your computer.
+
+After restarting, run Setup again by typing setup /x. This skips
+the automatic hardware detection.
+
+Press CTRL+ALT+DEL now to restart your computer.^0
+;
+;
