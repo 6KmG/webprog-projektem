@@ -37,7 +37,7 @@ void DrawRect(
 double uTime(){
     struct timespec tv;
     clock_gettime(CLOCK_REALTIME, &tv);
-    return ((double) tv.tv_sec) + ((double) tv.tv_nsec / 1000000);
+    return ((double) tv.tv_sec) + ((double) tv.tv_nsec / 1000000000);
 }
 
 // I haven't found a function in the sdl library which draws 
@@ -66,7 +66,7 @@ void DrawCircle(
 int main(int argc, char *argv[])  
 {
     const short UpdateFrameSpeed = 1000 / FPS;
-    const float DELAY = 0.065;
+    const double DELAY = 0.125;
 
     double cooldown = 0;
     unsigned short i = 0;
@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
     char running = true;
     while(running)
     {
+        printf("time: %f\n", uTime());
         // The window title with the simpliest fps counter
         FrameCounter++;
         if (time(0) > FrameRateOutputSpeed){
@@ -142,6 +143,7 @@ int main(int argc, char *argv[])
             SnakeLen[i + 1] = head.y;
             i+=2;
         }
+
         // Draws the first 3 tiles and updates the array
         else{ 
             DrawRect(
@@ -165,6 +167,7 @@ int main(int argc, char *argv[])
                 30, 
                 BODYCOLOR
             );
+
             SnakeLen[0] = head.x;
             SnakeLen[1] = head.y;
             for (short j = count; j > 2; j -= 2){
@@ -172,6 +175,7 @@ int main(int argc, char *argv[])
                 SnakeLen[j - 1] = SnakeLen[j - 3];
             }
         }
+
         int incrementation = (FPS / 14) * 2;
         for(
             start = ((int) (FPS / 14) * 2) * 4 + 2; 
@@ -207,47 +211,55 @@ int main(int argc, char *argv[])
                 case SDL_KEYDOWN:
                     if(
                         windowEvent.key.keysym.sym == SDLK_d && 
-                        // movements[3] != locked && 
+                        movements[3] != locked && 
                         uTime() > cooldown
-                        ){
+                    ){
+                        printf("before: %f\n", cooldown);
                         movements[0] = false; 
                         movements[1] = false; 
                         movements[2] = locked; 
                         movements[3] = true;
                         cooldown = uTime() + DELAY;
+                        printf("after: %f\n", cooldown);
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_a && 
-                        // movements[2] != locked && 
+                        movements[2] != locked && 
                         uTime() > cooldown
-                        ){
+                    ){
+                        printf("before: %f\n", cooldown);
                         movements[0] = false; 
                         movements[1] = false; 
                         movements[2] = true; 
                         movements[3] = locked;
                         cooldown = uTime() + DELAY;
+                        printf("after: %f\n", cooldown);
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_w && 
-                        // movements[0] != locked && 
+                        movements[0] != locked && 
                         uTime() > cooldown
-                        ){
+                    ){
+                        printf("before: %f\n", cooldown);
                         movements[0] = true; 
                         movements[1] = locked; 
                         movements[2] = false; 
                         movements[3] = false;
                         cooldown = uTime() + DELAY;
+                        printf("after: %f\n", cooldown);
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_s && 
-                        // movements[1] != locked && 
+                        movements[1] != locked && 
                         uTime() > cooldown
-                        ){
+                    ){
+                        printf("before: %f\n", cooldown);
                         movements[0] = locked; 
                         movements[1] = true; 
                         movements[2] = false; 
                         movements[3] = false;
                         cooldown = uTime() + DELAY;
+                        printf("after: %f\n", cooldown);
                     }
                     break;
             }
@@ -256,13 +268,13 @@ int main(int argc, char *argv[])
         if(movements[3] == true){
             head.x += SPEED/FPS;
         }
-        else if(movements[2] == true){
+        if(movements[2] == true){
             head.x -= SPEED/FPS;
         }
-        else if(movements[1] == true){
+        if(movements[1] == true){
             head.y += SPEED/FPS;
         }
-        else if(movements[0] == true){
+        if(movements[0] == true){
             head.y -= SPEED/FPS;
         }
         // On snake eating the circle
