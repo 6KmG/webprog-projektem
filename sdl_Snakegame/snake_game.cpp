@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
                 case SDL_KEYDOWN:
                     if(
                         windowEvent.key.keysym.sym == SDLK_d && 
-                        movements[3] != locked && 
+                        // movements[3] != locked && 
                         uTime() > cooldown
                         ){
                         movements[0] = false; 
@@ -218,7 +218,7 @@ int main(int argc, char *argv[])
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_a && 
-                        movements[2] != locked && 
+                        // movements[2] != locked && 
                         uTime() > cooldown
                         ){
                         movements[0] = false; 
@@ -229,7 +229,7 @@ int main(int argc, char *argv[])
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_w && 
-                        movements[0] != locked && 
+                        // movements[0] != locked && 
                         uTime() > cooldown
                         ){
                         movements[0] = true; 
@@ -240,7 +240,7 @@ int main(int argc, char *argv[])
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_s && 
-                        movements[1] != locked && 
+                        // movements[1] != locked && 
                         uTime() > cooldown
                         ){
                         movements[0] = locked; 
