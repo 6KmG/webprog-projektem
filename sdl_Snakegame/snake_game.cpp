@@ -114,7 +114,6 @@ int main(int argc, char *argv[])
     char running = true;
     while(running)
     {
-        printf("time: %f\n", uTime());
         // The window title with the simpliest fps counter
         FrameCounter++;
         if (time(0) > FrameRateOutputSpeed){
@@ -214,52 +213,44 @@ int main(int argc, char *argv[])
                         movements[3] != locked && 
                         uTime() > cooldown
                     ){
-                        printf("before: %f\n", cooldown);
                         movements[0] = false; 
                         movements[1] = false; 
                         movements[2] = locked; 
                         movements[3] = true;
                         cooldown = uTime() + DELAY;
-                        printf("after: %f\n", cooldown);
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_a && 
                         movements[2] != locked && 
                         uTime() > cooldown
                     ){
-                        printf("before: %f\n", cooldown);
                         movements[0] = false; 
                         movements[1] = false; 
                         movements[2] = true; 
                         movements[3] = locked;
                         cooldown = uTime() + DELAY;
-                        printf("after: %f\n", cooldown);
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_w && 
                         movements[0] != locked && 
                         uTime() > cooldown
                     ){
-                        printf("before: %f\n", cooldown);
                         movements[0] = true; 
                         movements[1] = locked; 
                         movements[2] = false; 
                         movements[3] = false;
                         cooldown = uTime() + DELAY;
-                        printf("after: %f\n", cooldown);
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_s && 
                         movements[1] != locked && 
                         uTime() > cooldown
                     ){
-                        printf("before: %f\n", cooldown);
                         movements[0] = locked; 
                         movements[1] = true; 
                         movements[2] = false; 
                         movements[3] = false;
                         cooldown = uTime() + DELAY;
-                        printf("after: %f\n", cooldown);
                     }
                     break;
             }
