@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <stdio.h>  // For sprintf
 #include <time.h>
+#include <string.h>
 
 #define WIDTH 800
 #define HEIGHT 480
@@ -34,9 +35,9 @@ void DrawRect(
 
 // There's no ready to use time function with sub-second detail, so I made one based on chatGPT's idea
 double uTime(){
-    struct timeval tv;
-    mingw_gettimeofday(&tv, 0);
-    return (double) time(0) + ((double) tv.tv_usec / 1000000);
+    struct timespec tv;
+    clock_gettime(CLOCK_REALTIME, &tv);
+    return ((double) tv.tv_sec) + ((double) tv.tv_nsec / 1000000);
 }
 
 // I haven't found a function in the sdl library which draws 
@@ -62,10 +63,10 @@ void DrawCircle(
     }
 }
 
-int SDL_main(int argc, char *argv[])  
+int main(int argc, char *argv[])  
 {
     const short UpdateFrameSpeed = 1000 / FPS;
-    const float DELAY = 0.125;
+    const float DELAY = 0.065;
 
     double cooldown = 0;
     unsigned short i = 0;
@@ -224,7 +225,7 @@ int SDL_main(int argc, char *argv[])
                         movements[1] = false; 
                         movements[2] = true; 
                         movements[3] = locked;
-                        cooldown = uTime()+DELAY;
+                        cooldown = uTime() + DELAY;
                     }
                     if(
                         windowEvent.key.keysym.sym == SDLK_w && 
