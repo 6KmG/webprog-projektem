@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Management System</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container my-5">
+    <h1 class="text-center">Update Book</h1>
+    <div class="text-center mb-4">
+        <a th:href="@{/}" class="btn btn-primary" role="button">Employees List</a>
+    </div>
+    <form th:action="@{/updateBook}" th:object="${book}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="row justify-content-center gy-3">
+            <div class="col-lg-8">
+                <div class="alert alert-danger text-center" th:if="${errorMessage}">
+                    <p class="lead mb-0" th:text="${errorMessage}"></p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <label for="title" class="form-label fw-bold">Title</label>
+                <input type="text" class="form-control shadow-none" id="title" th:field="*{title}" placeholder="Book's title">
+            </div>
+            <div class="col-lg-8">
+                <label for="author" class="form-label fw-bold">Author</label>
+                <input type="text" class="form-control shadow-none" id="author" th:field="*{author}" placeholder="Book's author">
+            </div>
+            <div class="col-lg-8">
+                <label for="price" class="form-label fw-bold">Price</label>
+                <input type="number" class="form-control shadow-none" id="price" th:field="*{price}" placeholder="Book's price">
+            </div>
+            <div class="col-lg-8">
+                <label for="available" class="form-label fw-bold">Available</label>
+                <input type="checkbox" name="active" id="available" th:field="*{available}" />
+            </div>
+            <div class="col-lg-8 text-center my-4">
+                <button type="submit" class="btn btn-success">Save Book</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

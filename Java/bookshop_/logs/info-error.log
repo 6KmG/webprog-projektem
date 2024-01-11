@@ -1,0 +1,8 @@
+2023-12-18 10:25:17.177 [http-nio-8080-exec-4] INFO  fileLogger - Saving new book 'test1' by 'testAuthor'
+2023-12-18 10:25:17.245 [http-nio-8080-exec-4] INFO  fileLogger - Saved book 'test1' by 'testAuthor' with id:17!
+2023-12-18 10:25:39.664 [http-nio-8080-exec-1] INFO  fileLogger - Saving new book 'test2' by 'testAuthor'
+2023-12-18 10:25:39.669 [http-nio-8080-exec-1] INFO  fileLogger - Saved book 'test2' by 'testAuthor' with id:18!
+2023-12-18 10:25:47.897 [http-nio-8080-exec-8] INFO  fileLogger - Updating book 17 'test1' by 'testAuthor'
+2023-12-18 10:25:47.913 [http-nio-8080-exec-8] INFO  fileLogger - Saved book 'test1' by 'testAuthor' with id:17!
+2023-12-18 10:25:52.451 [http-nio-8080-exec-8] INFO  fileLogger - Book with id 18 was deleted.
+2023-12-18 10:25:54.676 [http-nio-8080-exec-5] INFO  fileLogger - Book with id 17 was deleted.

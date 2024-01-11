@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Management System</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container my-5">
+    <h1 class="text-center">Available Books</h1>
+    <div class="text-center mb-4">
+        <a th:href="@{/newBookForm}" class="btn btn-primary" role="button">Add Book</a>
+        <a th:href="@{/unavailable}" class="btn btn-primary" role="button">Show Unavailable Books</a>
+        <a th:href="@{/owned}" class="btn btn-primary" role="button">Show Owned Books</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover align-middle">
+            <thead class="table-primary">
+            <tr>
+                <th># ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="books : ${listBooks}" th:if="${books.available}==true">
+                <td th:text="${books.id}"></td>
+                <td th:text="${books.title}"></td>
+                <td th:text="${books.author}"></td>
+                <td th:text="${books.price}"></td>
+                <td class="text-center">
+                    <a th:href="@{/owned/saveBook/{id}/index(id=${books.id})}" class="btn btn-secondary btn-sm m-1" role="button">Add to Owned</a>
+                    <a th:href="@{/updateBookForm/{id}(id=${books.id})}" class="btn btn-info btn-sm m-1" role="button">Update</a>
+                    <a th:href="@{/deleteBook/{id}/index(id=${books.id})}" class="btn btn-danger btn-sm m-1" role="button">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
