@@ -1,48 +1,23 @@
-global _main
-
-extern _ExitProcess@4
-extern _MessageBoxA@16
-
 section .data
-    title db "Title", 0
-    msg db "Please choose yes or no.", 0
-
-    yes_msg db "You choosed yes.", 0
-    no_msg db "You choosed no."
+    title db 'Hello, Assembly!',0
+    message db 'This is a MessageBox from assembly.',0
 
 section .text
-_main:
-    push 0x040034
-    push title
-    push msg
-    push 0
-    call _MessageBoxA@16
+    global _start
 
-    cmp eax, 6
-    je yes
+_start:
+    ; Set up the parameters for MessageBox
+    mov     r9d, 0          ; hWnd (handle to the owner window, 0 for desktop)
+    lea     r8, [rel title]  ; lpText (pointer to the message string)
+    lea     rdx, [rel message] ; lpCaption (pointer to the caption string)
+    mov     rcx, 0          ; uType (MessageBox style, 0 for OK button)
 
-    cmp eax, 7
-    je no
+    ; Call MessageBox syscall (function number 0x40)
+    mov     rax, 0x40       ; syscall number for MessageBox
+    sub     rsp, 8          ; align stack
+    syscall
 
-    push 1
-    call _ExitProcess@4
-
-yes:
-    push 0x040000
-    push title
-    push yes_msg
-    push 0
-    call _MessageBoxA@16
-
-    push 0
-    call _ExitProcess@4
-
-no:
-    push 0x040000
-    push title
-    push no_msg
-    push 0
-    call _MessageBoxA@16
-
-    push 0
-    call _ExitProcess@4
+    ; Exit the program
+    mov     eax, 60         ; syscall number for exit
+    xor     edi, edi        ; exit code 0
+    syscall
