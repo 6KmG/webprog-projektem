@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <img src="stats.png" alt="Snow" id="statsimg">
+    <div id="stats"></div>
+    <table id="options">
+        <tr>
+            <td>
+                <div class="dropdown">
+                <button class="dropbtn">Pick Race</button>
+                <div class="dropdown-content">
+                    <a onclick="newPlayer('android')">Android</a>
+                    <a onclick="newPlayer('saiyan')">Saiyan</a>
+                    <a href="#">Link 3</a>
+                    <a href="#" onclick="">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                    <a href="#" onclick="">Link 1</a>
+                    <a href="#">Link 2</a>
+                </div>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="buttons" onclick="setLevel()">Set Level</button></td>
+            <td><input type="text" name="text" class="inputs" id="setlevelinput" novalidate></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="buttons" onclick="levelUp()">Level Up</button></td>
+            <td><input type="text" name="text" class="inputs" id="levelupinput" novalidate></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="buttons" onclick="levelDown()">Level Down</button></td>
+            <td><input type="text" name="text" class="inputs" id="leveldowninput" novalidate></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="buttons">Wish Death</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="buttons">Rebirth</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="buttons">Prestige</button></td>
+            <td></td>
+        </tr>
+    </table>
+    
+</body>
+</html>
