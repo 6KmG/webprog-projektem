@@ -18,12 +18,11 @@
                 <div class="dropdown-content">
                     <a onclick="newPlayer('android')">Android</a>
                     <a onclick="newPlayer('saiyan')">Saiyan</a>
-                    <a href="#">Link 3</a>
-                    <a href="#" onclick="">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                    <a href="#" onclick="">Link 1</a>
-                    <a href="#">Link 2</a>
+                    <a onclick="newPlayer('jiren')">Jiren</a>
+                    <a onclick="newPlayer('frieza')">Frieza</a>
+                    <a onclick="newPlayer('majin')">Majin</a>
+                    <a onclick="newPlayer('human')">Human</a>
+                    <a onclick="newPlayer('namekian')">Namekian</a>
                 </div>
                 </div>
             </td>
@@ -42,18 +41,33 @@
             <td><input type="text" name="text" class="inputs" id="leveldowninput" novalidate></td>
         </tr>
         <tr>
-            <td><button type="button" class="buttons">Wish Death</button></td>
+            <td><button type="button" class="buttons" onclick="prestige()">Prestige</button></td>
             <td></td>
         </tr>
         <tr>
-            <td><button type="button" class="buttons">Rebirth</button></td>
+            <td><button type="button" class="buttons" id="deathbutton" onclick="wishDeath()">Wish Death</button></td>
             <td></td>
         </tr>
         <tr>
-            <td><button type="button" class="buttons">Prestige</button></td>
+            <td><button type="button" class="buttons" id="rebirthbutton" onclick="rebirth()">Rebirth</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="buttons" id="kamiboostbtn" onclick="kamiBoost()">Kami Boost</button></td>
+            <td></td>
+        </tr> -
+        <tr>
+            <td><button type="button" class="buttons" id="nailboostbtn" onclick="nailBoost()">Nail Boost</button></td>
             <td></td>
         </tr>
     </table>
-    
+    <div class="otherdata">
+        <div id="prestiges">Prestiges: 0</div>
+        <div id="rebirthed">Haven't rebirthed yet.</div>
+        <div id="npcboost">NPCs have a 0% stat boost against you.</div>
+        <div id="heaven">You're not in heaven.</div>
+        <div id="kamiboost">You haven't used you Kami Boost.</div>
+        <div id="nailboost">You haven't used you Nail Boost.</div>
+    </div>
 </body>
 </html>

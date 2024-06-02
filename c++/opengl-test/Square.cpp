@@ -2,21 +2,23 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "Init.cpp"
 
 typedef struct Square{
+    GLfloat size;
     GLfloat data[24];
     GLuint indices[6];
 } Square;
 
-Square createSquare(GLFWwindow* window, GLfloat x, GLfloat y, GLfloat size, 
-                    GLfloat r, GLfloat g, GLfloat b
-                    ){
-    int window_width;
-    int window_height;
-    glfwGetWindowSize(window, &window_width, &window_height);
-    GLfloat widthHeightMul = (GLfloat)window_height / window_width;
+Square createSquare(
+    GLFWwindow* window, GLfloat x, GLfloat y, GLfloat size, 
+    GLfloat r, GLfloat g, GLfloat b
+    ){
+    GLfloat widthHeightMul = widthHeightMultiplier(window);
 
     Square squareVerticesAndColor;
+
+    squareVerticesAndColor.size = size;
 
     squareVerticesAndColor.data[0] = widthHeightMul * x;
     squareVerticesAndColor.data[1] = y;
@@ -53,28 +55,54 @@ Square createSquare(GLFWwindow* window, GLfloat x, GLfloat y, GLfloat size,
     return squareVerticesAndColor;
 }
 
-void moveSquareHorizontal(GLfloat squareData[], GLfloat value){
-    squareData[0] += value;
-    squareData[6] += value;
-    squareData[12] += value;
-    squareData[18] += value;
+void moveSquareHorizontal(Square *square, GLfloat value){
+    square->data[0] += value;
+    square->data[6] += value;
+    square->data[12] += value;
+    square->data[18] += value;
 }
 
-void moveSquareVertical(GLfloat squareData[], GLfloat value){
-    squareData[1] += value;
-    squareData[7] += value;
-    squareData[13] += value;
-    squareData[19] += value;
+void moveSquareVertical(Square *square, GLfloat value){
+    square->data[1] += value;
+    square->data[7] += value;
+    square->data[13] += value;
+    square->data[19] += value;
 }
 
-void drawSquare(GLuint vertexBufferObject, GLuint elementBufferObject, 
-                GLfloat* square, GLuint* indices
-                ){
+GLfloat getSquareTopLeftX(Square square){
+    return square.data[0];
+}
+GLfloat getSquareTopLeftY(Square square){
+    return square.data[1];
+}
+GLfloat getSquareBottomLeftX(Square square){
+    return square.data[6];
+}
+GLfloat getSquareBottomLeftY(Square square){
+    return square.data[7];
+}
+GLfloat getSquareBottomRightX(Square square){
+    return square.data[12];
+}
+GLfloat getSquareBottomRightY(Square square){
+    return square.data[13];
+}
+GLfloat getSquareTopRightX(Square square){
+    return square.data[18];
+}
+GLfloat getSquareTopRightY(Square square){
+    return square.data[19];
+}
+
+void drawSquare(
+    GLuint vertexBufferObject, GLuint elementBufferObject, 
+    Square square
+    ){
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 24, square, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 24, square.data, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferObject);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, square.indices, GL_STATIC_DRAW);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

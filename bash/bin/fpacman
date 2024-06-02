@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Check if no arguments are provided
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <operation> [packages]"
+    exit 1
+fi
+
+# Define Pacman operations
+operation=$1
+shift
+
+case "$operation" in
+    "help" | "--help" | "-h") cat $0.gz ;;
+	"install") pacman -Sy --needed "$@" ;;
+    "remove") pacman -Rns "$@" ;;
+    "update") pacman -Syu ;;
+    "search") pacman -Ss "$@" ;;
+	"autoremove") pacman -Rns $(sudo pacman -Qdttq) ;;
+    "clean") pacman -Scc ;;
+	"list-installed") pacman -Q ;;
+	"export") pacman -Qqe > "$1" ;;
+	"import") pacman -S --needed - < "$1" ;;
+	"maintain") 
+		pacman -Syu; 
+		pacman -Rns $(sudo pacman -Qdttq);
+		pacman -Sc
+	;;
+	*)
+        echo "Unknown operation: $operation"
+        echo "Usage: $0 <operation> [packages]"
+        exit 1
+        ;;
+esac

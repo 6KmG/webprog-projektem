@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <stdlib.h>
 
 const char* vertexShaderSource = R"(
     #version 330 core
@@ -63,4 +64,11 @@ void setupBuffer(GLuint &vertexBufferObject, GLuint &vertexArrayObject, GLuint &
 
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
+}
+
+GLfloat widthHeightMultiplier(GLFWwindow* window){
+    GLint windowWidth;
+    GLint windowHeight;
+    glfwGetWindowSize(window, &windowWidth, &windowHeight);
+    return (GLfloat) windowHeight/windowWidth;
 }

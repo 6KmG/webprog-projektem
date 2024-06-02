@@ -1,0 +1,30 @@
+NAME
+       fpacman - Bash-based formatted Pacman wrapper for Arch Linux package management.
+
+SYNOPSIS
+       fpacman <operation> [packages, keyword]
+
+DESCRIPTION
+       fpacman is a Bash script designed to simplify package management on Arch Linux
+       systems using the Pacman package manager. It provides a user-friendly interface
+       for common package management operations.
+
+OPTIONS
+       <operation>
+              Specifies the operation to perform. Available operations are:
+              install        : Install packages.
+              remove         : Remove packages.
+              update         : Update the system.
+              search         : Search for packages.
+              autoremove     : Remove orphaned packages.
+              clean          : Clean the package cache.
+              help           : Display usage information and available operations. (--help or -h)
+              list-installed : Display a list of all installed packages along with their versions
+              export         : Export the list of installed packages to a file.
+              import         : Install packages listed in a file.
+              maintain	     : It does update, autoremove and purge in one command.
+
+       [packages]
+              Specifies the packages to be operated on. For the 'install' and 'remove'
+              operations, you can specify one or more package names to install or remove.
+

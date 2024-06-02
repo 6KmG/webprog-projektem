@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://flnllyw7acim"]
+
+[ext_resource type="Texture2D" uid="uid://cowp1rm0hrm7h" path="res://sprites/head.png" id="1_d4grv"]
+[ext_resource type="Script" path="res://player.gd" id="1_fpwkk"]
+[ext_resource type="Texture2D" uid="uid://bkkwbekas4wha" path="res://sprites/arm.png" id="2_1dan3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ej0a"]
+size = Vector2(83, 200)
+
+[node name="Player" type="Node2D"]
+position = Vector2(100, 547)
+script = ExtResource("1_fpwkk")
+metadata/_edit_group_ = true
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_8ej0a")
+
+[node name="Head" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -65)
+scale = Vector2(0.486111, 0.486111)
+texture = ExtResource("1_d4grv")
+
+[node name="Torso" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-7.15256e-07, -1.90735e-06)
+scale = Vector2(0.533585, 0.306015)
+texture = ExtResource("2_1dan3")
+
+[node name="Arm" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-22, 4.00001)
+rotation = 0.57599
+scale = Vector2(-0.394459, 0.396749)
+texture = ExtResource("2_1dan3")
+
+[node name="Arm2" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(23, 5)
+rotation = -0.591548
+scale = Vector2(0.36547, 0.411139)
+texture = ExtResource("2_1dan3")
+
+[node name="Leg" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-17, 62)
+rotation = 0.393595
+scale = Vector2(0.361062, 0.419273)
+texture = ExtResource("2_1dan3")
+
+[node name="Leg2" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(14, 61)
+rotation = -0.350177
+scale = Vector2(0.366328, 0.400265)
+texture = ExtResource("2_1dan3")

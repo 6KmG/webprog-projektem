@@ -1,6 +1,14 @@
-#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-int main(){
-    printf("%f\n", pow(10, 4));
+void* func(){
+    int *result = 5;    *result = ;
+    return (void*) result;
+}
+
+int main(int argc, char* argv){
+    int *a = (int*) func();
+    printf("%d", *a);
+
+    return 0;
 }

@@ -1,0 +1,3 @@
+ #!/bin/bash
+
+ryzenadj --stapm-limit=30000 --fast-limit=30000 --slow-limit=30000 --vrmmax-current=55000 --tctl-temp=70

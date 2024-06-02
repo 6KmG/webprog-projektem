@@ -1,0 +1,36 @@
+2024-04-17 14:43:55 - INFO - Function "example" has been called from the module "example".
+2024-04-17 14:43:55 - INFO - 
+2024-04-17 14:43:55 - INFO - Function "foo" has been called from the module "__main__".
+2024-04-17 14:43:55 - DEBUG - Called functions: ('print',) Parameters: ('a', 'b')
+2024-04-17 14:43:55 - CRITICAL - Exception occurred in function "foo": foo() missing 1 required positional argument: 'b'
+2024-04-17 14:43:55 - INFO - 
+2024-04-17 14:50:45 - INFO - Function "example" has been called from the module "example".
+2024-04-17 14:50:45 - INFO - 
+2024-04-17 14:50:45 - INFO - Function "foo" has been called from the module "__main__".
+2024-04-17 14:50:45 - DEBUG - Called functions: ('print',) Parameters: ('a', 'b')
+2024-04-17 14:50:45 - CRITICAL - Exception occurred in function "foo": foo() missing 1 required positional argument: 'b'
+2024-04-17 14:50:45 - INFO - 
+2024-04-17 14:50:50 - INFO - Function "example" has been called from the module "example".
+2024-04-17 14:50:50 - INFO - 
+2024-04-17 14:50:50 - INFO - Function "foo" has been called from the module "__main__".
+2024-04-17 14:50:50 - DEBUG - Called functions: ('print',) Parameters: ('a', 'b')
+2024-04-17 14:50:50 - CRITICAL - Exception occurred in function "foo": foo() missing 1 required positional argument: 'b'
+2024-04-17 14:50:50 - INFO - 
+2024-04-17 14:50:55 - INFO - Function "example" has been called from the module "example".
+2024-04-17 14:50:55 - INFO - 
+2024-04-17 14:50:55 - INFO - Function "foo" has been called from the module "__main__".
+2024-04-17 14:50:55 - DEBUG - Called functions: ('print',) Parameters: ('a', 'b')
+2024-04-17 14:50:55 - CRITICAL - Exception occurred in function "foo": foo() missing 1 required positional argument: 'b'
+2024-04-17 14:50:55 - INFO - 
+2024-04-17 14:53:51 - INFO - Function "example" has been called from the module "example".
+2024-04-17 14:53:51 - INFO - 
+2024-04-17 14:53:51 - INFO - Function "foo" has been called from the module "__main__".
+2024-04-17 14:53:51 - DEBUG - Called functions: ('print',) Parameters: ('a', 'b')
+2024-04-17 14:53:51 - CRITICAL - Exception occurred in function "foo": foo() missing 1 required positional argument: 'b'
+2024-04-17 14:53:51 - INFO - 
+2024-04-19 10:31:24 - INFO - Function "example" has been called from the module "example".
+2024-04-19 10:31:24 - INFO - 
+2024-04-19 10:31:24 - INFO - Function "foo" has been called from the module "__main__".
+2024-04-19 10:31:24 - DEBUG - Called functions: ('print',) Parameters: ('a', 'b')
+2024-04-19 10:31:24 - CRITICAL - Exception occurred in function "foo": foo() missing 1 required positional argument: 'b'
+2024-04-19 10:31:24 - INFO - 

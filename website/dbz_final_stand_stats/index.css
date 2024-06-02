@@ -1,71 +1,90 @@
-body {
-
-}
-
 #statsimg {
     position: absolute;
     top: 0px;
     left: 0px;
     z-index:0;
+    max-width: 50%;
 }
-
 .lines {
-    padding-bottom: 28.5px;
+    
+    padding-bottom: 11.5%;
+    font-size: 2.2vw;
 }
-
 #stats {
     position: absolute;
-    margin-left: 55px;
-    margin-top: 103px;
+    margin-left: 4%;
+    margin-top: 8.5%;
     color: white;
     z-index: 2;
     font-family:'Franklin Gothic Small', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
-
 .points {
     display: inline;
     position: absolute;
-    right: -165%;
+    right: -16vw;
 }
-
 .buttons {
     background-color: #4c2e2e;
     color: white;
-    padding: 10px;
+    padding: 8px;
     font-size: 16px;
-    border: none;
-    width: 150px;
+    border: 3px solid #ff8181;
+    border-radius: 3px;
+    outline: 3px solid black;
+    width: 120px;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    margin-top: 10px;
+    margin-right: 10px;
 }
-
 #options{
-    margin: 0% 40%;
-    width: 40%;
+    position: absolute;
+    right: 0%;
+    max-width: 50%;
 }
-
 .inputs{
     font-size: 16px;
     padding: 5px;
-    width: 25%;
+    width: 50px;
     position: relative;
-    left: -25%;
+    left: 0%;
+    border: 3px solid;
+    border-radius: 5px;
+    margin-top: 10px;
 }
-
+.otherdata{
+    inline-size: 100px;
+    position: absolute;
+    bottom: 5%;
+    right: -5%;
+    padding: 10px;
+    width: 80%;
+    color: black;
+    font-family:'Franklin Gothic Small', 'Arial Narrow', Arial, sans-serif;
+    background-color: #4c2e2e;
+    color: white;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    border: solid #ff8181;
+    border-width: 3px;
+    border-radius: 10px;
+    outline: 3px solid black;
+}
 .dropbtn {
     background-color: #4c2e2e;
     color: white;
-    padding: 10px;
+    padding: 8px;
     font-size: 16px;
-    border: none;
-    width: 150px;
+    border: solid #ff8181;
+    border-width: 3px;
+    border-radius: 2px;
+    outline: 3px solid black;
+    width: 120px;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
-
 .dropdown {
     position: relative;
     display: inline-block;
 }
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -75,18 +94,32 @@ body {
     z-index: 1;
     width: 100%;
 }
-
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-
-.dropdown-content a:hover {background-color: #ddd;}
-
+.dropdown-content a:hover {background-color: #ddd; user-select: none;}
 .dropdown:hover .dropdown-content {display: block;}
-
 .dropdown:hover .dropbtn {background-color: #2e1c1c;}
-
 .buttons:hover {background-color: #2e1c1c;}
+
+@media screen and (min-width: 1100px) {
+    #stats {
+       margin-left: 50px;
+       margin-top: 100px;
+    }
+    .lines {
+        padding-bottom: 23px;
+        font-size: 22px;
+    }
+    .otherdata{
+        width: 50%;
+    }
+    .points {
+        display: inline;
+        position: absolute;
+        right: -100%;
+    }
+}

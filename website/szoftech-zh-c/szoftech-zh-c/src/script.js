@@ -1,0 +1,2 @@
+// Alkalmazás inicializálása
+Controller.AppInit();
