@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "benchmark",
+            "request": "launch",
+            "mainClass": "benchmark",
+            "projectName": ""
+        },
+        {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
@@ -24,6 +31,6 @@
                     "ignoreFailures": true
                 }
             ]
-        },
+        }
     ]
 }

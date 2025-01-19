@@ -1,68 +1,71 @@
 	.file	"benchmark.c"
 	.text
-	.def	__main;	.scl	2;	.type	32;	.endef
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.LC1:
+	.string	"The result: %ld\n"
+	.section	.text.startup,"ax",@progbits
+	.p2align 4
 	.globl	main
-	.def	main;	.scl	2;	.type	32;	.endef
-	.seh_proc	main
+	.type	main, @function
 main:
 	pushq	%rbp
-	.seh_pushreg	%rbp
-	pushq	%rdi
-	.seh_pushreg	%rdi
-	pushq	%rsi
-	.seh_pushreg	%rsi
-	pushq	%rbx
-	.seh_pushreg	%rbx
-	subq	$56, %rsp
-	.seh_stackalloc	56
-	leaq	48(%rsp), %rbp
-	.seh_setframe	%rbp, 48
-	.seh_endprologue
-	call	__main
-	movl	$1, %edi
-	movl	$3, %ebx
-	jmp	.L2
-.L8:
-	movb	$1, -1(%rbp)
 	pxor	%xmm1, %xmm1
-	cvtsi2sdl	%ebx, %xmm1
-	movq	%xmm1, %rax
-	movq	%rax, %xmm0
-	call	sqrt
-	cvttsd2sil	%xmm0, %eax
-	movl	%eax, -8(%rbp)
-	movl	$3, %esi
-	jmp	.L3
-.L6:
+	movl	$1, %ebp
+	pushq	%rbx
+	movl	$3, %ebx
+	subq	$8, %rsp
+	.p2align 4
+	.p2align 3
+.L8:
+	pxor	%xmm0, %xmm0
+	cvtsi2sdl	%ebx, %xmm0
+	ucomisd	%xmm0, %xmm1
+	ja	.L15
+	sqrtsd	%xmm0, %xmm0
+.L4:
+	cvttsd2sil	%xmm0, %esi
+	cmpl	$2, %esi
+	jle	.L5
+	movl	$3, %ecx
+	jmp	.L7
+	.p2align 4
+	.p2align 4,,10
+	.p2align 3
+.L18:
+	addl	$2, %ecx
+	cmpl	%ecx, %esi
+	jl	.L5
+.L7:
 	movl	%ebx, %eax
 	cltd
-	idivl	%esi
-	movl	%edx, %eax
-	testl	%eax, %eax
-	jne	.L4
-	movb	$0, -1(%rbp)
-	jmp	.L5
-.L4:
-	addl	$2, %esi
-.L3:
-	cmpl	-8(%rbp), %esi
-	jle	.L6
-.L5:
-	cmpb	$1, -1(%rbp)
-	jne	.L7
-	addl	$1, %edi
-.L7:
+	idivl	%ecx
+	testl	%edx, %edx
+	jne	.L18
 	addl	$2, %ebx
-.L2:
-	cmpl	$99999999, %ebx
-	jle	.L8
-	movl	%edi, %eax
-	addq	$56, %rsp
+	cmpl	$200000001, %ebx
+	jne	.L8
+.L19:
+	movl	%ebp, %esi
+	leaq	.LC1(%rip), %rdi
+	xorl	%eax, %eax
+	call	printf@PLT
+	addq	$8, %rsp
+	xorl	%eax, %eax
 	popq	%rbx
-	popq	%rsi
-	popq	%rdi
 	popq	%rbp
 	ret
-	.seh_endproc
-	.ident	"GCC: (GNU) 12.2.0"
-	.def	sqrt;	.scl	2;	.type	32;	.endef
+	.p2align 4,,10
+	.p2align 3
+.L5:
+	addl	$2, %ebx
+	addl	$1, %ebp
+	cmpl	$200000001, %ebx
+	jne	.L8
+	jmp	.L19
+.L15:
+	call	sqrt@PLT
+	pxor	%xmm1, %xmm1
+	jmp	.L4
+	.size	main, .-main
+	.ident	"GCC: (GNU) 14.2.1 20240910"
+	.section	.note.GNU-stack,"",@progbits

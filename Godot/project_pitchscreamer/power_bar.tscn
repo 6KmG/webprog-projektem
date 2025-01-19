@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c356ifjrcc0cl"]
+
+[ext_resource type="Script" path="res://scenes/PowerBar.gd" id="1_nn0ae"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5meh"]
+
+[sub_resource type="Gradient" id="Gradient_00w7f"]
+offsets = PackedFloat32Array(0, 0.517045, 0.772727)
+colors = PackedColorArray(6.35326e-06, 0.668334, 0.867054, 1, 0.805034, 0.67405, 0, 1, 0.854902, 0.152941, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a3yhl"]
+gradient = SubResource("Gradient_00w7f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_upbh2"]
+texture = SubResource("GradientTexture2D_a3yhl")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="power_bar" type="ProgressBar"]
+modulate = Color(1, 1, 1, 0.509804)
+top_level = true
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = -0.005
+anchor_right = 0.062
+anchor_bottom = -0.005
+offset_left = -127.16
+offset_top = -21.75
+offset_right = -76.16
+offset_bottom = -12.75
+theme_override_styles/background = SubResource("StyleBoxEmpty_d5meh")
+theme_override_styles/fill = SubResource("StyleBoxTexture_upbh2")
+max_value = 0.7
+value = 0.7
+show_percentage = false
+script = ExtResource("1_nn0ae")
+metadata/_edit_use_anchors_ = true

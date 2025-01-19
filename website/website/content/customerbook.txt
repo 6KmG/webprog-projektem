@@ -1,0 +1,3 @@
+Első Elemér;elso@mail.com;5;Első hozzászólás. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam blanditiis, reiciendis molestias voluptas accusamus, similique, cum fugit voluptatibus amet veritatis delectus dicta sed vero eligendi.;1
+Második Márton;masodik@mail.com;4;Második bejegyzés. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam blanditiis, reiciendis molestias voluptas accusamus.;0
+Harmadik Hedvig;harmadik@mail.com;3;Harmadik. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam blanditiis, reiciendis molestias voluptas accusamus, similique, cum fugit voluptatibus amet veritatis delectus dicta sed vero.;1

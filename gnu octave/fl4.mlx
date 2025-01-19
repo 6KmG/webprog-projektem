@@ -1,0 +1,178 @@
+function kimenet4 = fl4(inputVector1, inputVector2)
+    %A kódot nem én írtam, hanem leloptam és átalakítottam!
+    if ~isvector(inputVector1) || ~isvector(inputVector2)
+        error('Bemeneti paraméter kizárólag vektor tipusú lehet!');
+    end
+    
+    elojelbit1 = inputVector1(1);
+    elojelbit2 = inputVector2(1);
+    
+    if (elojelbit1 ~= 0 && elojelbit1 ~= 1) || (elojelbit2 ~= 0 && elojelbit2 ~= 1)
+        error('Az előjelbit csak 0 és 1 lehet.');
+    end
+    
+    if elojelbit1 == 1 || elojelbit2 == 1
+        error('Kizórálag összeadás engedélyezett!');
+    end
+    
+    mantissza1 = inputVector1(2:end-1);
+    mantissza2 = inputVector2(2:end-1);
+    
+    if length(mantissza1) ~= length(mantissza2)
+        error('A két gépi szám nem ugyanabból a számhalmazból származnak!');
+    end
+    
+    % Mantissza vizsgálata
+    if any(mantissza1 ~= 0 & mantissza1 ~= 1)
+        error('A mantissza csak 0 és 1 számokból állhat!');
+    end
+    
+    if any(mantissza2 ~= 0 & mantissza2 ~= 1)
+        error('A mantissza csak 0 és 1 számokból állhat!');
+    end
+    
+    karakterisztika1 = inputVector1(end);
+    karakterisztika2 = inputVector2(end);
+    
+    if(mod(karakterisztika1, 1) ~= 0)
+        error('A karakterisztika csak egész szám lehet!');
+    end
+    
+    if(mod(karakterisztika2, 1) ~= 0)
+        error('A karakterisztika csak egész szám lehet!');
+    end
+    
+    if karakterisztika1 ~= karakterisztika2 % Ha nincs közös karakterisztika
+        karakterisztikaEgyNagyobb = karakterisztika1 > karakterisztika2;
+        if karakterisztikaEgyNagyobb == 1
+            karakterisztikaEgyNagyobb = karakterisztika1;
+            karakterisztikaKulonbseg = karakterisztika1 - karakterisztika2;
+            
+            % mantissza2 tolása jobbra
+            
+            mantissza2 = [zeros(1, karakterisztikaKulonbseg), mantissza2(1:end-(karakterisztikaKulonbseg))];
+        else
+            karakterisztikaEgyNagyobb = karakterisztika2;
+            karakterisztikaKulonbseg = karakterisztika2-karakterisztika1;
+            
+            %mantissza1 tolása jobbra
+            
+            mantissza1 = [zeros(1, karakterisztikaKulonbseg), mantissza1(1:end-(karakterisztikaKulonbseg))];
+        end
+    
+        eredmeny = binaryNumberAddition(mantissza1, mantissza2);
+    
+        [normalizaltErtek, visszateroKarakterisztika] = normalize(length(mantissza1), eredmeny, karakterisztikaEgyNagyobb, mantissza1);
+        normalizaltErtek = sprintf("%d", normalizaltErtek);
+        
+        kimenet4 = [num2str(elojelbit1), num2str(normalizaltErtek), num2str(visszateroKarakterisztika)];
+    else %közös a karakterisztika
+        eredmeny = binaryNumberAddition(mantissza1, mantissza2);
+    
+        % Normalizálás megnézése
+        [normalizaltErtek, visszateroKarakterisztika] = normalize(length(mantissza1), eredmeny, karakterisztika1, mantissza1);
+        
+        normalizaltErtek = sprintf("%d", normalizaltErtek);
+        kimenet4 = [num2str(elojelbit1), num2str(normalizaltErtek), num2str(visszateroKarakterisztika)];
+    end
+    end
+    
+    function [normalizalt, karakterisztika] = normalize(tHossz, szam, kozosKarakterisztika, eredetiSzam)
+    if length(szam) > tHossz %Ha a szám hosszabb a karakterisztikánál
+        if szam(end) == 1 %Ha egy a vége, akkor fel kell kerekíteni a számot.
+            uresVektor = zeros(1, tHossz);
+            uresVektor(tHossz) = 1; %Utolsó érték mindig a karakterisztika
+            normalizalt = binaryNumberAddition(szam(1:tHossz), uresVektor);
+            karakterisztika = kozosKarakterisztika + (length(szam)-length(eredetiSzam));
+        else
+            normalizalt = szam(1:tHossz);
+            karakterisztika = kozosKarakterisztika + (length(szam)-length(eredetiSzam));
+        end
+    else
+        normalizalt = szam;
+        karakterisztika = kozosKarakterisztika;
+    end
+    end
+    
+    function reszKimenet = binaryNumberAddition(egyikMantissza, masikMantissza)
+    carryErtek = 0;
+    
+    osszeadottErtek = zeros(size(egyikMantissza));
+    
+    for i = length(egyikMantissza):-1:1
+        bit1 = egyikMantissza(i);
+        bit2 = masikMantissza(i);
+        osszeg = bit1 + bit2 + carryErtek;
+        if osszeg >= 2
+            carryErtek = 1;
+            osszeg = mod(osszeg, 2);
+        else
+            carryErtek = 0;
+        end
+        osszeadottErtek(i) = osszeg;
+    end
+    % Túlcsordulás
+    if carryErtek
+        osszeadottErtek = [1, osszeadottErtek];
+    end
+    reszKimenet = osszeadottErtek;
+    end
+
+% function test_fl4new()
+%     101.1
+%     011.0
+%     1001.
+%     % Teszt 1: Helyes vektorok (az elvárt eredmény egy bináris összeadás)
+%     inputVector1 = [0 1 0 1 1 3]; % előjelbit=0, mantissza=[1 0 1 1], karakterisztika=3
+%     inputVector2 = [0 0 1 1 0 3]; % előjelbit=0, mantissza=[0 1 1 0], karakterisztika=3
+%     try
+%         result = fl4(inputVector1, inputVector2);
+%         disp(['Teszt 1 eredmény: ', result]);
+%     catch ME
+%         disp(['Teszt 1 sikertelen: ', ME.message]);
+%     end
+
+%     % Teszt 2: Eltérő karakterisztikájú vektorok
+%     inputVector1 = [0 1 0 1 1 4]; % karakterisztika=4
+%     inputVector2 = [0 0 1 1 0 2]; % karakterisztika=2
+%     try
+%         result = fl4(inputVector1, inputVector2);
+%         disp(['Teszt 2 eredmény: ', result]);
+%     catch ME
+%         disp(['Teszt 2 sikertelen: ', ME.message]);
+%     end
+
+%     % Teszt 3: Hibás bemenet (nem vektor)
+%     inputVector1 = [0 1 0 1 1 3];
+%     inputVector2 = [0 1; 1 0]; % Ez nem vektor!
+%     try
+%         result = fl4(inputVector1, inputVector2);
+%         disp(['Teszt 3 eredmény: ', result]);
+%     catch ME
+%         disp(['Teszt 3 sikertelen, várt hiba: ', ME.message]);
+%     end
+
+%     % Teszt 4: Hibás előjelbit (nem 0 vagy 1)
+%     inputVector1 = [2 1 0 1 1 3]; % előjelbit=2
+%     inputVector2 = [0 0 1 1 0 3];
+%     try
+%         result = fl4(inputVector1, inputVector2);
+%         disp(['Teszt 4 eredmény: ', result]);
+%     catch ME
+%         disp(['Teszt 4 sikertelen, várt hiba: ', ME.message]);
+%     end
+
+%     % Teszt 5: Hibás mantissza (nem csak 0 vagy 1)
+%     inputVector1 = [0 1 0 1 1 3];
+%     inputVector2 = [0 0 1 2 0 3]; % A mantissza tartalmaz egy '2'-t
+%     try
+%         result = fl4(inputVector1, inputVector2);
+%         disp(['Teszt 5 eredmény: ', result]);
+%     catch ME
+%         disp(['Teszt 5 sikertelen, várt hiba: ', ME.message]);
+%     end
+
+% end
+
+
+% test_fl4new

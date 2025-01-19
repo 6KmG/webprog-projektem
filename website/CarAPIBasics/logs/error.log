@@ -1,0 +1,61 @@
+2024-09-27 11:23:38.682 [http-nio-8080-exec-4] ERROR fileLoggerError - 
+Hibakód: "400,
+Hibastátusz: "Bad Request",
+Üzenet: "Hiányzó autóadatok.",
+Útvonal: "/cars"
+2024-09-27 11:25:02.708 [http-nio-8080-exec-4] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Az ID=5585 autó nincs a listában.",
+Útvonal: "/cars/5585"
+2024-10-04 10:33:48.718 [http-nio-8080-exec-4] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Az ID=6 autó nincs a listában.",
+Útvonal: "/cars/6"
+2024-10-04 10:39:33.544 [http-nio-8080-exec-3] ERROR fileLoggerError - 
+Hibakód: "400,
+Hibastátusz: "Bad Request",
+Üzenet: "Hiányzó autóadatok.",
+Útvonal: "/cars"
+2024-10-04 10:39:39.306 [http-nio-8080-exec-2] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Az ID=6 autó nincs a listában.",
+Útvonal: "/cars/6"
+2024-10-04 11:12:09.826 [http-nio-8080-exec-4] ERROR fileLoggerError - Törlési hiba. Az ID=6 autó nem található.
+2024-10-04 11:12:09.829 [http-nio-8080-exec-4] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Törlési hiba. Az ID=6 autó nem található.",
+Útvonal: "/cars/6"
+2024-10-04 11:13:20.138 [http-nio-8080-exec-4] ERROR fileLoggerError - Törlési hiba. Az ID=6 autó nem található.
+2024-10-04 11:13:20.141 [http-nio-8080-exec-4] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Törlési hiba. Az ID=6 autó nem található.",
+Útvonal: "/cars/6"
+2024-10-11 10:31:48.489 [http-nio-8080-exec-4] ERROR fileLoggerError - Lekérdezési hiba. Az ID=69 autó nem található.
+2024-10-11 10:31:48.492 [http-nio-8080-exec-4] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Lekérdezési hiba. Az ID=69 autó nem található.",
+Útvonal: "/cars/69"
+2024-10-11 11:02:34.472 [http-nio-8080-exec-1] ERROR fileLoggerError - Lekérdezési hiba. Az ID=3 autó nem található.
+2024-10-11 11:02:34.483 [http-nio-8080-exec-1] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Lekérdezési hiba. Az ID=3 autó nem található.",
+Útvonal: "/cars/3"
+2024-10-11 11:02:35.802 [http-nio-8080-exec-3] ERROR fileLoggerError - Lekérdezési hiba. Az ID=3 autó nem található.
+2024-10-11 11:02:35.803 [http-nio-8080-exec-3] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Lekérdezési hiba. Az ID=3 autó nem található.",
+Útvonal: "/cars/3"
+2024-10-11 11:03:21.074 [http-nio-8080-exec-5] ERROR fileLoggerError - Lekérdezési hiba. Az ID=3 autó nem található.
+2024-10-11 11:03:21.077 [http-nio-8080-exec-5] ERROR fileLoggerError - 
+Hibakód: "404,
+Hibastátusz: "Not Found",
+Üzenet: "Lekérdezési hiba. Az ID=3 autó nem található.",
+Útvonal: "/cars/3"

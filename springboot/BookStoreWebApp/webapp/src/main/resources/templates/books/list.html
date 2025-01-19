@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Könyvek listája</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="user-select-none">Könyvek listája</h1>
+    <a class="btn btn-primary" th:href="@{/books/create}">Új könyv</a>
+    <a class="btn btn-warning" th:href="@{/mybooks}">Könyveim</a>
+    <a class="btn btn-secondary" th:href="@{/books/unavailable}">Nem elérhető könyvek</a>
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <span th:text="${successMessage}"></span>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <span th:text="${errorMessage}"></span>
+    </div>
+    
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Cím</th>
+            <th>Szerző</th>
+            <th>Év</th>
+            <th>Ár</th>
+            <th>Elérhető</th>
+            <th>Létrehozva</th>
+            <th>Módosítva</th>
+            <th>Műveletek</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.year}"></td>
+            <td th:text="${book.price} + ' Ft'"></td>
+            <td th:text="${book.available ? 'Igen' : 'Nem'}"></td>
+            <!-- <td th:text="${book.createdDate}"></td>
+            <td th:text="${book.lastModifiedDate}"></td> -->
+            <td th:text="${#temporals.format(book.createdDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#temporals.format(book.lastModifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <!-- <a class="btn btn-warning btn-sm" th:href="@{/mybooks/add (id=${book.id})}">Hozzáadás saját könyvekhez</a> -->
+                <form th:if="${book.available}" th:action="@{/mybooks/add}" method="post" style="display:inline;">
+                    <input type="hidden" name="bookId" th:value="${book.id}" />
+                    <button type="submit" class="btn btn-secondary btn-sm">Hozzáadás</button>
+                </form>
+                <a class="btn btn-primary btn-sm" th:href="@{/books/edit/{id}(id=${book.id})}">Módosítás</a>
+                <a th:if="${!#lists.contains(myBookIds, book.id)}" class="btn btn-danger btn-sm" th:href="@{/books/delete/{id}(id=${book.id})}">Törlés</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="mt-5">
+        <h3>Statisztikák</h3>
+        <ul>
+            <li>
+                Legdrágább könyv: 
+                <span th:text="${mostExpensiveBook != null ? mostExpensiveBook.title : 'Nincs elérhető adat'}"></span>
+                <span th:if="${mostExpensiveBook != null}" th:text="'' + ${mostExpensiveBook.price} + ' Ft'"></span>
+            </li>
+            <li>Elérhető könyvek száma: <span th:text="${availableBooks}"></span></li>
+            <li>Nem elérhető könyvek száma: <span th:text="${unavailableBooks}"></span></li>
+            <li>Saját könyveim száma: <span th:text="${myBooksCount}"></span></li>
+        </ul>
+    </div>
+    
+</div>
+</body>
+</html>

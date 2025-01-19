@@ -1,0 +1,29 @@
+2024-09-27 11:06:30.569 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-09-27 11:07:38.663 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-09-27 11:12:39.465 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-09-27 11:12:44.027 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Autó lekérdezve: ID=1727428356108; 'Mercedes GLC 63 Luxury SUV', '2020'
+2024-09-27 11:13:30.702 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-09-27 11:13:35.697 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Autó lekérdezve: ID=1727428408726; 'Ferrari SF90 Spider (2024)'
+2024-09-27 11:14:39.499 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-09-27 11:14:44.362 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Autó létrehozva: ID=1727428484362; 'Mercedes SUV (2023)'
+2024-09-27 11:16:48.935 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-09-27 11:17:03.246 [http-nio-8080-exec-6] INFO  fileLoggerInfo - Autó módosítása folyamatban: ID=1727428603081; 'Ferrari SF90 Spider (2024)'
+2024-09-27 11:17:03.247 [http-nio-8080-exec-6] INFO  fileLoggerInfo - Az ID=1727428603081 autó módosítva: 'Valami SUV (2019)'
+2024-10-04 10:32:19.611 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-10-04 10:33:38.492 [http-nio-8080-exec-7] INFO  fileLoggerInfo - Autó létrehozva: ID=3; 'Autó Model (2021)'
+2024-10-04 10:34:03.726 [http-nio-8080-exec-5] INFO  fileLoggerInfo - Autó törölve: ID=2; 'Mercedes GLC 63 Luxury SUV (2020)'
+2024-10-04 10:34:09.026 [http-nio-8080-exec-8] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-10-04 10:34:18.773 [http-nio-8080-exec-9] INFO  fileLoggerInfo - Autó létrehozva: ID=4; 'Autó1 Model2 (2022)'
+2024-10-04 10:49:47.612 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Autó létrehozva: ID=3; 'Autó1 Model2 (null)'
+2024-10-04 11:04:53.593 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Autó létrehozva: ID=3; 'null null (null)'
+2024-10-11 10:22:34.149 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-10-11 10:22:37.097 [http-nio-8080-exec-4] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-10-11 10:26:07.182 [http-nio-8080-exec-5] INFO  fileLoggerInfo - Autó lekérdezve: ID=1; 'Ferrari SF90 Spider (2024)'
+2024-10-11 10:31:40.897 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Autó létrehozva: ID=3; 'Toyoda Lightsaber (1969)'
+2024-10-11 10:31:52.077 [http-nio-8080-exec-5] INFO  fileLoggerInfo - Autó lekérdezve: ID=3; 'Toyoda Lightsaber (1969)'
+2024-10-11 10:33:43.021 [http-nio-8080-exec-9] INFO  fileLoggerInfo - Autó létrehozva: ID=4; 'Toyoda Lightsaber (1969)'
+2024-10-11 10:33:58.084 [http-nio-8080-exec-10] INFO  fileLoggerInfo - Az autó lista lekérdezve.
+2024-10-11 10:34:01.960 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Autó létrehozva: ID=5; 'Toyoda Lightsaber (1969)'
+2024-10-11 10:57:13.016 [http-nio-8080-exec-4] INFO  fileLoggerInfo - Autó létrehozva: ID=6; 'Toyoda Lightsaber (1969)'
+2024-10-11 10:59:28.400 [http-nio-8080-exec-6] INFO  fileLoggerInfo - Autó lekérdezve: ID=3; 'Toyoda Lightsaber (1969)'
+2024-10-11 11:00:50.480 [http-nio-8080-exec-8] INFO  fileLoggerInfo - Autó lekérdezve: ID=3; 'Toyoda Lightsaber (1969)'

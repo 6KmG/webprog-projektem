@@ -1,8 +1,6 @@
- #include <stdio.h>
- #include <stdint.h>
+#include <stdio.h>
 
- int main(){
-	int *p;
-    
+int main(){
+	printf("HI");
 
  }

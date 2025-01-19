@@ -1,0 +1,510 @@
+[gd_scene load_steps=32 format=3 uid="uid://dvmqepowidbr7"]
+
+[ext_resource type="Texture2D" uid="uid://bjjow3xjv3gg7" path="res://scenes/Soccer_pitch.png" id="1_q2a2a"]
+[ext_resource type="Script" path="res://scenes/player1.gd" id="2_bjj34"]
+[ext_resource type="Script" path="res://scenes/Team.gd" id="2_ubte6"]
+[ext_resource type="Script" path="res://scenes/PowerBar.gd" id="4_5hf8u"]
+[ext_resource type="Script" path="res://scenes/player2.gd" id="4_wmkww"]
+[ext_resource type="Script" path="res://scenes/player3.gd" id="5_lxqwm"]
+[ext_resource type="Script" path="res://scenes/player4.gd" id="6_kyign"]
+[ext_resource type="Script" path="res://scenes/player5.gd" id="7_v28h7"]
+[ext_resource type="Script" path="res://scenes/player6.gd" id="8_trv1d"]
+[ext_resource type="Script" path="res://scenes/player7.gd" id="9_ajoew"]
+[ext_resource type="Script" path="res://scenes/player8.gd" id="10_a3jls"]
+[ext_resource type="Script" path="res://scenes/player9.gd" id="11_n01tj"]
+[ext_resource type="Script" path="res://scenes/player10.gd" id="12_478is"]
+[ext_resource type="Script" path="res://scenes/player11.gd" id="13_0fg4n"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_w83q8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uvl1q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b48t"]
+size = Vector2(133, 1575)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rca56"]
+size = Vector2(213, 2070)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r3evk"]
+size = Vector2(158, 1616)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8872"]
+size = Vector2(2073, 175)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g8u3e"]
+bounce = 1.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jhua7"]
+radius = 6.0
+height = 12.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_sm641"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6lund"]
+radius = 6.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_li1jn"]
+
+[sub_resource type="Gradient" id="Gradient_r6wo4"]
+offsets = PackedFloat32Array(0, 0.744318, 1)
+colors = PackedColorArray(0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a3yhl"]
+gradient = SubResource("Gradient_r6wo4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p5grt"]
+texture = SubResource("GradientTexture2D_a3yhl")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1wqk1"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0e65a"]
+radius = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_xfn0g"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="pitch" type="MeshInstance2D" parent="."]
+position = Vector2(840, 525)
+scale = Vector2(1680, 1050)
+mesh = SubResource("QuadMesh_w83q8")
+texture = ExtResource("1_q2a2a")
+
+[node name="border" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_uvl1q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border"]
+position = Vector2(-50.5, 519.5)
+shape = SubResource("RectangleShape2D_2b48t")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="border"]
+position = Vector2(835, -85.5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_rca56")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="border"]
+position = Vector2(1744, 512)
+shape = SubResource("RectangleShape2D_r3evk")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="border"]
+position = Vector2(830.5, 1121.5)
+shape = SubResource("RectangleShape2D_g8872")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="border"]
+position = Vector2(1578, 576)
+polygon = PackedVector2Array(-5, 3, -8, 2, -9, 1, -9, 0, -8, -1, -6, -2, 38, -2, 38, -104, -5, -104, -8, -105, -9, -106, -9, -107, -8, -108, -6, -109, 89, -109, 89, 3)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="border"]
+position = Vector2(107, 467)
+polygon = PackedVector2Array(4, 5, 6, 4, 6, 1, 4, 0, 1, -1, -91, -1, -91, 112, 2, 112, 4, 111, 5, 110, 5, 108, 4, 107, 2, 106, -41, 106, -41, 6, 1, 6)
+
+[node name="ball" type="RigidBody2D" parent="."]
+top_level = true
+position = Vector2(840, 522)
+collision_layer = 2
+collision_mask = 2
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_g8u3e")
+gravity_scale = 0.0
+linear_damp = 0.9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+shape = SubResource("CapsuleShape2D_jhua7")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="ball/CollisionShape2D"]
+modulate = Color(0.901961, 0.901961, 0, 1)
+scale = Vector2(12, 12)
+mesh = SubResource("SphereMesh_sm641")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="ball" groups=["ball"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball/Area2D"]
+shape = SubResource("CircleShape2D_6lund")
+metadata/_edit_lock_ = true
+
+[node name="team" type="Node2D" parent="."]
+script = ExtResource("2_ubte6")
+
+[node name="player" type="CharacterBody2D" parent="team"]
+position = Vector2(873, 516)
+script = ExtResource("2_bjj34")
+
+[node name="power_bar" type="ProgressBar" parent="team/player"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.7
+value = 0.7
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player2" type="CharacterBody2D" parent="team"]
+position = Vector2(812, 748)
+script = ExtResource("4_wmkww")
+
+[node name="power_bar" type="ProgressBar" parent="team/player2"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player2"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player2" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player2/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player2/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player3" type="CharacterBody2D" parent="team"]
+position = Vector2(649, 624)
+script = ExtResource("5_lxqwm")
+
+[node name="power_bar" type="ProgressBar" parent="team/player3"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player3"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player3" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player3/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player3/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player4" type="CharacterBody2D" parent="team"]
+position = Vector2(810, 287)
+script = ExtResource("6_kyign")
+
+[node name="power_bar" type="ProgressBar" parent="team/player4"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player4"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player4" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player4/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player4/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player5" type="CharacterBody2D" parent="team"]
+position = Vector2(636, 431)
+script = ExtResource("7_v28h7")
+
+[node name="power_bar" type="ProgressBar" parent="team/player5"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player5"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player5" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player5/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player5/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player6" type="CharacterBody2D" parent="team"]
+position = Vector2(622, 155)
+script = ExtResource("8_trv1d")
+
+[node name="power_bar" type="ProgressBar" parent="team/player6"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player6"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player6" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player6/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player6/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player7" type="CharacterBody2D" parent="team"]
+position = Vector2(618, 872)
+script = ExtResource("9_ajoew")
+
+[node name="power_bar" type="ProgressBar" parent="team/player7"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player7"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player7" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player7/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player7/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player8" type="CharacterBody2D" parent="team"]
+position = Vector2(404, 295)
+script = ExtResource("10_a3jls")
+
+[node name="power_bar" type="ProgressBar" parent="team/player8"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player8"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player8" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player8/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player8/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player9" type="CharacterBody2D" parent="team"]
+position = Vector2(410, 740)
+script = ExtResource("11_n01tj")
+
+[node name="power_bar" type="ProgressBar" parent="team/player9"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player9"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player9" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player9/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player9/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player10" type="CharacterBody2D" parent="team"]
+position = Vector2(402, 519)
+script = ExtResource("12_478is")
+
+[node name="power_bar" type="ProgressBar" parent="team/player10"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player10"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player10" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player10/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player10/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[node name="player11" type="CharacterBody2D" parent="team"]
+position = Vector2(151, 515)
+script = ExtResource("13_0fg4n")
+
+[node name="power_bar" type="ProgressBar" parent="team/player11"]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 25.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_li1jn")
+theme_override_styles/fill = SubResource("StyleBoxTexture_p5grt")
+max_value = 0.5
+show_percentage = false
+script = ExtResource("4_5hf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player11"]
+shape = SubResource("CircleShape2D_1wqk1")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="team/player11" groups=["player"]]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="team/player11/Area2D"]
+shape = SubResource("CircleShape2D_0e65a")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="team/player11/Area2D/CollisionShape2D"]
+modulate = Color(0.0117647, 0.27451, 0.580392, 1)
+scale = Vector2(32, 32)
+mesh = SubResource("SphereMesh_xfn0g")
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="team/player/Area2D" to="team/player" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player/Area2D" to="team/player" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player2/Area2D" to="team/player2" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player2/Area2D" to="team/player2" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player3/Area2D" to="team/player3" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player3/Area2D" to="team/player3" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player4/Area2D" to="team/player4" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player4/Area2D" to="team/player4" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player5/Area2D" to="team/player5" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player5/Area2D" to="team/player5" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player6/Area2D" to="team/player6" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player6/Area2D" to="team/player6" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player7/Area2D" to="team/player7" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player7/Area2D" to="team/player7" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player8/Area2D" to="team/player8" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player8/Area2D" to="team/player8" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player9/Area2D" to="team/player9" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player9/Area2D" to="team/player9" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player10/Area2D" to="team/player10" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player10/Area2D" to="team/player10" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="team/player11/Area2D" to="team/player11" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="team/player11/Area2D" to="team/player11" method="_on_area_2d_area_exited"]

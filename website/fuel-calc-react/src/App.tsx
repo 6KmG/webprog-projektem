@@ -14,7 +14,7 @@ function App() {
       const totalFuel = (consumption * dist) / 100;
       setResult(`Total fuel needed: ${totalFuel.toFixed(2)} liters`);
     } else {
-      setResult('Please enter valid numbers');
+      setResult('Please enter valid numbers');  
     }
   };
 

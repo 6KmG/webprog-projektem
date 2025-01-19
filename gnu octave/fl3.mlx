@@ -1,0 +1,75 @@
+function v = fl3(varargin)
+    % fl3 - Valós szám gépi alakjának kiszámítása
+    % Ha nem adunk meg bemeneti paramétereket, akkor az alapértelmezett
+    % gépi számhalmaz az M(8; -5; 5) lesz, azaz 8 bit, -5 a legkisebb kitevő,
+    % és 5 a legnagyobb kitevő.
+    
+    if nargin == 0
+        % Alapértelmezett gépi számhalmaz: M(8; -5; 5)
+        t = 8;
+        emin = -5;
+        emax = 5;
+        x = 0; % Alapértelmezett valós szám
+    elseif nargin == 1
+        % Alapértelmezett gépi számhalmaz, egy bemeneti szám
+        t = 8;
+        emin = -5;
+        emax = 5;
+        x = varargin{1};
+    elseif nargin == 3
+        % Felhasználó által meghatározott gépi számhalmaz
+        t = varargin{1};
+        emin = varargin{2};
+        emax = varargin{3};
+        x = varargin{4};
+    else
+        error('Hibás bemeneti paraméterek száma.');
+    end
+    
+    % Ellenőrizzük, hogy a szám ábrázolható-e
+    if x == 0
+        v = zeros(1, t + 1); % Ha x = 0, akkor az egész vektor 0.
+        return;
+    end
+    
+    % Karakterisztika (kitevő) meghatározása
+    e = floor(log10(abs(x))); 
+    if e < emin || e > emax
+        error('A szám nem ábrázolható a megadott gépi számhalmazon.');
+    end
+    
+    % Normalizált mantissza kiszámítása
+    m = abs(x) / 10^e;
+    mantissa = zeros(1, t);
+    
+    % Mantissza bináris reprezentációja (2-es számrendszer) - saját átváltás
+    for i = 2:t
+        m = m * 2;
+        if m >= 1
+            mantissa(i) = 1;
+            m = m - 1;
+        else
+            mantissa(i) = 0;
+        end
+    end
+    
+    % Előjelbit beállítása
+    mantissa(1) = x < 0;
+    
+    % Karakterisztika hozzáadása
+    v = [mantissa, e];
+end
+
+% % Teszteljük a fl3 függvényt különböző számokra és gépi halmazokra
+
+% disp('Tesztelés 1: Alapértelmezett halmaz és x = 0.5');
+% v1 = fl3(0.5);
+% disp(v1);
+
+% disp('Tesztelés 2: Alapértelmezett halmaz és x = -3.2');
+% v2 = fl3(-3.2);
+% disp(v2);
+
+% disp('Tesztelés 3: Egyéni gépi halmaz M(6; -2; 3) és x = 2.56');
+% v3 = fl3(6, -2, 3, 2.56);
+% disp(v3);

@@ -1,0 +1,45 @@
+2024-12-06 17:29:31.721 [http-nio-8080-exec-4] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:29:31.726 [http-nio-8080-exec-4] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:29:37.956 [http-nio-8080-exec-5] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:29:37.960 [http-nio-8080-exec-5] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:29:41.276 [http-nio-8080-exec-3] INFO  fileLogger - Method call: updateBook - Updating book with ID=22. Previous data -> Title: 'A kettesnél nincs jobb, csak szebb', Author: 'Tusnádi Bálint ', Year: '2024'.
+2024-12-06 17:29:41.440 [http-nio-8080-exec-3] INFO  fileLogger - Book with ID=22 successfully updated. Updated book: 'A kettesnél nincs jobb, csak szebb by Tusnádi Bálint  (2024)'
+2024-12-06 17:29:41.467 [http-nio-8080-exec-6] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:29:41.473 [http-nio-8080-exec-6] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:30:28.276 [http-nio-8080-exec-8] INFO  fileLogger - Book successfully saved. Created book: ID=32, 'Csúcsszuper webapp by Tusnádi Bálint (2024)'
+2024-12-06 17:30:28.289 [http-nio-8080-exec-9] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:30:28.294 [http-nio-8080-exec-9] INFO  fileLogger - Books successfully fetched. Number of books: 6.
+2024-12-06 17:30:46.886 [http-nio-8080-exec-10] INFO  fileLogger - Method call: deleteBook - Deleting book with ID=29 ('pinep by fqwfq, 2001').
+2024-12-06 17:30:47.442 [http-nio-8080-exec-10] INFO  fileLogger - Book with ID=29 successfully deleted.
+2024-12-06 17:30:47.463 [http-nio-8080-exec-1] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:30:47.466 [http-nio-8080-exec-1] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:30:54.576 [http-nio-8080-exec-2] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:30:54.580 [http-nio-8080-exec-2] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:30:59.433 [http-nio-8080-exec-5] INFO  fileLogger - Method call: removeBookFromMyList - Removing book with ID=38 from my books.
+2024-12-06 17:30:59.462 [http-nio-8080-exec-5] INFO  fileLogger - Book with ID=38 successfully removed from my books.
+2024-12-06 17:31:07.283 [http-nio-8080-exec-6] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:31:07.286 [http-nio-8080-exec-6] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:31:09.612 [http-nio-8080-exec-7] INFO  fileLogger - Method call: addBookToMyBooks - Adding book with ID=22 to my books.
+2024-12-06 17:31:09.638 [http-nio-8080-exec-7] INFO  fileLogger - Book with ID=22 successfully added to my books.
+2024-12-06 17:31:09.650 [http-nio-8080-exec-8] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:31:09.654 [http-nio-8080-exec-8] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:31:29.701 [http-nio-8080-exec-10] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:31:29.705 [http-nio-8080-exec-10] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+    2024-12-06 17:31:39.057 [http-nio-8080-exec-4] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:31:39.061 [http-nio-8080-exec-4] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:31:43.186 [http-nio-8080-exec-3] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:31:43.190 [http-nio-8080-exec-3] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:31:59.309 [http-nio-8080-exec-7] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:31:59.313 [http-nio-8080-exec-7] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:32:01.774 [http-nio-8080-exec-8] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:32:01.777 [http-nio-8080-exec-8] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:32:02.918 [http-nio-8080-exec-9] INFO  fileLogger - Method call: updateBook - Updating book with ID=32. Previous data -> Title: 'Csúcsszuper webapp', Author: 'Tusnádi Bálint', Year: '2024'.
+2024-12-06 17:32:02.946 [http-nio-8080-exec-9] INFO  fileLogger - Book with ID=32 successfully updated. Updated book: 'Csúcsszuper webapp by Tusnádi Bálint (2024)'
+2024-12-06 17:32:02.955 [http-nio-8080-exec-10] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:32:02.959 [http-nio-8080-exec-10] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:32:05.273 [http-nio-8080-exec-2] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:32:05.278 [http-nio-8080-exec-2] INFO  fileLogger - Books successfully fetched. Number of books: 5.
+2024-12-06 17:32:06.248 [http-nio-8080-exec-4] INFO  fileLogger - Method call: updateBook - Updating book with ID=31. Previous data -> Title: 'works?', Author: 'asdad', Year: '2000'.
+2024-12-06 17:32:06.288 [http-nio-8080-exec-4] INFO  fileLogger - Book with ID=31 successfully updated. Updated book: 'works? by asdad (2000)'
+2024-12-06 17:32:06.300 [http-nio-8080-exec-5] INFO  fileLogger - Method call: getAllBooks - Fetching all books started.
+2024-12-06 17:32:06.304 [http-nio-8080-exec-5] INFO  fileLogger - Books successfully fetched. Number of books: 5.

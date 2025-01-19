@@ -1,0 +1,33 @@
+function fl2(t ,k1 ,k2)
+    if ((t == round(t)) == false)
+        error("A 't' paraméter kizárólag természetes szám lehet!")
+    end
+    if ((mod(k1,1) == 0) == false || (mod(k2,1) == 0) == false)
+        error("A két korlát kizárólag egész szám lehet!")
+    end
+    if ((k1 < k2) == false)
+        error("Az alsó korlátnak mindig kisebbnek kell lenni, mint a felső korlátnak!")
+    end
+    
+    mVegtelen = (1-2^(-t))*2^k2;
+    epsilonNulla = 2^(k1-1);
+    epsilonEgy = 2^(-t+1);
+    
+    szamhalmaz = [];
+    clf;hold on
+    camroll(-90)
+    for k = k1:k2
+        for m = 0:mVegtelen
+            mantissza = dec2bin(m, t - 1) - '0'; % valamiért itt nem működik a str2num
+            aktualisKarakterisztika = k; 
+            ertek = fl1([mantissza, aktualisKarakterisztika]); 
+            szamhalmaz = [szamhalmaz, ertek];
+            plot(-ertek, 'ob'); %negatív értékek
+            plot(ertek, 'rx'); %pozitív értékek
+        end
+    end
+    fprintf("A számhalmaz legnagyobb eleme: %4.2f\n", mVegtelen);
+    fprintf("A számhalmaz legkisebb pozitív eleme: %8.3f\n", epsilonEgy);
+    fprintf("A gépi szám és az egy különbsége: %8.3f\n", epsilonNulla);
+    fprintf("A számhalmaz elemszáma: %d\n", length(szamhalmaz));
+    end

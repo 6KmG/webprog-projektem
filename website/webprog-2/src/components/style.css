@@ -1,0 +1,23 @@
+body{
+    background-color: aqua;
+    margin: 0;
+    padding: 0;
+}
+
+button{
+    width: 100px;
+    height: 60px;
+    border-radius: 10px;
+    border-color: brown;
+    background-color: lightcoral;
+}
+
+header {
+    background-image: url(../assets/header_1.jpg);
+    position: relative;
+    width: 200px;
+}
+
+section{
+    padding: 10px;
+}

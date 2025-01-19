@@ -1,0 +1,5 @@
+Speciális szolgáltatás A.;Általános leírás a speciális szolgáltatásokhoz. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, architecto.;50500
+Speciális szolgáltatás B.;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo ex, maiores omnis temporibus.;60600
+Lávaköves térdmasszázs;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, perferendis!;10100
+Kuplungtárcsás pulykafuttatás;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia voluptatem neque reprehenderit ipsam, eveniet eum.;20200
+Tejszínhabos talpvakarás;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo ex, maiores omnis temporibus.;30300

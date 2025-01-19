@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.mlx": "matlab",
         "*.pypy": "python",
         "iostream": "cpp",
         "cmath": "c",
@@ -75,7 +76,12 @@
         "TINYMAIN.C": "cpp",
         "NONAME.C": "cpp",
         "string.h": "c",
-        "STRING.H": "cpp"
+        "STRING.H": "cpp",
+        "functional": "c",
+        "any": "c",
+        "array": "c",
+        "complex": "c",
+        "variant": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "java.compile.nullAnalysis.mode": "automatic",

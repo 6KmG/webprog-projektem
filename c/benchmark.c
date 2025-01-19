@@ -1,18 +1,18 @@
 //Compiled with gcc
 
 #include <math.h>
-#include <stdbool.h>
-int main(){
-    register long int count = 1;
-    
-    bool is_prime;
-    register long int square;
+#include <stdio.h>
 
-    for (register long int i = 3; i<1000000;i+=2){
+int main(){
+    int count = 1; 
+    int is_prime;
+    int square; 
+
+    for ( int i = 3; i < 100000000; i += 2){
         is_prime = 1;
         square = sqrt(i);
-        for (register long int j = 3; j<=square; j+=2){
-            if (i%j==0){
+        for ( int j = 3; j <= square; j += 2){
+            if (i % j == 0){
                 is_prime = 0;
                 break;
             }
@@ -21,5 +21,6 @@ int main(){
             count++;
         }
     }
-    return count;
+    printf("The result: %ld\n", count);
+    return 0;
 }

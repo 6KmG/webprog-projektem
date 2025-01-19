@@ -1,0 +1,77 @@
+2024-10-18 11:18:37.185 [http-nio-8080-exec-3] INFO  fileLoggerInfo - 
+ * Metódus meghívása: deleteTodo
+ * Az ID=1 autó törlése elkezdődött.
+2024-10-18 11:18:37.267 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Az ID=1 autó eltávolítva.
+2024-10-18 11:24:45.929 [http-nio-8080-exec-7] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-18 11:24:45.930 [http-nio-8080-exec-7] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-18 11:28:24.408 [http-nio-8080-exec-4] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-18 11:28:24.427 [http-nio-8080-exec-4] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-18 11:28:35.442 [http-nio-8080-exec-5] INFO  fileLoggerInfo - 
+ * Metódus meghívása: deleteTodo
+ * Az ID=1 autó törlése elkezdődött.
+2024-10-18 11:28:35.447 [http-nio-8080-exec-5] INFO  fileLoggerInfo - Az ID=1 autó eltávolítva.
+2024-10-18 11:28:37.929 [http-nio-8080-exec-6] INFO  fileLoggerInfo - 
+ * Metódus meghívása: getTodoById
+ * Az ID=1 feladat megkeresése elkezdődött.
+2024-10-18 11:28:37.930 [http-nio-8080-exec-6] ERROR fileLoggerError - Lekérdezési hiba. Az ID=1 feladat nem található.
+2024-10-18 11:28:41.826 [http-nio-8080-exec-7] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-18 11:28:41.827 [http-nio-8080-exec-7] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 1.
+2024-10-18 11:31:39.866 [http-nio-8080-exec-2] INFO  fileLoggerInfo - 
+ * Metódus meghívása: createTodo
+ * Feladat hozzáadása elkezdődött:
+ * [név: 'New Task', leírás: This is a new task, dátum: 2024-10-20]
+2024-10-18 11:31:40.062 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Feladat hozzáadva: [ID=3 | 'New Task']
+2024-10-18 11:34:00.684 [http-nio-8080-exec-3] INFO  fileLoggerInfo - 
+ * Metódus meghívása: getTodoById
+ * Az ID=3 feladat megkeresése elkezdődött.
+2024-10-18 11:34:00.900 [http-nio-8080-exec-3] ERROR fileLoggerError - Lekérdezési hiba. Az ID=3 feladat nem található.
+2024-10-18 11:34:05.115 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-18 11:34:05.117 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-18 11:34:09.366 [http-nio-8080-exec-4] INFO  fileLoggerInfo - 
+ * Metódus meghívása: createTodo
+ * Feladat hozzáadása elkezdődött:
+ * [név: 'New Task', leírás: This is a new task, dátum: 2024-10-20]
+2024-10-18 11:34:09.370 [http-nio-8080-exec-4] INFO  fileLoggerInfo - Feladat hozzáadva: [ID=3 | 'New Task']
+2024-10-18 11:34:16.684 [http-nio-8080-exec-5] INFO  fileLoggerInfo - 
+ * Metódus meghívása: updateTodo
+ * Módosítás előtt (adatok beolvasása): [ID=3, 'New Task This is a new task 2024-10-20']
+2024-10-18 11:34:16.685 [http-nio-8080-exec-5] INFO  fileLoggerInfo - Az ID=3 feladat módosítva. Új adatok: [név: 'New Task', leírás: 'This is a new task', dátum: '2024-10-20']
+2024-10-18 11:34:24.966 [http-nio-8080-exec-6] INFO  fileLoggerInfo - 
+ * Metódus meghívása: deleteTodo
+ * Az ID=3 autó törlése elkezdődött.
+2024-10-18 11:34:24.967 [http-nio-8080-exec-6] INFO  fileLoggerInfo - Az ID=3 autó eltávolítva.
+2024-10-18 11:34:34.879 [http-nio-8080-exec-7] INFO  fileLoggerInfo - 
+ * Metódus meghívása: deleteTodo
+ * Az ID=3 autó törlése elkezdődött.
+2024-10-18 11:34:34.880 [http-nio-8080-exec-7] ERROR fileLoggerError - Törlési hiba. Az ID=3 feladat nem található.
+2024-10-18 11:34:43.827 [http-nio-8080-exec-8] INFO  fileLoggerInfo - 
+ * Metódus meghívása: getTodoById
+ * Az ID=3 feladat megkeresése elkezdődött.
+2024-10-18 11:34:43.827 [http-nio-8080-exec-8] ERROR fileLoggerError - Lekérdezési hiba. Az ID=3 feladat nem található.
+2024-10-20 23:02:03.024 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:02:03.097 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:02:16.827 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:02:16.828 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:07:37.812 [http-nio-8080-exec-8] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:07:37.813 [http-nio-8080-exec-8] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:08:16.381 [http-nio-8080-exec-10] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:08:16.382 [http-nio-8080-exec-10] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:13:05.029 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:13:05.030 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:14:01.089 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:14:01.090 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:23:52.202 [http-nio-8080-exec-6] INFO  fileLoggerInfo - 
+ * Metódus meghívása: createTodo
+ * Feladat hozzáadása elkezdődött:
+ * [név: 'New Task', leírás: This is a new task, dátum: 2024-10-20]
+2024-10-20 23:23:52.205 [http-nio-8080-exec-6] INFO  fileLoggerInfo - Feladat hozzáadva: [ID=3 | 'New Task']
+2024-10-20 23:27:40.254 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:27:40.304 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:28:05.782 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:28:05.784 [http-nio-8080-exec-3] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:28:06.633 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:28:06.639 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:28:06.903 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:28:06.903 [http-nio-8080-exec-2] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.
+2024-10-20 23:28:14.088 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Metódus meghívása: getAllTodos - Az összes autó lekérdezése elkezdődött.
+2024-10-20 23:28:14.101 [http-nio-8080-exec-1] INFO  fileLoggerInfo - Autók sikeresen lekérdezve. Az autók száma: 2.

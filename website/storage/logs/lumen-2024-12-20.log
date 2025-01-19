@@ -1,0 +1,100 @@
+[2024-12-20 19:38:45] production.ERROR: /users {"exception":"[object] (Illuminate\\Container\\EntryNotFoundException(code: 0): /users at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:748)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/users', Object(Closure))
+#1 {main}
+
+[previous exception] [object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [/users] does not exist. at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:914)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/users')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/users')
+#2 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/users', Object(Closure))
+#3 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"/users\" does not exist at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:912)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(912): ReflectionClass->__construct('/users')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/users')
+#2 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/users')
+#3 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/users', Object(Closure))
+#4 {main}
+"} 
+[2024-12-20 19:38:54] production.ERROR: / {"exception":"[object] (Illuminate\\Container\\EntryNotFoundException(code: 0): / at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:748)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#1 {main}
+
+[previous exception] [object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [/] does not exist. at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:914)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/')
+#2 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#3 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"/\" does not exist at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:912)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(912): ReflectionClass->__construct('/')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/')
+#2 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/')
+#3 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#4 {main}
+"} 
+[2024-12-20 19:38:56] production.ERROR: / {"exception":"[object] (Illuminate\\Container\\EntryNotFoundException(code: 0): / at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:748)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#1 {main}
+
+[previous exception] [object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [/] does not exist. at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:914)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/')
+#2 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#3 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"/\" does not exist at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:912)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(912): ReflectionClass->__construct('/')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/')
+#2 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/')
+#3 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#4 {main}
+"} 
+[2024-12-20 19:39:06] production.ERROR: / {"exception":"[object] (Illuminate\\Container\\EntryNotFoundException(code: 0): / at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:748)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#1 {main}
+
+[previous exception] [object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [/] does not exist. at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:914)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/')
+#2 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#3 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"/\" does not exist at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:912)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(912): ReflectionClass->__construct('/')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/')
+#2 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/')
+#3 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#4 {main}
+"} 
+[2024-12-20 19:40:44] production.ERROR: / {"exception":"[object] (Illuminate\\Container\\EntryNotFoundException(code: 0): / at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:748)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#1 {main}
+
+[previous exception] [object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [/] does not exist. at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:914)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/')
+#2 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#3 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"/\" does not exist at /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php:912)
+[stacktrace]
+#0 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(912): ReflectionClass->__construct('/')
+#1 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(795): Illuminate\\Container\\Container->build('/')
+#2 /home/G5/Documents/pcs/website/webprog-project/vendor/illuminate/container/Container.php(742): Illuminate\\Container\\Container->resolve('/')
+#3 /home/G5/Documents/pcs/website/webprog-project/index.php(9): Illuminate\\Container\\Container->get('/', Object(Closure))
+#4 {main}
+"} 

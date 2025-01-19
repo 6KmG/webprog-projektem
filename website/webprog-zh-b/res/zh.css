@@ -1,0 +1,19 @@
+footer > ul {
+    font-size: large;
+    list-style-type: none;
+    text-align: center;
+}
+
+    footer > ul > li {
+        width: 20%;
+        text-align: center;
+        display: inline-block;
+    }
+
+        footer > ul > li > img {
+            width: 33%;
+            height: auto;
+            max-width: 100%;
+            opacity: 50%;
+            margin: 10px;
+        }

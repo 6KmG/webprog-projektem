@@ -1,0 +1,88 @@
+function [count, notable_elements] = fl2(t, k1, k2)
+    % Ellenőrizzük, hogy a bemeneti adatok megfelelnek-e a feltételeknek
+    if ~isscalar(t) || ~isscalar(k1) || ~isscalar(k2)
+        error('Mindhárom bemeneti adatnak skalárnak kell lennie.');
+    end 
+    if ~isnumeric(t) || t <= 0 || round(t) ~= t
+        error('t egy pozitív egész szám kell legyen.');
+    end
+    if ~isnumeric(k1) || ~isnumeric(k2) || k1 >= k2
+        error('k1 és k2 egész számok kell legyenek, és k1 kisebb kell legyen k2-nél.');
+    end
+
+    % Számhalmaz elemeinek generálása
+    N = 2^(t-1); % A számhalmaz elemszáma
+    binary_range = k1:k2;
+
+    % Nevezetes elemek meghatározása
+    m_infinity = -2^(t-1);  % M∞
+    zero = 0;               % "0"
+    one = 1;                % "1"
+
+    % Számhalmaz meghatározása
+    numbers = zeros(1, length(binary_range));
+    for i = 1:length(binary_range)
+        numbers(i) = binary_to_decimal(binary_range(i), t);
+    end
+
+    % Elemek száma
+    count = length(numbers);
+
+    % Nevezetes elemek összegyűjtése
+    notable_elements = [m_infinity, zero, one];
+
+    % Az elemek ábrázolása a valós számegyenesen
+    figure;
+    plot(numbers, zeros(size(numbers)), 'ro');
+    hold on;
+    plot(notable_elements, zeros(size(notable_elements)), 'bx', 'MarkerSize', 10);
+    title('Gépi számhalmaz elemei a valós számegyenesen');
+    xlabel('Valós számok');
+    legend('Számhalmaz elemei', 'Nevezetes elemek', 'Location', 'Best');
+    grid on;
+end
+
+function dec = binary_to_decimal(binary, t)
+    % Segédfüggvény, amely bináris számot alakít át decimálissá
+    if binary < 0
+        dec = -binary_to_decimal(-binary, t);
+    else
+        dec = 0;
+        power = 1;
+        while binary > 0
+            dec = dec + mod(binary, 10) * power;
+            binary = floor(binary / 10);
+            power = power * 2;
+        end
+    end
+end
+
+% % 1. teszt: Normál bemenet
+% disp('Teszt 1: Normál bemenet');
+% try
+%     [count, notable_elements] = fl2(4, -3, 3);
+%     disp('Teszt sikeresen lefutott.');
+%     disp(['Elemszám: ', num2str(count)]);
+%     disp('Nevezetes elemek:');
+%     disp(notable_elements);
+% catch ME
+%     disp(['Teszt sikertelen: ', ME.message]);
+% end
+
+% % 2. teszt: Hibás bemenet (t nem pozitív egész szám)
+% disp('Teszt 2: Hibás t bemenet');
+% try
+%     fl2(-2, -3, 3);
+%     disp('Teszt sikertelen: nem dobott hibát.');
+% catch ME
+%     disp(['Hiba sikeresen elkapva: ', ME.message]);
+% end
+
+% % 3. teszt: Hibás bemenet (k1 >= k2)
+% disp('Teszt 3: Hibás k1 és k2');
+% try 
+%     fl2(4, 5, 3);
+%     disp('Teszt sikertelen: nem dobott hibát.');
+% catch ME
+%     disp(['Hiba sikeresen elkapva: ', ME.message]);
+% end

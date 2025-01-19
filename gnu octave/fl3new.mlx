@@ -1,0 +1,130 @@
+function kimenet2 = fl3(varargin)
+    if nargin == 1 %M(8, -5, 5)
+        t = 8;
+        k1 = -5;
+        k2 = 5;
+        szam = varargin{1};
+    elseif nargin == 3
+        t = varargin{1};
+        k1 = varargin{2};
+        k2 = varargin{3};
+        szam = input('Kérek egy valós számot: ');
+    else
+        error("Egy paraméter esetében valós számot, vagy három paraméter esetében, természetes és két egész számot kell megadni!");
+    end
+    if ((t == round(t)) == false)
+        error("A 't' paraméter kizárólag természetes szám lehet!");
+    end
+    if ((mod(k1,1) == 0) == false || (mod(k2,1) == 0) == false)
+        error("A két korlát kizárólag egész szám lehet!");
+    end
+    if ((k1 < k2) == false)
+        error("Az alsó korlátnak mindig kisebbnek kell lenni, mint a felső korlátnak!");
+    end
+    
+    mVegtelen = (1-2^(-t))*2^k2;
+    
+    if szam < -mVegtelen || szam >= mVegtelen
+        error('A szám nem ábrázolható a megadott gépi számhalmazon!');
+    end
+    if szam < 0
+        elojelbit = 1;
+    else
+        elojelbit = 0;
+    end
+    %
+    if mod(szam,1) == 0 %Egész szám
+        if szam == 0
+            kimenet2 = ['0', '0', '0']; % Nulla esete
+        else
+            egesz = char(num2str(szam));
+            egeszBinarisString = convertDecimalNumberToBinaryNumber(egesz);
+            %
+            osszeragasztottBinaris = strcat(strcat(egeszBinarisString,'.'),'0');
+            %
+            nyersNormalizalt = NormalizeBinary(osszeragasztottBinaris);
+            %
+            ujKarakterisztika = split(nyersNormalizalt);
+            %
+            mantissza = char(strcat(nyersNormalizalt(3),nyersNormalizalt(4)));
+            %
+            kimenetMantissza = char(zeros(1,strlength(mantissza)));
+            %
+            for MANTISSZAINDEX=1:strlength(mantissza)-1
+                kimenetMantissza(1,MANTISSZAINDEX) = mantissza(MANTISSZAINDEX);
+            end
+            %
+            kimenet2 = [elojelbit, kimenetMantissza, ujKarakterisztika(4)];
+        end
+    else % Nem egész szám
+        szamString = split(num2str(szam),'.'); %Ketté töröm a számot (egész + tört)
+        %
+        egesz = char(szamString(1));
+        egeszBinarisString = convertDecimalNumberToBinaryNumber(egesz); %Egész szám binárisan (string)
+        %
+        tizedes = char(szamString(2));
+        tizedesBinarisString = convertNonDecimalNumberToBinary(tizedes,t); %tizedes szám binárisan (string)
+        %
+        osszeragasztottBinaris = strcat(strcat(egeszBinarisString,'.'),tizedesBinarisString);
+        %
+        nyersNormalizalt = NormalizeBinary(osszeragasztottBinaris); % A még feldolgozatlan
+        ujKarakterisztika = split(nyersNormalizalt);
+        mantissza = char(strcat(nyersNormalizalt(3),nyersNormalizalt(4)));
+        kimenetMantissza = char(zeros(1,strlength(mantissza)));
+        for MANTISSZAINDEX=1:strlength(mantissza)
+            kimenetMantissza(1,MANTISSZAINDEX) = mantissza(MANTISSZAINDEX);
+        end
+    
+        %
+        kimenet2 = [elojelbit, kimenetMantissza, ujKarakterisztika(5)];
+    end
+    end
+    
+    function egeszSzamToBinaris = convertDecimalNumberToBinaryNumber(nummern)
+    maradandoSzamlalo = str2double(nummern); % Gyorsabb végrehajthatóság miatt str2double
+    binarisFeliras = "";
+    while maradandoSzamlalo ~= 0
+        maradek = mod(maradandoSzamlalo,2);
+        binarisFeliras = strcat(binarisFeliras,num2str(maradek));
+        if maradek == 1 % van maradék
+            maradandoSzamlalo = (maradandoSzamlalo - 1) / 2;
+        else % nincs maradék
+            maradandoSzamlalo = maradandoSzamlalo / 2;
+        end
+    end
+    egeszSzamToBinaris = reverse(binarisFeliras);
+    end
+    
+    function tizedesSzamToBinaris = convertNonDecimalNumberToBinary(nummern, T)
+    maradandoSzamlalo = str2double(nummern);
+    eredetiHossz = strlength(num2str(maradandoSzamlalo));
+    binarisFeliras = '';
+    for IINDEX=1:T-1
+        eredmeny = maradandoSzamlalo * 2;
+        if maradandoSzamlalo == 0
+            IINDEX = T-1;
+        elseif length(num2str(eredmeny)) == eredetiHossz
+            maradandoSzamlalo = eredmeny;
+            binarisFeliras = strcat(binarisFeliras,'0');
+        else
+            reszEredmeny = num2str(eredmeny);
+            maradandoSzamlalo = str2double(reszEredmeny(2:end));
+            binarisFeliras = strcat(binarisFeliras,'1');
+        end
+    end
+    tizedesSzamToBinaris = binarisFeliras;
+    end
+    
+    function normalizaltKettesSzam = NormalizeBinary(binary)
+    tortBinaris = split(binary,'.');
+    eltolasSzama = strlength(tortBinaris(1)); % Ahány helyiértékkel eltoljuk a bináris számot.
+    pontElottiBinarisEgesz = tortBinaris(1); % Pont előtti bináris szám
+    pontUtaniBinarisEgesz = tortBinaris(2); % pont utáni bináris szám
+    if (pontUtaniBinarisEgesz == '0')
+        normalizaltKettesSzam = ['0', '.', pontElottiBinarisEgesz, num2str(eltolasSzama)];
+    else
+        normalizaltKettesSzam = ['0', '.', pontElottiBinarisEgesz,pontUtaniBinarisEgesz, num2str(eltolasSzama)];
+    end
+    
+    end
+    

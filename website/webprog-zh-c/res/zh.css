@@ -1,0 +1,33 @@
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    color: rgba(255, 255, 255, 0.5); /* Áttetsző fehér szöveg */
+    
+}
+
+footer > section {
+    flex: 1;
+    max-width: 30%; /* Maximum szélesség beállítása */
+    margin: 0px 50px; /* Felső és alsó 0px, bal és jobb 50px */
+}
+
+footer > img {
+    opacity: 0.5; /* Áttetsző kép */
+    max-width: 100px;
+    height: auto;
+}
+
+footer > section > ul > li > a {
+    color: rgba(255, 255, 255, 0.5); /* ��ttetsző link szövege */
+}
+
+footer > section:last-of-type {
+    text-align: right;
+}
+
+footer > section > ul {
+    list-style-type: none;
+}
+

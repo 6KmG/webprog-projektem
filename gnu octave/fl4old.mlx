@@ -1,0 +1,126 @@
+% function result = fl4(v1, v2)
+%     % Ellenőrizzük, hogy a vektorok azonos méretűek-e (azonos számhalmazból valók-e)
+%     if length(v1) ~= length(v2)
+%         error('A két vektor nem azonos számhalmazból való.');
+%     end
+    
+%     % Szétválasztjuk a vektorokat karakterisztikára és mantisszára
+%     [sign1, exp1, mant1] = split_vector(v1);
+%     [sign2, exp2, mant2] = split_vector(v2);
+    
+%     % Ha az egyik szám negatív, akkor kivonást végzünk
+%     if sign1 ~= sign2
+%         if sign1 == 1
+%             v1 = negate(v1);
+%         else
+%             v2 = negate(v2);
+%         end
+%     end
+    
+%     % Karakterisztika egyeztetés (közös karakterisztika)
+%     if exp1 > exp2
+%         mant2 = shift_right(mant2, exp1 - exp2);
+%         exp2 = exp1;
+%     elseif exp2 > exp1
+%         mant1 = shift_right(mant1, exp2 - exp1);
+%         exp1 = exp2;
+%     end
+    
+%     % Mantisszák összeadása
+%     result_mant = add_mantissa(mant1, mant2);
+    
+%     % Normalizálás
+%     [result_mant, result_exp] = normalize(result_mant, exp1);
+    
+%     % Összeállítjuk a végeredményt
+%     result = [result_exp, result_mant];
+    
+%     % Ha az összeg túl nagy, kezeljük a túlcsordulást
+%     if length(result) > length(v1)
+%         error('Túlcsordulás történt az összeadás során.');
+%     end
+% end
+
+% function [sign, exp, mant] = split_vector(v)
+%     sign = v(1);
+%     exp = v(2:5);  % Feltételezzük, hogy a karakterisztika 4 bit
+%     mant = v(6:end);
+% end
+
+% function result = shift_right(mant, shift_amount)
+%     result = bitshift(mant, -shift_amount);
+% end
+
+% function result = add_mantissa(mant1, mant2)
+%     result = mant1 + mant2;
+% end
+
+% function [mant, exp] = normalize(mant, exp)
+%     while mant(1) == 0
+%         mant = bitshift(mant, 1);  % Balra tolás normalizáláshoz
+%         exp = exp - 1;
+%     end
+% end
+
+% function result = negate(v)
+%     % Negálja a vektort, ha az első bit 1 (negatív szám)
+%     v(1) = 1 - v(1);  % Előjel bitet invertáljuk
+%     result = v;
+% end
+
+% function test_fl4()
+%     % Teszteljük az azonos számhalmazból való számokat
+%     v1 = [0, 1, 0, 1, 1, 0, 1, 1, 0, 1];  % Egy gépi szám bináris alakban
+%     v2 = [0, 1, 0, 1, 0, 1, 1, 0, 0, 1];  % Egy másik gépi szám bináris alakban
+%     result = fl4(v1, v2);
+    
+%     disp('Az összeadás eredménye:');
+%     disp(result);
+    
+%     % Negatív szám tesztje
+%     v3 = [1, 1, 0, 1, 0, 1, 1, 0, 0, 1];  % Negatív szám
+%     result_neg = fl4(v1, v3);
+    
+%     disp('Pozitív és negatív szám összeadásának eredménye:');
+%     disp(result_neg);
+    
+%     % Túlcsordulás tesztelése
+%     v4 = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1];  % Nagy szám a túlcsordulás teszteléséhez
+%     try
+%         result_ovf = fl4(v1, v4);
+%         disp('Túlcsordulás teszt eredménye:');
+%         disp(result_ovf);
+%     catch e
+%         disp(e.message);
+%     end
+% end
+
+% test_fl4
+
+function result = fl4(v1, v2)
+    % Ellenőrizzük, hogy a két vektor azonos hosszúságú
+    if length(v1) ~= length(v2)
+        error('A két vektor hossza nem egyezik meg.');
+    end
+    
+    % Inicializáljuk az eredményt és a carry-t
+    result = zeros(1, length(v1));  % Eredmény vektor
+    carry = 0;
+    
+    % Végigiterálunk a vektorokon (a legnagyobb index-től a legkisebbig)
+    for i = length(v1):-1:1
+        % A két bit összeadása a carry-vel
+        result(i) = mod(v1(i) + v2(i) + carry, 2);  % Az összeg bitje
+        carry = floor((v1(i) + v2(i) + carry) / 2);  % Az új carry (ha van)
+    end
+    
+    % Ha a carry nem 0, akkor hozzáadjuk a legnagyobb bithez
+    if carry == 1
+        result = [carry, result];  % Többlet bitet hozzáadunk a legnagyobb helyhez
+    end
+end
+
+v1 = [1, 0, 1, 1] % 11
+v2 = [1, 1, 1, 1] % 7
+
+result = fl4(v1, v2)
